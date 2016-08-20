@@ -1,0 +1,134 @@
+title: Python
+---
+body:
+
+# Học lập trình Python (PyFML07 - 2016)
+
+Khoá học tiếp theo tại Hà Nội khai giảng ngày 23 tháng 8, đăng ký ngay 😍
+
+![python logo](https://www.python.org/static/community_logos/python-logo-master-v3-TM.png)
+
+## Review của cựu học viên
+
+https://www.facebook.com/pyfml/reviews
+
+## Đăng ký
+
+Điền vào mẫu: http://goo.gl/forms/BJAwtCU3v5GQPDV22
+
+## Giới thiệu
+
+Lớp học đã được tin tưởng và tín dụng bởi các học viên đến từ:
+
+- Appota, BKAV, FPT, Fujitsu, Samsung, VCCorp, VDC, VNTrip, Vicare, Viettel, Vật giá (VNP), UDIC...
+- Sinh viên các trường: Bách khoa, bưu chính viễn thông, học viện mật mã, học viện tài chính, xây dựng, ngoại thương,
+
+Đã có cơ sở tại:
+
+- Hà Nội
+- TP HCM
+
+## Thời gian & Địa điểm
+
+- HN: khai giảng 19h ngày 23 tháng 8, Phòng 701 CT1 chung cư Skylight, ngõ hòa bình 6 minh khai
+- TPHCM: (đăng ký để được liên hệ)
+- Page: https://www.facebook.com/pyfml
+
+## Lịch học
+
+- Thời lượng mỗi buổi: 2h30 phút (học buổi tối thứ 3 & thứ 5,từ 19h)
+- Mỗi buổi 1 topic
+- 1 tuần 2 buổi
+
+## Học phí
+
+- **3.000.000 VND**.
+- **Giảm 10%** học phí cho học viên giới thiệu mỗi học viên khác => giới thiệu 10 học viên -> 🆓
+- Học viên có thể học lại vào khoá ngay sau đó nếu bị lỡ buổi học nào hay đơn giản là muốn học lại.
+
+## Python là gì? ăn được không ?
+
+- Ngôn ngữ lập trình dễ đọc nhất 🌏
+
+- Mạnh mẽ 🐍, [đơn giản](http://www.information-age.com/it-management/skills-training-and-leadership/123460073/python-overtakes-french-most-popular-language-taught-primary-schools>) (không phải tự quản lý memory như C,C++), thực tế (không [magic - hư cấu như Ruby](http://stackoverflow.com/questions/441717/whats-wrong-with-magic), ngắn gọn súc tích (không [dài lê thê như Java](http://c2.com/cgi/wiki?HelloWorldInManyProgrammingLanguages>), ... Tất nhiên là cũng có nhiều điểm yếu, nhưng lúc mới ❤️ nhau thì người ta chỉ cần biết những điểm khỏe thôi, yếu đâu về sau tự lòi ra hết.
+
+- Sử dụng phổ biến hàng đầu trên thế giới (http://githut.info/ http://www.tiobe.com/index.php/content/paperinfo/tpci/index.html http://stackoverflow.com/tags)
+
+- Sử dụng bởi các tập đoàn công nghệ hàng đầu thế giới: [Google, Dropbox](http://techcrunch.com/2012/12/07/dropbox-guido-van-rossum-python/) , [Microsoft](https://blogs.msdn.microsoft.com/pythonengineering/) , Amazon, [Facebook](https://github.com/facebook/augmented-traffic-control) , [Mozilla](https://github.com/mozill) , [Uber](https://eng.uber.com/building-tincup/) ...
+
+- Phổ biến trong các [startup quốc tế](https://www.quora.com/Why-do-so-many-startups-use-Python-as-a-programming-language/answer/Aaron-Kazah-3/share) và trong nước như [ViCare](http://builtwith.com/vicare.vn), VNTrip,...
+
+- Là ngôn ngữ sử dụng để tạo ra [OpenStack](http://www.openstack.org/) - hệ thống public cloud phổ biến và hiện đại nhất thế giới
+
+- Python trong tiếng Việt nghĩa là "con trăn", mà ở Việt Nam thì không có gì là không ăn được cả 😹
+
+## Python để làm gì
+
+- [tính toán khoa học](http://www.kdnuggets.com/2015/05/r-vs-python-data-science.html)
+- [lập trình web](https://www.shoop.io/en/blog/25-of-the-most-popular-python-and-django-websites/)
+- [lập trình hệ thống](https://www.python.org/about/apps/)
+- [IOT](http://www.zerynth.com/)
+
+## Mục tiêu
+
+- Cung cấp cho người học tất cả các khái niệm quan trọng trong Python. Những lỗi hay mắc phải, và cách dùng tốt nhất đối với mỗi khái niệm.
+
+- Code của từng học viên được giảng viên kiểm tra và giúp chỉnh sửa để học viên có thể viết code theo các tiểu chuẩn của Python (pep8, pythonic), tối ưu hơn. Quá trình này sử dụng git, giúp học viên có kinh nghiệm thực tế với hệ thống quản lý mã nguồn hiện đại (https://help.github.com/)
+
+- Chia sẻ các kinh nghiệm, kiến thức thực tế để trở thành lập trình viên Python (Pythonista), sử dụng các công cụ cần thiết liên quan đến Python như pip pep8 pdb virtualenv... và các công cụ khác (command line/TDD/git/github/IDE...).
+
+- Giới thiệu các khái niệm cơ bản trong ngành khoa học máy tính như thuật toán, độ phức tạp, ...
+
+- [Hướng dẫn phát âm tiếng Anh](http://c2k8pro.blogspot.co.id/search/label/EEnglish), học tiếng Anh cho Python.
+
+- Định hướng giúp sinh viên các hướng phát triển thêm sau khóa học.
+
+## Giảng viên
+
+- Nguyễn Việt Hưng  aka [HVN](https://github.com/hvnsweeting) - cung Bảo Bình ♒️: CTO/Founder @ http://fml.vn/ - Senior DevOps @robotinfra.com,  contributor của các software nổi tiếng trong thế giới Opensource ([Saltstack](https://github.com/saltstack/salt/pulls?q=is%3Apr+is%3Aclosed+author%3Ahvnsweeting)/[diamond](https://github.com/python-diamond/Diamond/graphs/contributors). Tác giả chính của blog http://www.familug.org
+- Hoàng Thanh Long - Enthusiast Programmer - học viên xuất sắc khoá 04, giảng viên khoá 05, 06
+
+
+## Trợ giảng / Code reviewer
+
+- Vũ Quang Đại: (học viên khoá 02), sinh viên ĐH Xây Dựng. Python developer at vntrip.vn
+- Nguyễn Tưởng Thành: (học viên khoá 00) tốt nghiệp khoa Hóa ĐHBKHN, OpenStack Python developer @ Fujitsu. [Cố vấn]
+- Nguyễn Hải Nam: (học viên khoá 00) senior Django developer. Python develop at MHealth [Cố vấn]
+- Đỗ Anh Tú: (học viên khoá 02) Python developer at Salehubb.com , homepage: http://tudoanh.github.io/
+
+## Đề cương khoá học (12 buổi)
+
+1. Introduction to Python - welcome
+2. Shell, basic data type, variables
+3. Control flow (if/else, for, while)
+4. String, list
+5. Tuple, dict, set
+6. Function, module, tools (virtualenv, pip)
+7. Exception
+8. OOP
+9. Generator, decorator, (Pitfall, pythonic - or can be side topic) standard lib: os, sys, shutil, argparse, logging, subprocess, datetime...
+10. Stdlib2: urllib2, json, time, unittest, re, pdb, thread, multiprocess, GIL...
+11. API, Flask
+12. Threading, QA
+13. Drinking 🍻
+
+## Khuyến khích
+
+Học viên sử dụng hệ điều hành UNIX-like: Ubuntu, Fedora, ...
+
+## Yêu cầu
+
+- Học viên mang laptop để code trên lớp, code bằng giấy và ✏️ cũng được nhưng sẽ đòi hỏi nỗ lực phi thường🎯
+- Học viên *PHẢI* làm bài tập về nhà.
+- **Không có yêu cầu nào về kiến thức lập trình trước khi tham gia khóa này.** Học viên cần biết bật tắt máy, cài phần mềm cần thiết, và biết gõ 10 ngón thì càng tốt.
+- Máy tính cài sẵn phiên bản Python 3.5 (không sử dụng python 2 hay 3.3 trở xuống). Có thể đăng ký tạm tài khoản ở [PythonAnywhere](https://www.pythonanywhere.com/) để dùng nếu không cài được Python3.5
+
+## Cơ hội nghề nghiệp
+
+Lượng công việc không nhiều như PHP hay Java nhưng luôn đủ cho bạn - và việc càng ít người làm thì
+đồng nghĩa với lương càng cao 🤑
+
+Có một HR người Việt từng ví: "ở Việt Nam, tìm dev Python khó như tìm kim cương, bởi vì tìm dev Ruby còn dễ hơn..."
+
+Học viên tốt nghiệp có thể đi gặp những người đào 💎 ở [Pyjobs](http://pyjobs.vn/)
+hay liên hệ với "hội học viên xuyên khoá PyFML" để được giới thiệu.

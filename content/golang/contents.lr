@@ -1,0 +1,112 @@
+_model: page
+---
+title: Golang
+---
+body:
+
+Tuyển sinh khoá học lập trình Golang dành cho người đã biết lập trình (GoFML01 - 2016) 
+=========
+
+Học 12 buổi, học phí 2.500.000 7h tối thứ 3 và 5 hàng tuần .
+
+.. image:: http://blog.golang.org/6years-gopher.png
+
+Thời gian & Địa điểm
+--------
+
+- Ngõ 120 Trường Chinh, Hà Nội.
+- Page: https://www.facebook.com/pyfml
+
+Golang là gì? ăn được không ? ăn vào thì có làm sao không?
+---------
+
+- Ngôn ngữ lập trình được "chống lưng" bởi người khổng lồ Google
+
+- Tác giả là những người nổi tiếng trong giới kỹ thuật: `Rob Pike <https://en.wikipedia.org/wiki/Rob_Pike>`_ , `Ken Thompson <https://en.wikipedia.org/wiki/Ken_Thompson>`_
+
+- Nhanh, mạnh, chắc chắn, đơn giản, `hiệu quả <http://blog.iron.io/2013/03/how-we-went-from-30-servers-to-2-go.html>`_ 
+
+- Ngôn ngữ lập trình đứng sau các công nghệ hot nhất trong thế giới IT: docker, kubernete, grafana, influxdb, etcd, consul, prometheus... Được sử dụng bởi các công ty hàng đầu: Google, `Uber <https://eng.uber.com/go-geofence/>`_ , `CloudFlare <https://blog.cloudflare.com/tag/go/>`_ , `Mailgun <https://github.com/mailgun/>`_ , `Facebook <https://github.com/facebookgo>`_ ... 
+
+- Không ăn được nhưng khi dùng để kiếm tiền thì sẽ có nhiều cái để mà ăn :trollface:
+
+Không đủ thuyết phục?
+----------------------
+
+`Đăng ký học ngay Python <https://gist.github.com/hvnsweeting/4112374900ef17411f44>`_
+
+Đăng ký 
+-----
+
+- Điền vào mẫu: http://goo.gl/forms/S2NWPe8Vpc
+
+- Nhận tối đa 15 học viên để đảm bảo chất lượng, sau 2 buổi học thử, nếu có > 15 người đăng ký thì  
+  người đăng ký sau sẽ được chuyển sang ưu tiên đăng ký khoá tiếp theo. 
+
+Lịch học
+-------
+
+- Thời lượng mỗi buổi: 2h15  phút (học buổi tối thứ 3 & thứ 5,từ 7h)
+- Mỗi buổi 1 topic
+- 1 tuần 2 buổi
+
+Học phí
+--------
+
+- **2.500.000 VND** 
+- Học viên có thể học lại vào khoá ngay sau đó nếu bị lỡ buổi học nào hay đơn giản là muốn học lại :cancer:
+
+
+Mục tiêu
+---------
+
+- Cung cấp cho người học tất cả các khái niệm Golang. Những lỗi hay mắc phải, và cách dùng tốt nhất đối với mỗi khái niệm.
+
+- Code của từng học viên được giảng viên kiểm tra và giúp chỉnh sửa để học viên có thể viết code theo các quy ước của Golang, tối ưu hơn, sử dụng các best practices. Quá trình này sử dụng git, giúp học viên có kinh nghiệm thực tế với hệ thống quản lý mã nguồn hiện đại (https://help.github.com/)
+
+- Chia sẻ các kinh nghiệm, kiến thức thực tế để trở thành lập trình viên Golang, sử dụng các công cụ cần thiết liên quan đến Go như gofmt, golint, errcheck ... và các công cụ khác (command line/TDD/git/github/IDE...).
+
+Giảng viên
+-----------
+
+- La Sơn Hải - Lập trình viên Golang chuyên nghiệp.
+- Nguyễn Việt Hưng (`HVN <https://github.com/hvnsweeting>`_ - cung Bảo Bình :aquarius:): CTO @ http://pyjobs.vn/ - website viết bằng Golang sử dụng `Echo framework <https://labstack.com/echo/>`_ . Senior DevOps @robotinfra.com,  contributor của các software nổi tiếng trong thế giới Opensource (`Saltstack <https://github.com/saltstack/salt/pulls?q=is%3Apr+is%3Aclosed+author%3Ahvnsweeting>`_/`diamond <https://github.com/python-diamond/Diamond/graphs/contributors>`_). Tác giả chính của blog http://www.familug.org
+
+Đề cương khoá học (12 buổi)
+--------
+
+1. Helloworld (basic example, running code, setup environment ... )
+2. Program structure and Basic Datatype
+#. Packages + Composite Type
+#. Functions & Struct
+#. Testing & Go tool
+#. Interface & Practice
+#. Concurrency
+#. Reflections & more Tools
+#. Network programming
+#. API practice
+#. Web with template
+#. QA
+
+Yêu cầu
+-----
+
+- Học viên đã biết lập trình một ngôn ngữ nào đó.
+- Học viên sử dụng hệ điều hành UNIX-like: Ubuntu, Fedora, ...
+- Học viên mang laptop để code trên lớp, code bằng giấy và :pencil2: cũng được nhưng sẽ đòi hỏi nỗ lực phi thường :trophy:
+- Học viên PHẢI làm bài tập về nhà.
+
+Cơ hội nghề nghiệp
+-------
+
+Lượng công việc không nhiều như PHP hay Java nhưng luôn đủ cho bạn - và việc càng ít người làm thì
+đồng nghĩa với lương càng cao :trollface:
+
+Ở Việt Nam đến nay chỉ có 1 hay 2 đầu việc yêu cầu kỹ năng lập trình Golang, vì vậy... hãy sẵn sàng
+bơi ra thế giới :earth_asia:
+
+Đít note
+---------
+
+Lớp học này được mở bởi các thành viên group https://www.facebook.com/pyfml và 
+không liên quan đến bất kỳ tổ chức - bang hội nào khác.
