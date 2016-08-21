@@ -68,14 +68,15 @@
         </div>
 	</header>
 	<!-- end header -->
-	<section id="content">
-	<div class="container">
-		<div class="row">
-            {% block body %}{% endblock %}
-        </div>
-	</div>
+    {% block fullbody %}
+   	<section id="content">
+    	<div class="container">
+    		<div class="row">
+                {% block body %}{% endblock %}
+            </div>
+    	</div>
 	</section>
-
+    {% endblock fullbody %}
 	<footer>
 	<div class="container">
 		<div class="row">
