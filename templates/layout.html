@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>{% block title %}Học Python/Golang chất lượng nhất Việt Nam{% endblock %} — FML.vn</title>
+<title>{% block title %}Học Python chất lượng số 1 Việt Nam{% endblock %} — FML.vn</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="" />
 <meta name="author" content="http://fml.vn" />
@@ -24,6 +24,16 @@
 
 </head>
 <body>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.7&appId=286096844749345";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 <div id="wrapper">
 	<!-- start header -->
 	<header>
@@ -35,14 +45,14 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.html"><span>M</span>oderna</a>
+                    <a class="navbar-brand" href="index.html"><span>P</span>ymi.vn</a>
                 </div>
                 <div class="navbar-collapse collapse ">
                     <ul class="nav navbar-nav">
                         <li{% if this._path == '/' %} class="active"{% endif
                           %}><a href="{{ '/'|url }}">Home</a></li>
                         {% for href, title in [
-                          ['/blog', 'Blog'],
+                          ['/tutorial', 'Tutorial'],
                           ['/python', 'Học Python'],
                           ['/golang', 'Golang'],
                           ['/projects', 'Projects'],
@@ -71,43 +81,40 @@
 		<div class="row">
 			<div class="col-lg-3">
 				<div class="widget">
-					<h5 class="widgetheading">Get in touch with us</h5>
+					<h5 class="widgetheading">PyMIvn inc.</h5>
 					<address>
-					<strong>Moderna company Inc</strong><br>
-					 Modernbuilding suite V124, AB 01<br>
-					 Someplace 16425 Earth </address>
+                    Phòng 701 CT1 chung cư Skylight, ngõ Hòa Bình 6, Minh Khai, Hà Nội</address>
 					<p>
-						<i class="icon-phone"></i> (123) 456-7890 - (123) 555-7891 <br>
-						<i class="icon-envelope-alt"></i> email@domainname.com
-					</p>
+						<i class="fa fa-phone" aria-hidden="true"></i> 0982 09 02 90<br>
+						<i class="fa fa-envelope" aria-hidden="true"></i> hvn@fml.vn
+                    </p>
 				</div>
 			</div>
 			<div class="col-lg-3">
 				<div class="widget">
-					<h5 class="widgetheading">Pages</h5>
+					<h5 class="widgetheading">Links</h5>
 					<ul class="link-list">
-						<li><a href="#">Press release</a></li>
-						<li><a href="#">Terms and conditions</a></li>
-						<li><a href="#">Privacy policy</a></li>
-						<li><a href="#">Career center</a></li>
+						<li><a href="http://www.familug.org/">Blog</a></li>
+						<li><a href="#">Python tutorial</a></li>
+						<li><a href="https://pyjobs.vn/">Python Jobs</a></li>
 						<li><a href="#">Contact us</a></li>
 					</ul>
 				</div>
 			</div>
 			<div class="col-lg-3">
 				<div class="widget">
-					<h5 class="widgetheading">Latest posts</h5>
+					<h5 class="widgetheading">Các khoá học</h5>
 					<ul class="link-list">
-						<li><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
-						<li><a href="#">Pellentesque et pulvinar enim. Quisque at tempor ligula</a></li>
-						<li><a href="#">Natus error sit voluptatem accusantium doloremque</a></li>
+						<li><a href="/python">Lập trình Python</a></li>
+						<li><a href="/golang">Lập trình Golang</a></li>
 					</ul>
 				</div>
 			</div>
 			<div class="col-lg-3">
 				<div class="widget">
-					<h5 class="widgetheading">SOMETHING</h5>
+					<h5 class="widgetheading">On Facebook</h5>
 					<div class="clear">
+<div class="fb-page" data-href="https://www.facebook.com/pyfml/" data-tabs="reviews" data-width="300" data-height="400" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/pyfml/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/pyfml/">PyMI</a></blockquote></div>
 					</div>
 				</div>
 			</div>
@@ -130,11 +137,9 @@
 				</div>
 				<div class="col-lg-6">
 					<ul class="social-network">
-						<li><a href="#" data-placement="top" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-						<li><a href="#" data-placement="top" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-						<li><a href="#" data-placement="top" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
-						<li><a href="#" data-placement="top" title="Pinterest"><i class="fa fa-pinterest"></i></a></li>
-						<li><a href="#" data-placement="top" title="Google plus"><i class="fa fa-google-plus"></i></a></li>
+						<li><a href="https://www.facebook.com/pyfml/" data-placement="top" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+						<li><a href="https://github.com/fmlvn/" data-placement="top" title="GitHub"><i class="fa fa-github"></i></a></li>
+						<li><a href="https://plus.google.com/+FamilugOrg" data-placement="top" title="Google plus"><i class="fa fa-google-plus"></i></a></li>
 					</ul>
 				</div>
 			</div>
