@@ -1,24 +1,25 @@
-title: Python là gì?
+title: Xin chào Python
 ---
 author: HVN
 ---
 body:
 
-# Python là gì
+## Python là gì?
+
 Python là một ngữ lập trình dễ học và mạnh mẽ, nó có các kiểu dữ liệu bậc cao tiện lợi, cú pháp sạch sẽ, bộ thư viện chuẩn với hàng trăm thư viện có chất lượng cực tốt. Python có cộng đồng người dùng lớn, luôn nằm trong bảng xếp hạng các ngôn ngữ phổ biến nhất trái đất (xem http://githut.info/).
 
 Python là một từ tiếng Anh, có hai cách phát âm:
 - Theo kiểu Anh Mỹ: /ˈpaɪ.θɑːn/ (đọc là pai-thon)
-- Theo kiểu Anh Anh:  /ˈpaɪ.θən/ (đọc là pai-thơn) 
+- Theo kiểu Anh Anh:  /ˈpaɪ.θən/ (đọc là pai-thơn)
 
 Nghe tác giả của Python - Guido van Rossum phát âm từ này: https://youtu.be/rTTFh7HOlC0?t=50s
 
 Và nếu bạn muốn biết cách phát âm tên ông tác giả người Hà Lan này hãy nghe ở đây: https://youtu.be/rTTFh7HOlC0?t=14s
 
-Dù bạn đọc theo kiểu Anh, hay kiểu Mỹ thì cũng đừng đọc theo các kiểu đọc phổ biến Việt Nam: Pi thon, pi thông, pai thông ...😂 
+Dù bạn đọc theo kiểu Anh, hay kiểu Mỹ thì cũng đừng đọc theo các kiểu đọc phổ biến Việt Nam: Pi thon, pi thông, pai thông ...😂
 
 Trong tiếng Việt, Python có nghĩa là "con trăn". Cái tên Python được lấy cảm hứng từ bộ phim hài kịch [Monty Python](https://en.wikipedia.org/wiki/Monty_Python%27s_Flying_Circus), bạn có thể xem trên [youtube](https://www.youtube.com/watch?v=T70-HTlKRXo).
- 
+
 Python có 2 version phổ biến là 2.X và 3.X.
 
 Python 2 rất phổ biến nhưng đã cũ, không còn tiếp tục được chính thức phát triển thêm tính năng mới.
@@ -28,17 +29,17 @@ hỗ trợ Python 3. Xem tại: https://python3wos.appspot.com/
 
 Người học nên bắt đầu với  Python 3, một lập trình viên thành thạo Python 3 có thể đọc và viết code Python 2 với một chút thay đổi về cú pháp.
 
-# Interpreter là gì
+## Interpreter là gì
 Interpreter /ɪnˈtəːprɪtə/  - trình thông dịch
 
-Trên máy tính, python là một chương trình có khả năng đọc các "câu lệnh Python" và thực thi chúng. 
+Trên máy tính, python là một chương trình có khả năng đọc các "câu lệnh Python" và thực thi chúng.
 Chương trình này còn có tên gọi là "Python interpreter" - một chương trình có khả năng xử lý ngôn ngữ Python.
-Interpreter trong tiếng Việt có nghĩa là "trình thông dịch", "thông/phiên dịch viên". 
+Interpreter trong tiếng Việt có nghĩa là "trình thông dịch", "thông/phiên dịch viên".
 Giống như một người đi phiên dịch, chuyển đoạn hội thoại từ một ngôn ngữ sang ngôn ngữ khác, Python interpreter sẽ dịch (chạy) từng câu,
 hay từng đoạn code Python chứ không đợi người ta nói hết toàn bộ đoạn hội thoại rồi ngồi sắp xếp, biên tập lại và dịch (biên dịch - compile).
 Vậy Python là một interpreted language (cùng nhóm với Ruby, PHP, Perl, Javascript,...) chứ không phải compiled language như C, C++, Golang, ...
 
-# Các bản Python
+## Các bản Python
 Python là một ngôn ngữ lập trình, tức nó chỉ là một bộ quy tắc ngôn ngữ phải tuân theo các luật này luật kia.
 Python không phải là một chương trình chạy được. Để "chạy" được, người ta cần đến Python interpreter.
 Bản (implementation) Python phổ biến nhất là CPython, là Python interpreter viết bằng ngôn ngữ C.
@@ -51,6 +52,6 @@ Ngoài CPython, còn có các bản khác như:
 
 Xem thêm tại [Python doc](https://docs.python.org/3/reference/introduction.html#alternate-implementations)
 ---
-pub_date: 
+pub_date:
 ---
 _slug: python-la-gi
