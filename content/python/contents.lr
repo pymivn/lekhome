@@ -39,7 +39,7 @@ Giống như một người đi phiên dịch, chuyển đoạn hội thoại t�
 hay từng đoạn code Python chứ không đợi người ta nói hết toàn bộ đoạn hội thoại rồi ngồi sắp xếp, biên tập lại và dịch (biên dịch - compile).
 Vậy Python là một interpreted language (cùng nhóm với Ruby, PHP, Perl, Javascript,...) chứ không phải compiled language như C, C++, Golang, ...
 
-## Các bản Python
+## Các bản Python Interpreter
 Python là một ngôn ngữ lập trình, tức nó chỉ là một bộ quy tắc ngôn ngữ phải tuân theo các luật này luật kia.
 Python không phải là một chương trình chạy được. Để "chạy" được, người ta cần đến Python interpreter.
 Bản (implementation) Python phổ biến nhất là CPython, là Python interpreter viết bằng ngôn ngữ C.
