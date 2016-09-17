@@ -1,0 +1,22 @@
+.box-gray img {
+    margin-bottom: 20px;
+}
+
+.box-bottom {
+    color: #fff;
+    display: block;
+    font-weight: 700;
+}
+
+.box-bottom:hover {
+    color: #eee;
+    text-decoration: none;
+}
+
+.icon .fa-5x {
+    color: #68A4C4;
+}
+
+#featured #main-slider {
+    margin-top: 0;
+}
