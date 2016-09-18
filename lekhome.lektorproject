@@ -1,2 +1,5 @@
 [project]
 name = fmlvn
+
+[packages]
+lektor-disqus-comments = 0.2
