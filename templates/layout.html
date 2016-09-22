@@ -76,7 +76,14 @@ src="https://www.facebook.com/tr?id=1366022640075449&ev=PageView&noscript=1"
                     <ul class="nav navbar-nav">
 
                         <li><a href="/">Home</a></li>
-                        <li class="active"><a href="/tutorial">Tutorial</a></li>
+                      {% for href, title in [
+                        ['/blog', 'Blog'],
+                        ['/tutorial', 'Tutorial'],
+                      ] %}
+                        <li{% if this.is_child_of(href) %} class="active"{% endif
+                          %}><a href="{{ href|url }}">{{ title }}</a></li>
+                      {% endfor %}
+
                         <li><a href="/python">Học Python</a></li>
                     </ul>
                 </div>
