@@ -1,0 +1,108 @@
+title: setup.py develop
+---
+shortintro: các sử dụng setup.py khi phát triển thư viện
+---
+author: HVN
+---
+body:
+
+Một Python library / application đúng chuẩn sẽ phải có 1 file setup.py trong thư mục gốc.
+Tài liệu chi tiết về việc viết/dùng file này để cài đặt và upload lên [PYPI](https://pypi.python.org/pypi)
+như thế nào xem thêm ở [đây](https://docs.python.org/3//distributing/index.html).
+
+Khi phát triển một python package, developer sẽ muốn "setup" nó ở chế độ "development"
+thay vì chế độ "production". Chế độ development giúp cho mọi thay đổi của developer
+lập tức có tác dụng, chứ không phải ngồi gõ lại
+
+```shell
+python setup.py install
+```
+
+sau mỗi lần sửa code.
+
+Để cài đặt 1 project ở chế độ development, chạy lệnh:
+
+```shell
+python setup.py develop
+```
+
+ Ví dụ:
+
+```shell
+$ python setup.py develop
+running develop
+running egg_info
+creating phg.egg-info
+writing phg.egg-info/PKG-INFO
+writing top-level names to phg.egg-info/top_level.txt
+writing dependency_links to phg.egg-info/dependency_links.txt
+writing manifest file 'phg.egg-info/SOURCES.txt'
+reading manifest file 'phg.egg-info/SOURCES.txt'
+writing manifest file 'phg.egg-info/SOURCES.txt'
+running build_ext
+Creating /Users/hvn/dream/lib/python2.7/site-packages/phg.egg-link (link to .)
+Removing phg 1.0.2 from easy-install.pth file
+Adding phg 1.0.4 to easy-install.pth file
+Installing phg script to /Users/hvn/dream/bin
+
+Installed /Users/hvn/me/phg
+Processing dependencies for phg==1.0.4
+Finished processing dependencies for phg==1.0.4
+```
+
+Theo help, lệnh này sẽ:
+
+```shell
+$ python setup.py --help-commands | grep devel
+  develop           install package in 'development mode'
+```
+
+Về mặt bản chất, nó không "cài đặt" hay copy một file nào cả, nó chỉ tạo file
+PACKAGE_NAME.egg-link trong site-packages, file này symlink đến source code của
+package hiện tại. Đồng thời nó update file easy-install.pth trong thư mục site-packages
+của virtualenv hiện tại (trong bài này env tên là dream)
+
+```shell
+$ cat /Users/hvn/dream/lib/python2.7/site-packages/easy-install.pth
+import sys; sys.__plen = len(sys.path)
+/Users/hvn/me/phg
+import sys; new = sys.path[sys.__plen:]; del sys.path[sys.__plen:]; p = getattr(sys, '__egginsert', 0); sys.path[p:p] = new; sys.__egginsert = p + len(new)
+```
+
+Mở python lên để xem [path mà python sẽ tìm file khi import](https://setuptools.readthedocs.io/en/latest/setuptools.html#development-mode)
+
+```python
+$ python
+Python 2.7.10 (default, Oct 23 2015, 19:19:21)
+[GCC 4.2.1 Compatible Apple LLVM 7.0.0 (clang-700.0.59.5)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import sys
+>>> print sys.path
+['',  '/Users/hvn/me/phg', '/Users/hvn/dream/lib/python27.zip', '/Users/hvn/dream/lib/python2.7', ..., '/Users/hvn/dream/lib/python2.7/site-packages']
+```
+
+*CHÚ Ý: khi chạy file setup.py, phải chạy ở cùng thư mục chứa setup.py,
+nếu không thư mục hiện tại khi gõ câu lệnh sẽ bị nhét vào import path
+chứ không phải thư mục chứa package cần cài đặt (vì setup.py develop sẽ symlink đến thư mục hiện tại ``.``).*
+
+Để gỡ package đã setup ở chế độ development, dùng lệnh:
+
+```shell
+$ python setup.py develop --uninstall
+running develop
+Removing /Users/hvn/dream/lib/python2.7/site-packages/phg.egg-link (link to .)
+Removing phg 1.0.4 from easy-install.pth file
+Note: you must uninstall or replace scripts manually!
+```
+
+Bài viết sử dụng:
+
+```shell
+$ python2 -c 'import sys, setuptools.version as v; print sys.version; print "setuptools:", v.__version__'
+2.7.10 (default, Oct 23 2015, 19:19:21)
+[GCC 4.2.1 Compatible Apple LLVM 7.0.0 (clang-700.0.59.5)]
+setuptools: 24.0.3
+```
+
+Tham khảo:
+- [Setuptools](https://setuptools.readthedocs.io/en/latest/setuptools.html#development-mode) doc

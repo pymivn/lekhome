@@ -1,0 +1,149 @@
+title: Một ví dụ đơn giản giải thích hàm đệ quy
+---
+author: HVN
+---
+shortintro: làm sao để in ra từ 1 đến 10 bằng hàm đệ quy?
+---
+body:
+
+## I. Hàm đệ quy
+
+Recursive function (hàm đệ quy) là function mà nó tự gọi chính nó.
+Phần định nghĩa function trông như thế này:
+
+```python
+def foo():
+    dosomething()
+    foo() # gọi chính nó
+    maybedosomething()
+    return otherthing
+```
+
+Recursion là một lối suy nghĩ, một cách lập trình rất phổ biến trong
+functional programming (lập trình hàm) nhưng ở thế giới còn lại, nó không
+thực sự phổ biến hay có vẻ quen thuộc.
+Quan điểm về viết recursive function cũng khác nhau, có người bảo dễ,
+có người mãi không hiểu gì. Và nếu bạn thuộc nhóm không hiểu gì, thì không phải
+do bạn dốt, chỉ là chưa quen thôi.
+
+## II. Recursive print
+
+Đề bài: Cho số nguyên dương N, viết function in ra màn hình từ 1 đến N.
+
+Lời giải:
+
+Cách bình thường:
+
+```python
+def lprint(n):
+    '''
+    Prints from 1 to n the loop way
+    '''
+    for i in range(1, n+1):
+        print(i)
+lprint(3)
+```
+
+Còn đây cách đệ quy:
+
+```python
+def rprint(n):
+    '''
+    Prints from 1 to n recursive way
+    '''
+    if n == 0:
+        return
+    else:
+        rprint(n-1)
+        print(n)
+rprint(3)
+```
+
+Output:
+
+```
+1
+2
+3
+```
+
+Nếu bạn không hiểu đoạn code trên thực sự làm gì qua từng bước, hãy xem
+phiên bản chỉnh sửa một chút để in ra giải thích sau:
+
+```python
+INPUT = 10
+def rprint2(n):
+    pad = 3 * ' ' * (INPUT - n)
+    print('%sInside function with %d' % (pad, n))
+    if n == 0:
+        return
+    else:
+        print('%s calling rprint2(%d)' % (pad + '|' + '_', n-1))
+        rprint2(n-1)
+        print('%s| printing %d' % (pad, n))
+        print(n)
+        return
+rprint2(INPUT)
+```
+
+Output:
+
+```
+Inside function with 10
+|_ calling rprint2(9)
+   Inside function with 9
+   |_ calling rprint2(8)
+      Inside function with 8
+      |_ calling rprint2(7)
+         Inside function with 7
+         |_ calling rprint2(6)
+            Inside function with 6
+            |_ calling rprint2(5)
+               Inside function with 5
+               |_ calling rprint2(4)
+                  Inside function with 4
+                  |_ calling rprint2(3)
+                     Inside function with 3
+                     |_ calling rprint2(2)
+                        Inside function with 2
+                        |_ calling rprint2(1)
+                           Inside function with 1
+                           |_ calling rprint2(0)
+                              Inside function with 0
+                           | printing 1
+1
+                        | printing 2
+2
+                     | printing 3
+3
+                  | printing 4
+4
+               | printing 5
+5
+            | printing 6
+6
+         | printing 7
+7
+      | printing 8
+8
+   | printing 9
+9
+| printing 10
+10
+```
+
+Hãy đọc từ trên xuống dưới, chậm rãi, để hiểu chuyện gì đã xảy ra.
+Nếu vẫn chưa hiểu?
+
+Hãy đọc lại từ đầu!
+
+Ví dụ trên chỉ nhằm minh hoạ recursive function làm việc như
+thế nào, chứ không có lợi ích gì khi viết hàm recursive trong trường hợp này.
+
+Recursive function sẽ trở nên rất hữu dụng nếu vấn đề được định nghĩa theo
+cách đệ quy (các hàm toán học),
+giải bài toán [Tháp Hà Nội](https://en.wikipedia.org/wiki/Tower_of_Hanoi),
+hay chỉ đơn giản là muốn tiến gần hơn một bước đến
+[Functional programming](http://stackoverflow.com/a/2576240/807703).
+
+Link [Jupyter notebook](https://gist.github.com/hvnsweeting/baab0583e6adfdb417fa27d6df2b076b)
