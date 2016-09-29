@@ -1,6 +1,4 @@
-title:
-
-Tính toán bằng Python
+title: Tính toán bằng Python
 ---
 author: HVN
 ---
@@ -25,7 +23,7 @@ Nghe đọc phát âm tại từ điển [Cambridge](http://dictionary.cambridge
 ## Các phép toán trong Python
 Mở python lên - chú ý loạt bài viết này dùng Python3 nên nếu bạn sử dụng Python2, kết quả có thể khác.
 
-```
+```python
 $ python3
 Python 3.5.1 (default, Apr 21 2016, 17:24:52)
 [GCC 4.2.1 Compatible Apple LLVM 5.1 (clang-503.0.40)] on darwin
