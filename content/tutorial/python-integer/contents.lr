@@ -1,0 +1,130 @@
+title:
+
+Tính toán bằng Python 
+---
+author: HVN
+---
+body:
+
+Dễ nhất là toán lớp 1, 
+toán lớp 1 học 1 + 1 = 2.
+
+Con đường học Python cũng nên bắt đầu từ ấy.
+
+Bài này sẽ thực hiện các phép toán cơ bản ở phổ thông sử dụng Python.
+
+## Các kiểu dữ liệu số
+### Integer
+Đọc là /ˈɪntɪdʒə/ (vietsub: in-ti-zơ) kiểu số nguyên,
+
+### Float 
+Đọc là /fləʊt/ (vietsub: phờ-lơu-t) kiểu số thực.
+
+Nghe đọc phát âm tại từ điển [Cambridge](http://dictionary.cambridge.org/dictionary/english/)
+
+## Các phép toán
+Mở python lên - chú ý loạt bài viết này dùng Python3 nên nếu bạn sử dụng Python2, kết quả có thể khác.
+
+```
+$ python3
+Python 3.5.1 (default, Apr 21 2016, 17:24:52)
+[GCC 4.2.1 Compatible Apple LLVM 5.1 (clang-503.0.40)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+```
+
+###  Phép cộng 
+Dùng dấu ``+``, trong tiếng Anh là "plus":
+
+```
+>>> 1 + 1 # đây là dòng mình gõ vào 
+2  # đây là dòng kết quả sẽ thấy sau khi gõ enter 
+>>> 2 + 3 + 100
+105
+>>> 2 + -1 + -2 + 1
+0
+```
+
+Không có gì lạ ở các kết quả trên, giống hệt học lớp 1.
+Không có bài toán nào khó nếu chỉ làm những việc đơn giản như vậy, hãy mở rộng bài toán và thử 
+với cá số to hơn:
+
+```
+>>> 12312421312321 + 658347654397897897073214123412
+658347654397897909385635435733
+```
+
+Có thể thấy to cỡ nào thì Python cũng xử lý được cả.
+
+Số thực được biểu diễn với phần nguyên và phần thập phân được phân cách bởi dấu chấm (``.``).
+Làm phép toán giữa một số thực với một số nguyên sẽ thu được 1 số thực. (Vì tập số thực bao hàm cả tập số nguyên - theo toán học).
+
+```
+>>> 1.5 + 2
+3.5
+```
+
+# Phép trừ 
+Dùng dấu ``-`` - trong tiếng Anh là "minus":
+
+```
+>>> 1235 - 5231
+-3996
+```
+
+Giống như trong toán, ta có thể gộp các phép tính lại với nhau bằng dấu ngoặc đơn (tính chất kết hợp):
+
+```
+>>> 2 - (2 + 2)
+-2
+>>> 2 - 2 + 2
+2
+```
+
+# Phép nhân 
+Python sử dụng dấu sao (``*`` - trong tiếng Anh là "asterisk") để biểu diễn phép nhân:
+
+```
+>>> 2 * 3 * (-5)
+-30
+>>> 2 + 5 * 8 # phép nhân có thứ tự ưu tiên cao hơn phép cộng - nên được tính trước 
+42
+```
+Nhân to bao nhiêu cũng được:
+
+```
+>>> 123123123 * 123123123
+15159303417273129
+>>> 612312312 * 0
+0
+```
+
+# Phép chia 
+Phép chia được biểu diễn bằng dấu ``/`` - trong tiếng Anh là "slash".
+```
+>>> 10 / 5
+2.0
+>>> 3 / 2
+1.5
+```
+
+Kết quả của phép chia luôn luôn là kiểu float. Đây là một cải tiến của Python3 so với Python2, bởi trong Python2,
+khi chia như vậy bạn sẽ nhận được phần nguyên của kết quả (kiểu int). Tức 3 / 2 sẽ thu được 1. Điều này 
+khiến cho lập trình viên dễ bị nhầm lẫn và không hợp với tự nhiên.
+
+Phép chia cho 0 sẽ gặp "lỗi". 
+
+```
+>>> 1 / 0
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ZeroDivisionError: division by zero
+```
+Trong python, khi thấy "lỗi" như thế này sẽ đọc là: 1 chia 0 xảy ra exception có tên là ZeroDivisionError.
+Phần theo sau dấu ``:`` giải thích lý do gặp lỗi, trường hợp này là ``division by zero`` - phép chia cho 0.
+
+Hết.
+
+Phần tiếp: các phép tính cao cấp trong Python 
+---
+shortintro: làm quen với Python bằng các phép toán ở phổ thông
