@@ -34,7 +34,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 ###  Phép cộng
 Dùng dấu ``+``, trong tiếng Anh là "plus":
 
-```
+```python
 >>> 1 + 1 # đây là dòng mình gõ vào
 2  # đây là dòng kết quả sẽ thấy sau khi gõ enter
 >>> 2 + 3 + 100
@@ -44,10 +44,10 @@ Dùng dấu ``+``, trong tiếng Anh là "plus":
 ```
 
 Không có gì lạ ở các kết quả trên, giống hệt học lớp 1.
-Không có bài toán nào khó nếu chỉ làm những việc đơn giản như vậy, hãy mở rộng bài toán và thử
-với cá số to hơn:
+Không có bài toán nào khó nếu chỉ làm những việc đơn giản như vậy, hãy mở rộng
+bài toán và thử với các số to hơn:
 
-```
+```python
 >>> 12312421312321 + 658347654397897897073214123412
 658347654397897909385635435733
 ```
@@ -55,9 +55,9 @@ với cá số to hơn:
 Có thể thấy to cỡ nào thì Python cũng xử lý được cả.
 
 Số thực được biểu diễn với phần nguyên và phần thập phân được phân cách bởi dấu chấm (``.``).
-Làm phép toán giữa một số thực với một số nguyên sẽ thu được 1 số thực. (Vì tập số thực bao hàm cả tập số nguyên - theo toán học).
+Làm phép toán giữa một số thực với một số nguyên sẽ trả về 1 số thực. (Vì tập số thực bao hàm cả tập số nguyên - theo toán học).
 
-```
+```python
 >>> 1.5 + 2
 3.5
 ```
@@ -65,14 +65,14 @@ Làm phép toán giữa một số thực với một số nguyên sẽ thu đư
 ### Phép trừ
 Dùng dấu ``-`` - trong tiếng Anh là "minus":
 
-```
+```python
 >>> 1235 - 5231
 -3996
 ```
 
-Giống như trong toán, ta có thể gộp các phép tính lại với nhau bằng dấu ngoặc đơn (tính chất kết hợp):
+Giống như trong toán, ta có thể gộp các phép tính lại với nhau bằng dấu ngoặc đơn:
 
-```
+```python
 >>> 2 - (2 + 2)
 -2
 >>> 2 - 2 + 2
@@ -82,7 +82,7 @@ Giống như trong toán, ta có thể gộp các phép tính lại với nhau b
 ### Phép nhân
 Python sử dụng dấu sao (``*`` - trong tiếng Anh là "asterisk") để biểu diễn phép nhân:
 
-```
+```python
 >>> 2 * 3 * (-5)
 -30
 >>> 2 + 5 * 8 # phép nhân có thứ tự ưu tiên cao hơn phép cộng - nên được tính trước
@@ -90,7 +90,7 @@ Python sử dụng dấu sao (``*`` - trong tiếng Anh là "asterisk") để bi
 ```
 Nhân to bao nhiêu cũng được:
 
-```
+```python
 >>> 123123123 * 123123123
 15159303417273129
 >>> 612312312 * 0
@@ -99,7 +99,7 @@ Nhân to bao nhiêu cũng được:
 
 ### Phép chia
 Phép chia được biểu diễn bằng dấu ``/`` - trong tiếng Anh là "slash".
-```
+```python
 >>> 10 / 5
 2.0
 >>> 3 / 2
@@ -112,7 +112,7 @@ khiến cho lập trình viên dễ bị nhầm lẫn và không hợp với t�
 
 Phép chia cho 0 sẽ gặp "lỗi".
 
-```
+```python
 >>> 1 / 0
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
@@ -125,4 +125,4 @@ Hết.
 
 Phần tiếp: các phép tính cao cấp trong Python
 ---
-shortintro: làm quen với Python bằng các phép toán ở phổ thông
+shortintro: Làm quen với Python bằng các phép toán cơ bản
