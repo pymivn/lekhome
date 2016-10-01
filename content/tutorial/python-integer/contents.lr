@@ -118,11 +118,11 @@ Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
 ZeroDivisionError: division by zero
 ```
-Trong python, khi thấy "lỗi" như thế này sẽ đọc là: 1 chia 0 xảy ra exception có tên là ZeroDivisionError.
-Phần theo sau dấu ``:`` giải thích lý do gặp lỗi, trường hợp này là ``division by zero`` - phép chia cho 0.
+Trong python, khi thấy "lỗi" như thế này sẽ đọc là: 1 chia 0 xảy ra
+**exception** (trường hợp ngoại lệ) có tên là ZeroDivisionError.  Phần theo sau
+dấu ``:`` giải thích lý do gặp lỗi, trường hợp này là ``division by zero`` -
+phép chia cho 0.
 
-Hết.
-
-Phần tiếp: các phép tính cao cấp trong Python
+Phần tiếp: [các phép tính cao cấp trong Python](/tutorial/python-calculation-2/)
 ---
 shortintro: Làm quen với Python bằng các phép toán cơ bản
