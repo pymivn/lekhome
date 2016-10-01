@@ -65,9 +65,9 @@ Do số dư luôn luôn nhỏ hơn số chia (7 là số bị chia, 2 là số c
 khi bài toán có quy luật tuần hoàn. Cho đề bài:
 
 > Biết từ nhà Mít sang nhà Chuối có 9 bậc (đánh số từ 1-9),
-coi nhà Mít là bậc 0 và nhà Chuối là bậc 10. Biết mỗi bậc đi 1 bước, hỏi nếu
+coi nhà Mít là bậc 0 và nhà Chuối là bậc 10. Biết mỗi 1 bước đi 1 bậc, hỏi nếu
 Mít bắt đầu từ nhà mình, đi theo đường ấy, đến nhà Chuối thì lại quay về,
-thì sau 1235789 bậc, Mít đang ở bậc số mấy?
+thì sau 1235789 bước, Mít đang ở bậc số mấy?
 
 
 ```python
