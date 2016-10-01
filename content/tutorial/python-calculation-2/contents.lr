@@ -1,0 +1,116 @@
+title: Tính toán bằng Python [phần 2]
+---
+author: HVN
+---
+body:
+
+[Bài trước](/tutorial/python-integer) đã giới thiệu về các phép tính tiểu học (cộng trừ nhân chia),
+bài này sẽ giới thiệu các phép tính phổ thông có vẻ cao cấp hơn như phép luỹ thừa, chia lấy dư, tính 
+toán số phức.
+
+## Phép luỹ thừa 
+Phép toán luỹ thừa, hay mũ, tiếng Anh gọi là "power".
+2 mũ 3 trong tiếng Anh là  "2 to the power of 3".
+Phép mũ trong Python sử dụng ký hiệu ``**``, KHÔNG PHẢI ký hiệu ``^``.
+
+```python
+>>> 2 ** 7
+128
+>>> 2 ** 8
+256
+>>> 10 ** 7
+10000000
+>>> 2 ** 1000
+10715086071862673209484250490600018105614048117055336074437503883703510511249361224931983788156958581275946729175531468251871452856923140435984577574698574803934567774824230985421074605062371141877954182153046474983581941267398767559165543946077062914571196477686542167660429831652624386837205668069376
+```
+
+Với Python, độ lớn của số là tuỳ ý, không có giới hạn. Nếu bạn còn chưa quên toán, 
+thì sẽ biết rằng phép căn bậc 2 (square root) thực chất là mũ 1/2, 
+căn bậc 3 (cube root) là mũ 1/3,...
+
+```python
+>>> 4 ** (1/2)
+2.0
+>>> 27 ** (1/3)
+3.0
+>>> 2 ** (1/2)
+1.4142135623730951
+>>> 4 ** 2.0
+16.0
+```
+
+Chú ý, giống các phép toán khác, phép mũ khi thực hiện với float ở phần số hay phần mũ đều trả về kết quả kiểu float.
+
+## Phép chia lấy dư
+Phép chia lấy dư (modulo hay viết tắt là mod) trong Python được biểu diễn bằng dấu ``%``.
+```python
+>>> 5 % 2
+1
+>>> 10 % 7
+3
+```
+
+Sử dụng phép chia lấy dư, ta có thể kiểm tra một số có là bội của số khác nếu nó chia lấy dư được kết quả là 0:
+```python
+>>> 100 % 25 # 100 = 25 * 4
+0
+```
+Ứng dụng phổ biến thường gặp là kiểm tra một số là chẵn (even) hay lẻ (odd):
+```python
+>>> 7 % 2
+1 # vậy 7 là lẻ
+```
+
+Do số dư luôn luôn nhỏ hơn số chia (7 là số bị chia, 2 là số chia, 1 là số dư), phép chia dư được sử dụng 
+khi bài toán có quy luật tuần hoàn. Cho đề bài:
+
+> Biết từ nhà Mít sang nhà Chuối có 11 bậc (đánh số từ 0-10) và về cũng trên những bậc ấy. Hỏi nếu Mít
+bắt đầu từ nhà mình, đi theo đường ấy thì sau 1235789 bậc, Mít đang ở bậc số mấy?
+
+
+```python
+[ 0] [ 1] [ 2] [ 3] [ 4] [ 5] [ 6] [ 7] [ 8] [ 9] [10]
+[20] [19] [18] [17] [16] [15] [14] [13] [12] [11]
+```
+
+Ta có thể giải bài toán này bằng cách đếm lần lượt, cho đến khi hết 1235789 bước thì sẽ biết Mít đang
+ở phương trời nào, hoặc chỉ cần dùng phép chia dư để loại bỏ những phần tuần hoàn của bài toán.
+Do Mít đi 20 bước (10 bước đi, 10 bước về) sẽ trở về bậc số 0.
+Vậy cứ chia lấy dư cho 20, ta thu được số bước lẻ còn lại.
+
+Sau 21 bước, Mít đang ở bậc số 21 % 20 == 1.
+Sau 31 bước, Mít đang ở bậc số 31 % 20 == 11, tức sau 1 bước trên đường về hay ở bậc số 9.
+Sau 1235789, Mít ở bậc 
+
+```python
+>>> 1235789 % 20
+9
+```
+
+Phép modulo còn có ứng dụng quan trọng trong ngành mật mã học (cryptography), hệ thống bảo mật RSA
+có sử dụng phép modulo, xem thêm tại [wikipedia][1].
+
+## Phép chia lấy phần nguyên
+Phép chia chỉ lấy phần nguyên (floor division) sử dụng ký hiệu ``//``:
+
+```python
+>>> 10 // 7
+1
+```
+
+## Số phức
+Số phức (được học trong chương trình toán cấp 3) 
+cũng được hỗ trợ bởi Python, phần ảo được ký hiệu bằng chữ ``j``:
+
+```python
+>>> 1 + 5j + 2 + 7j
+(3+12j)
+```
+
+Xem thêm tại: [python tutorial](https://docs.python.org/3/tutorial/introduction.html#numbers)
+
+  [1]:  https://en.wikipedia.org/wiki/RSA_(cryptosystem)#Operation
+---
+pub_date: 2016-10-01
+---
+shortintro: Phép luỹ thừa, phép lấy căn, phép chia dư ...
