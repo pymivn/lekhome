@@ -79,8 +79,8 @@ True
 biểu thức ``True or 1/0`` không gặp **exception** khi lấy 1 chia cho 0, bởi code đã dừng lại khi thấy ``True``.
 
 Nhưng thế giới vốn không chỉ có trắng và đen, nó còn hồng cam vàng tím xanh lá chuối nữa, nên khi đưa
-về đúng và sai, những giá tri ``0``, ``''``, ``[]``, ``()``, ``None`` sẽ được xem là sai, còn lại đều là đúng. (Tạm nhớ
-vẹt 🕊 thế, đến khi các kiểu dữ liệu trông lạ lạ sẽ được giới thiệu ở các bài tiếp theo.)
+về đúng và sai, những giá trị ``0``, ``''``, ``[]``, ``()``, ``None`` sẽ được xem là sai, còn lại đều là đúng. (Tạm nhớ
+vẹt 🐣 thế, đến khi các kiểu dữ liệu trông lạ lạ sẽ được giới thiệu ở các bài tiếp theo.)
 
 ```python
 >>> False or 5
