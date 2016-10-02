@@ -4,8 +4,8 @@ author: HVN
 ---
 body:
 
-Thế giới không chỉ có trắng và đen, thế giới còn có tím mộng mơ, hồng ngây thơ, đỏ mãnh liệt 
-và xanh hoà bình nữa. 
+Thế giới không chỉ có trắng và đen, thế giới còn có tím mộng mơ, hồng ngây thơ, đỏ mãnh liệt
+và xanh hoà bình nữa.
 Nhưng sự thật chỉ có đúng hoặc sai, và Python thì có ``True`` hoặc ``False``.
 
 ## Boolean
@@ -29,9 +29,9 @@ Dùng toán tử ``not`` để đảo ngược giá trị của biểu thức.
 Dùng ``is`` để kiểm tra xem CÁI NÀY có **là** CÁI KIA không
 
 ```python
->>> True is not False # tương đương với True is True 
+>>> True is not False # tương đương với True is True
 True
->>> False is not True # tương đương với False is False 
+>>> False is not True # tương đương với False is False
 True
 ```
 
@@ -43,7 +43,7 @@ True
 ```
 
 Dùng toán tử ``and`` để kết hợp hai biểu thức logic.
-Đúng với đúng là đúng, đúng với sai là sai, sai với sai là sai lè lè 
+Đúng và đúng là đúng, đúng và sai là sai, sai và sai là sai lè lè
 ```python
 >>> True and True
 True
@@ -78,8 +78,8 @@ True
 
 biểu thức ``True or 1/0`` không gặp **exception** khi lấy 1 chia cho 0, bởi code đã dừng lại khi thấy ``True``.
 
-Nhưng thế giới vốn không chỉ có trắng và đen, nó còn hồng cam vàng tím xanh lá chuối nữa, nên khi đưa 
-về đúng và sai, những giá tri ``0``, ``''``, ``[]``, ``()``, ``None`` sẽ được xem là sai, còn lại đều là đúng. (Tạm nhớ 
+Nhưng thế giới vốn không chỉ có trắng và đen, nó còn hồng cam vàng tím xanh lá chuối nữa, nên khi đưa
+về đúng và sai, những giá tri ``0``, ``''``, ``[]``, ``()``, ``None`` sẽ được xem là sai, còn lại đều là đúng. (Tạm nhớ
 vẹt 🕊 thế, đến khi các kiểu dữ liệu trông lạ lạ sẽ được giới thiệu ở các bài tiếp theo.)
 
 ```python
@@ -98,7 +98,22 @@ Nói dài nói dai thế, tóm lại: đúng là không sai, mà sai thì làm l
 True
 ```
 
-### Câu hỏi bài tập: vậy tình yêu ở đâu? 
+### Câu hỏi bài tập: vậy tình yêu ở đâu?
+
+```python
+>>> import this
+>>> love = this
+>>> this is love
+True
+>>> love is True
+False
+>>> love is False
+False
+>>> love is not True or False; love is love
+True
+True
+>>> # https://www.quora.com/What-are-some-cool-easter-eggs-of-python/answer/Christoffer-Aasted?srid=3VBz
+```
 
 > People killin', people dyin'
 
@@ -122,4 +137,4 @@ pub_date: 2016-10-02
 ---
 shortintro:
 
-Tình yêu nằm ở đâu giữa sai và đúng? 
+Tình yêu nằm ở đâu giữa sai và đúng?
