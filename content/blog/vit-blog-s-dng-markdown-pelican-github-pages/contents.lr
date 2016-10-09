@@ -4,9 +4,6 @@ author: htl
 ---
 body:
 
-Title: Viết blog sử dụng markdown, pelican, github pages
-Authors: htl
-
 ## I. Markdown
 
 [Markdown](https://daringfireball.net/projects/markdown/) được nói trong bài này là cú pháp để phục vụ việc chuyển text thành HTML. Tức là khi viết bằng cú pháp markdown, đưa qua 1 chương trình xử lý, nó sẽ cho ra kết quả là HTML.

@@ -21,7 +21,5 @@ Lúc này bạn có thể cài extension của jupyter notebook là **pep8\_magi
 %%pep8
 # code dưới này
 ```
-
--htl-
 ---
 shortintro: Kiểm tra pep8 luôn trong jupyter notebook
