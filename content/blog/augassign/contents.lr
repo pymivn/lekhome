@@ -4,10 +4,10 @@ author: HVN
 ---
 body:
 
-list + list trả về 1 list, tuple + tuple trả về 1 tuple
+Biết list + list trả về 1 list, tuple + tuple trả về 1 tuple,
+vậy tuple + list hay list + tuple thì trả về gì?
 
 ## list + tuple
-Vậy tuple + list hay list + tuple thì trả về gì?
 Câu trả lời đúng là: không trả về gì cả bởi có **exception** xảy ra.
 
 ```python
@@ -21,7 +21,8 @@ Traceback (most recent call last):
 TypeError: can only concatenate tuple (not "list") to tuple
 ```
 
-đây là **TypeError** exception, với nội dung rất rõ ràng: chỉ có thể cộng list với list, tuple với tuple.
+đây là **TypeError** exception, với nội dung rất rõ ràng: chỉ có thể cộng list
+với list, tuple với tuple.
 
 Thông thường, phép tính ``a += b`` được hiểu là ``a = a + b``.
 Điều này đúng trong hầu hết các trường hợp... cho đến khi nó sai:
@@ -118,14 +119,15 @@ gọi  method ``extend``.
 
 [Xem chi tiết code C implement List](https://hg.python.org/cpython/file/3.5/Objects/listobject.c#l902).
 
-Còn với kiểu dữ liệu immutable (như tuple, integer, string ... ), chúng không có method ``__iadd__``,
-phép toán **augmented assigment`` lúc này sẽ gọi
-``__add__``, và khi tuple + list sẽ không thu được gì:
+Với kiểu dữ liệu immutable (như tuple, integer, string ... ), chúng không
+có method ``__iadd__``, nên phép toán ``+=`` sẽ gọi
+method ``__add__``. Viết ``a += b`` khi a là tuple, b là list sẽ tương đương
+với viết ``a = a + b``, mà tuple + list thì không thu được gì:
 
 ```python
->>> a = [1]
->>> b = (2,)
->>> b += a
+>>> a = (2,)
+>>> b = [1]
+>>> a += b
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
 TypeError: can only concatenate tuple (not "list") to tuple
@@ -133,12 +135,12 @@ TypeError: can only concatenate tuple (not "list") to tuple
 
 **Đây không phải là bug của Python, nó là một tính năng ™** theo thiết kế.
 
-Bởi nếu cho phép thay đổi một kiểu dữ liệu ``immutable`` ,
+Bởi nếu cho phép thay đổi một kiểu dữ liệu ``immutable``
 thì khi viết ``4 + 5`` bạn sẽ muốn nhận được 1 object
 mới là số ``9``, hay bạn muốn sửa số ``4`` thành số ``9``? 🤔
 ---
 shortintro:
 
-a += b có thực sự là a = a + b? chuyện thực sự xảy ra khi a + b?
+a += b có thực sự là a = a + b? chuyện gì xảy ra khi a + b?
 ---
 pub_date: 2016-10-09
