@@ -1,0 +1,127 @@
+title: tuple += list được gì?
+---
+author: HVN
+---
+body:
+
+list + list trả về 1 list
+
+tuple + tuple trả về 1 tuple
+
+Vậy tuple + list hay list + tuple thì trả về gì?
+Câu trả lời đúng luôn là: không trả về gì cả bởi có **exception** xảy ra. 
+
+```python
+>>> [1] + (2,)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: can only concatenate list (not "tuple") to list
+>>> (2,) + [1]
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: can only concatenate tuple (not "list") to tuple
+```
+
+đây là **TypeError** exception, với nội dung rất rõ ràng: chỉ có thể cộng list với list, tuple với tuple.
+
+Thông thường, phép tính 
+
+```python
+a += b
+```
+
+được hiểu là a = a + b. Điều này đúng trong hầu hết các trường hợp... cho đến khi nó sai:
+
+```python
+>>> a = 5
+>>> b = 4
+>>> a += b
+>>> print(a)
+9
+>>> a = 'pymi'
+>>> b = '.vn'
+>>> a += b
+>>> print(a)
+pymi.vn
+
+>>> a = [1]
+>>> b = (2,)
+>>> a += b
+>>> print(a)
+[1, 2]
+>>> # Ồ ồ ồ ồ ồ 😱 vì sao list lại cộng được với tuple 🙄
+```
+
+Phép toán ``+=`` ``-=`` ``*=`` ``/=`` ... được gọi là **augmented assignment operators** (phép toán "augmented assignment").
+
+### Augmented /ɔːɡˈmɛntɪd/
+Vietsub: làm tăng lên.
+Engsub: Having been made greater in size or value.
+
+Danh sách đầy đủ các phép toán này có thể xem tại 
+[trang định nghĩa cú pháp của Python](https://docs.python.org/3/reference/grammar.html).
+
+Trong Python, bản chất các phép toán đều chỉ là ``syntactic sugar`` (làm cho cú pháp thêm ngọt - dễ nhìn).
+Phép cộng ``a + b`` được thực hiện bằng cách gọi method ``__add__`` của object ``a`` với argument là ``b``.
+
+```python
+>>> a = 5
+>>> b = 4
+>>> a.__add__(b)
+9
+```
+Tại đây, method ``__add__`` trả về một object mới là số ``9``.
+
+``a += b`` sẽ gán cho tên (biến) ``a`` một object mới (số 9) - kết quả của phép tính ``a+b``.
+Đầy đủ hơn, cách hoạt động của **augmented assigment** được mô tả tại 
+[PEP0203](https://www.python.org/dev/peps/pep-0203/). Đoạn trích từ 
+[PEP0203](https://www.python.org/dev/peps/pep-0203/):
+
+```
+ So, given an instance object `x', the expression
+    
+        x += y
+    
+    tries to call x.__iadd__(y), which is the `in-place' variant of
+    __add__. If __iadd__ is not present, x.__add__(y) is attempted,
+    and finally y.__radd__(x) if __add__ is missing too.
+```
+
+Tức khi thực hiện phép toán ``+=``, Python sẽ thử method ``__iadd__``
+trước. Nếu nó không tồn tại, Python lại thử ``__add__`` rồi sau cùng thử gọi ``__radd__`` .
+``__iadd__`` là phiên bản **in-place** của ``__add__``,
+method này sẽ thay đổi chính object gọi method 
+chứ không trả về 1 object khác với giá trị mới.
+
+List có method ``__iadd__``, nên khi dùng phép toán ``+=``, python
+sẽ gọi ``__iadd__``, method này sẽ gọi method ``extend``.
+``extend`` chấp nhận đầu vào là
+1 iterable (kiểu dữ liệu chứa nhiều giá trị như list, string, tuple ...)
+ nên khi viết ``mlist += mtuple``, thực chất tương đương với ``mlist.extend(mtuple)``.
+
+[Xem chi tiết code C implement List](https://hg.python.org/cpython/file/3.5/Objects/listobject.c#l902). 
+
+Còn với kiểu dữ liệu immutable (như tuple, integer, string ... ), nó không có method ``__iadd__``,
+phép toán **augmented assigment`` lúc này sẽ gọi 
+``__add__``, và tuple + list sẽ không thu được gì:
+
+```python
+>>> a = [1]
+>>> b = (2,)
+>>> b += a
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: can only concatenate tuple (not "list") to tuple
+```
+
+**Đây không phải là bug của Python, nó là một tính năng ™** theo thiết kế.
+
+Bởi nếu cho phép thay đổi một kiểu dữ liệu ``immutable`` ,
+thì khi viết ``4 + 5`` bạn sẽ muốn nhận được 1 object
+mới là số ``9``, hay bạn muốn sửa số ``4`` thành số ``9``? 🤔
+---
+shortintro:
+
+a += b có thực sự là a = a + b? chuyện thực sự xảy ra khi a + b? 
+---
+pub_date: 2016-10-09
