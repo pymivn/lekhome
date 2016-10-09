@@ -107,6 +107,15 @@ gọi  method ``extend``.
 1 iterable (kiểu dữ liệu chứa nhiều giá trị như list, string, tuple ...)
  nên khi viết ``mlist += mtuple``, thực chất tương đương với ``mlist.extend(mtuple)``.
 
+```python
+>>> lst = [1]
+>>> id(lst)
+4340949768
+>>> lst += (2,)
+>>> print(lst, id(lst))
+[1, 2] 4340949768  # id không đổi
+```
+
 [Xem chi tiết code C implement List](https://hg.python.org/cpython/file/3.5/Objects/listobject.c#l902).
 
 Còn với kiểu dữ liệu immutable (như tuple, integer, string ... ), chúng không có method ``__iadd__``,
