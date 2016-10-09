@@ -1,14 +1,15 @@
-title: tuple += list được gì?
+title: Giải mã rắc rối phép toán +=
 ---
 author: HVN
 ---
 body:
 
+## list và tuple - hai loài khác biệt
 Biết list + list trả về 1 list, tuple + tuple trả về 1 tuple,
-vậy tuple + list hay list + tuple thì trả về gì?
+vậy list + tuple thì trả về gì?
 
-## list + tuple
 Câu trả lời đúng là: không trả về gì cả bởi có **exception** xảy ra.
+Dù cho lấy list + tuple hay tuple + list đi chăng nữa:
 
 ```python
 >>> [1] + (2,)
@@ -24,6 +25,7 @@ TypeError: can only concatenate tuple (not "list") to tuple
 đây là **TypeError** exception, với nội dung rất rõ ràng: chỉ có thể cộng list
 với list, tuple với tuple.
 
+## a += b có đúng là a = a + b?
 Thông thường, phép tính ``a += b`` được hiểu là ``a = a + b``.
 Điều này đúng trong hầu hết các trường hợp... cho đến khi nó sai:
 
@@ -46,17 +48,22 @@ pymi.vn
 >>> # Ồ ồ ồ ồ ồ 😱 vì sao list lại cộng được với tuple 🙄
 ```
 
-Phép toán ``+=`` ``-=`` ``*=`` ``/=`` ... được gọi là **augmented assignment operators** (phép toán "augmented assignment").
+Phép toán ``+=``, ``-=``, ``*=``, ``/=`` được gọi là **augmented
+assignment operators** (phép toán "augmented assignment").
 
 ### Augmented /ɔːɡˈmɛntɪd/
 Vietsub: làm tăng lên.
 Engsub: Having been made greater in size or value.
 
 Xem đầy đủ danh sách các phép toán **augmented assignment** tại
-[trang định nghĩa cú pháp của Python](https://docs.python.org/3/reference/grammar.html).
+[trang định nghĩa cú pháp của
+Python](https://docs.python.org/3/reference/grammar.html).
 
-Trong Python, bản chất các phép toán đều chỉ là ``syntactic sugar`` (làm cho cú pháp thêm ngọt - dễ nhìn).
-Phép cộng ``a + b`` được thực hiện bằng cách gọi method ``__add__`` của object ``a`` với argument là ``b``.
+## Bản chất của các phép toán
+
+Trong Python, bản chất các phép toán đều chỉ là ``syntactic sugar`` (làm cho cú
+pháp thêm ngọt - dễ nhìn).  Phép cộng ``a + b``, thực chất được thực hiện bằng
+cách gọi method ``__add__`` của object ``a`` với argument là ``b``.
 
 ```python
 >>> a = 5
@@ -78,9 +85,11 @@ Khi viết ``a = a + b``, ta có
 9 4309492352 # id đã khác
 ```
 
-Ở đây sẽ gán cho tên (biến) ``a`` kết quả của phép tính ``a+b`` - một object mới (số 9).
-Nhưng khi thực hiện ``x += y``, không phải lúc nào cũng xảy ra
-trường hợp  ``x = x + y``. Cách hoạt động của **augmented assigment** được mô tả tại
+Ở đây sẽ gán cho tên (biến) ``a`` kết quả của phép tính ``a+b`` - một object
+mới (số 9).
+
+### Phép toán += hoạt động thế nào?
+Cách hoạt động của **augmented assigment** được mô tả tại
 [PEP0203](https://www.python.org/dev/peps/pep-0203/). Đoạn trích từ
 [PEP0203](https://www.python.org/dev/peps/pep-0203/):
 
@@ -101,12 +110,16 @@ rồi sau cùng thử gọi ``__radd__`` .
 Khi mà ``__add__`` sẽ trả về một object mới chứa kết quả của phép cộng,
 thì ``__iadd__`` lại thay đổi giá trị của chính object gọi nó.
 
+#### list += tuple
+
 List có method ``__iadd__``, nên khi dùng phép toán ``+=``, python
 sẽ gọi ``__iadd__``, method này thay đổi chính list object bằng việc
-gọi  method ``extend``.
+[gọi  method
+``extend``](https://hg.python.org/cpython/file/3.5/Objects/listobject.c#l902).
 ``extend`` chấp nhận đầu vào là
-1 iterable (kiểu dữ liệu chứa nhiều giá trị như list, string, tuple ...)
- nên khi viết ``mlist += mtuple``, thực chất tương đương với ``mlist.extend(mtuple)``.
+ iterable (kiểu dữ liệu chứa nhiều giá trị như list, string, tuple ...)
+nên có thể viết list += tuple. Kết quả thu được là list ban đầu với giá trị mới
+được extend từ tuple đưa vào.
 
 ```python
 >>> lst = [1]
@@ -117,7 +130,7 @@ gọi  method ``extend``.
 [1, 2] 4340949768  # id không đổi
 ```
 
-[Xem chi tiết code C implement List](https://hg.python.org/cpython/file/3.5/Objects/listobject.c#l902).
+#### tuple += list
 
 Với kiểu dữ liệu immutable (như tuple, integer, string ... ), chúng không
 có method ``__iadd__``, nên phép toán ``+=`` sẽ gọi
@@ -138,6 +151,14 @@ TypeError: can only concatenate tuple (not "list") to tuple
 Bởi nếu cho phép thay đổi một kiểu dữ liệu ``immutable``
 thì khi viết ``4 + 5`` bạn sẽ muốn nhận được 1 object
 mới là số ``9``, hay bạn muốn sửa số ``4`` thành số ``9``? 🤔
+
+## Kết luận
+Phép toán ``+=`` *khiến cho* một list có thể "cộng" được với một tuple đã
+không còn là điều bí ẩn một khi bức màn bí mật đã được tụt xuống.
+Hãy nhìn các phép toán theo một con mắt khác, chúng chỉ là ký hiệu và che
+giấu đi cơ chế hoạt động thực sự ở phía dưới. Đây là lập trình, không phải
+toán học.
+
 ---
 shortintro:
 
