@@ -1,0 +1,151 @@
+title:
+
+Đặt tên
+---
+author: HVN
+---
+body:
+
+Nếu cứ thấy số 6 gọi là số 6, thấy số 9 gọi là số 9, thì tổng
+ của hai số hẳn là 9 + 6 và sinh ra kết quả là một số 15.
+Vạn vật sinh ra đều có cho mình một cái tên, một cái tên
+dù hay hay dở cũng là một cái tên.
+Python được đặt tên là Python, và người ta gọi nó bằng Python,
+chứ không gọi nó là "một bộ cú pháp, quy định lập trình với câu lệnh ..."
+
+Vậy hãy đặt cho những con số, giá trị đúng sai những cái tên,
+để ta được gọi nó, để ta có thể hét tên nó lên hay chửi thầm một cái tên
+vì nó làm chương trình không chạy.
+
+## Cú pháp
+```python
+name = value
+```
+Ví dụ:
+
+```python
+>>> my_age = 6
+>>> your_age = 9
+>>> our_ages = my_age + your_age
+>>> print(our_ages)
+15
+```
+
+Một khi tên đã được đặt, ta có thể dùng tên thay cho giá trị mà tên đó
+đã đặt cho. Ở đây, ta có tên, và vật được đặt tên (giá trị).
+
+### Tên (name)
+Tên không phải đặt thế nào cũng được. Ở Việt Nam không thể đặt
+tên là anh "Trần Văn @;" mà ra đường không bị tóm. Luật đặt tên được
+đưa ra như sau:
+- là một hay nhiều ký tự viết liền
+```python
+>>> my salary = 15000000
+  File "<stdin>", line 1
+    my salary = 15000000
+            ^
+SyntaxError: invalid syntax
+>>> my_salary = 15000000
+>>> print(my_salary)
+15000000
+```
+
+- phải bắt đầu bằng một chữ cái hoặc dấu underscore (``_``), tên bắt đầu với chữ số là không hợp lệ:
+
+```python
+>>> mimi = 5
+>>> mon_ami = 8
+>>> 09tam = 7
+  File "<stdin>", line 1
+    09tam = 7
+     ^
+SyntaxError: invalid token
+```
+Ta gặp ngay syntax error, vì một tên không được bắt đầu bằng số.
+
+Về luật thì chỉ có vậy, 2 luật, mười mấy chữ. Nhưng về thông lệ thì lại có thêm
+vài điều. Hẳn là ở Việt Nam, chẳng mấy ai có tên là anh "Lê Văn A", "Bùi Thị T"
+cả. Tên trong Python nên:
+- sử dụng tiếng Anh (lập trình viên "xịn" của nước nào cũng hiểu được).
+- tên nên dễ đọc, hiểu xem đang nói đến cái gì, không cần tiết kiệm dùng các tên 1 chữ
+
+```python
+>>> a = 7
+>>> x = 9
+>>> y = (a + x) * 2
+>>> print(y)
+32 # vậy y ở đây ám chỉ cái gì?
+>>>
+>>> width = 7
+>>> height = 9
+>>> perimeter = (width + height) * 2
+>>> print(perimeter)
+32 # chu vi = (dài + rộng) * 2
+```
+
+- không dùng tiếng Việt không dấu (tiếng Việt có dấu HỢP LỆ nhưng xem lại điều trên).
+
+```python
+>>> số_bưởi = 90
+>>> print(số_bưởi)
+90
+```
+
+Vì sao không nên dùng tiếng Việt không dấu? mặc dù điều này là rất phổ biến trong
+giới lập trình ở Việt Nam. Hãy thử đoán đoạn code sau muốn tính cái gì?
+
+```python
+>>> bao_sang = 1
+>>> bao_chieu = 2
+>>> bao_ca_ngay = bao_sang + bao_chieu
+>>> print(bao_ca_ngay)
+3
+```
+
+Hai người bất kỳ có thể đọc đoạn code này và hiểu theo 2 nghĩa khác nhau. Hay
+những câu chuyện / tin nhắn đã trở thành huyền thoại:
+
+> Anh oi, em dang o truong, anh den ngay di anh, muon lam roi.
+> A anh nho mua bao moi luon nhe, o nha het bao roi, chi toan la bao cu thoi.
+> Ma thoi, khong can mua bao dau, em moi mat kinh, khong nhin duoc nua anh oi, den ngay di, muon lam roi…
+
+Vậy nên hãy sử dụng tiếng Anh, dù không "giỏi" tiếng Anh thì bạn vẫn có thể tra
+từ điển để tìm được một từ tương ứng với từ Tiếng Việt cần dùng.
+
+### Vật được đặt tên
+Tên đã đặt được rồi, còn cái được đặt tên thì nó là gì?
+có thể là các giá trị kiểu integer, có thể là boolean ... hay gọi chung là
+một "thứ" / "vật thể" / "đối tượng" nào đó. Và ta thống nhất sẽ gọi là
+"object" (đối tượng).
+
+### bind /bʌɪnd/
+
+Vietsub: bai-đ
+
+Vie: buộc, gắn
+
+Eng: tie or fasten (something) tightly together
+
+Mỗi cái tên giờ sẽ "chỉ tới" một đối tượng (name refers object). Việc "nối" một cái name
+với một object được gọi chính thức là "binding".
+Khi sử dụng một cái name chưa được "gắn" vào object nào, ta gặp exception ``NameError``
+
+```python
+>>> print(girlfriend)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'girlfriend' is not defined
+```
+
+Chú ý rằng Python gọi ``girlfriend`` là một ``name`` chứ không phải một ``variable`` (biến)
+giống như các ngôn ngữ lập trình khác.
+Mặc dù, nhìn chung khi nói về name trong Python người ta vẫn thường dùng từ biến (variable).
+
+Giờ thì hãy đi ra và bắt đầu công cuộc đặt tên cho các Python object, ngày nào còn
+đi code, ngày ấy bạn vẫn sẽ làm chuyện ấy.
+---
+pub_date: 2016-10-12
+---
+shortintro:
+
+Ai cũng có tên, vậy còn số 9?
