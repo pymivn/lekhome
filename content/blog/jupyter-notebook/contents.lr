@@ -9,7 +9,7 @@ Là nền tảng tính toán khoa học mã nguồn mở, [interactive](https://
 
 
 ## Jupyter notebook
-Trước đây là **ipython notebook**, đổi tên thành **jupyter notebook** với mục tiêu hỗ trợ nhiều ngôn ngữ hơn. Là ứng dụng chạy trên nền web cho phép chạy interactive python (tương tự ipython). Hơn thế nữa, nó còn hỗ trợ vẽ các đồ thị, biểu đồ, hỗ trợ viết 1 "notebook" bằng cách sử dụng [Markdown](http://jupyter-notebook.readthedocs.io/en/latest/examples/Notebook/Working%20With%20Markdown%20Cells.html)
+Trước đây là **ipython notebook**, đổi tên thành **jupyter notebook** với mục tiêu hỗ trợ nhiều ngôn ngữ hơn. Là ứng dụng chạy trên nền web cho phép chạy interactive python (tương tự ipython). Hơn thế nữa, nó còn hỗ trợ vẽ các đồ thị, biểu đồ, hỗ trợ viết 1 "notebook" bằng cách sử dụng [Markdown](../blog-markdown-pelican-githubpages)
 
 ## Cài đặt jupyter notebook
 
@@ -178,9 +178,6 @@ Cơ bản đủ để dùng giảng dạy python. Tìm hiểu thêm tại: [ipyt
 Happy coding python!
 
 P/S: Có thể dùng jupyter để tạo **file.py** (**New -> Text file**) hoặc bất cứ file gì (tạo xong đổi tên), ví dụ như mình dùng jupyter để tạo **file.md** để viết blog này chẳng hạn.
-
-
--htl-
 ---
 pub_date: 2016-6-6
 ---
