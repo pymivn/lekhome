@@ -1,0 +1,213 @@
+title:
+
+Cuộc đời xoay quanh những dòng chữ
+---
+_slug: string1
+---
+author: HVN
+---
+body:
+
+Ngày mới học lập trình, tôi thường lười và ngại xử lý các "chuỗi" (string) -
+tức các dòng chữ, đoạn văn.
+Tôi thích mang lập trình ra để tính toán, tìm số nguyên tố, tìm bội nhỏ nhất, ước lớn nhất,
+đường đi loằng ngoằng nhất...
+Vậy nhưng đến khi đi làm, mới nhận ra, 68,59 % số code viết ra đều chỉ để xử lý string.
+Bởi thế mới nói, xử lý string quan trọng như nước trong cơ thể vậy 😳.
+
+Có bao nhiêu người lập trình để tính toán khoa học?
+
+Có bao nhiêu người xử lý đồ hoạ (tức viết ra phần mềm Photoshop, Camera360 chứ KHÔNG PHẢI
+dùng phần mềm Photoshop), thực hiện các phép toán trên bit và bytes?
+
+Và còn lại, bao nhiêu người xử lý các HTTP request? lưu và xử lý thông tin người
+dùng, vốn là dạng text? Số này là rất rất nhiều.
+
+Python hỗ trợ text, hỗ trợ đến tận răng, mà cần gì thì chỉ việc mang ra dùng, không
+cần nghĩ suy. Không tin thì làm thử coi.
+
+### Tạo string
+đặt cho chúng là ``s`` và ``ss``:
+```python
+>>> s = "Python"
+>>> ss = "Trái đất này là của chúng mình."
+>>> print(s)
+Python
+>>> print(ss)
+Trái đất này là của chúng mình.
+```
+
+Dùng function (hàm) ``print`` để in object ra màn hình - chưa cần hiểu function là gì
+nhưng cứ dùng đã. Cú pháp là ``function`` rồi dấu mở ngoặc ``(``, đến một hay nhiều
+object phân cách nhau bằng đấu ``,`` rồi đến dấu đóng ngoặc ``)``.
+
+Chú ý: Python 3 dùng cú pháp ``print(s)``, Python 2 dùng cú pháp ``python s``, toàn bộ
+loạt bài viết này dùng Python 3.
+
+### Độ dài của string
+Độ dài của ``s`` là bao nhiêu đếm 3 giây là biết: ``6`` ký tự.
+Độ dài của ``ss`` là bao nhiêu thì đếm 30 giây mới biết được 🙄
+Máy móc sinh ra là để phục vụ con người, để tự động hoá những công việc nhàm chán,
+và việc đếm thì chỉ các cháu lớp một mới thấy vui. Ta dùng function ``len`` để đếm
+độ dài của 1 string, kết quả của các phép đếm này là các object integer:
+
+```python
+>>> len(s)
+6
+>>> len(ss)
+31
+```
+
+### Nối string
+Các string được nối với nhau bằng phép cộng:
+
+```python
+>>> s + " thật là " + "thon" + "."
+'Python thật là thon.'
+```
+
+Nhưng string không cộng được với số, muốn cộng số phải biến đổi số đó
+về kiểu string với function ``str``:
+
+```python
+>>> s + 3
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: Can't convert 'int' object to str implicitly
+>>> s + str(3)
+'Python3'
+```
+Phép cộng một string với một số integer gặp exception **TypeError**,
+với nội dung exception "không thể chuyển đổi object kiểu ``int``
+thành khiểu ``str`` một cách không chủ động (implicitly)"
+
+### Nhân bản
+Phép nhân vốn là nhiều lần của phép cộng. Nhân string cũng vậy,
+ta dễ dàng tạo 42 dấu ``*`` bằng phép nhân:
+
+```python
+>>> "*" * 42
+'******************************************'
+>>> 42 * "*"
+'******************************************'
+```
+
+Hay nếu một ngày bị gấu mắng và bắt xin lỗi 30 lần? Đừng lo, đã có Python đứng
+về phía bạn:
+
+```python
+>>> "Xin lỗi em " * 30
+'Xin lỗi em Xin lỗi em Xin lỗi em Xin lỗi em Xin lỗi em Xin lỗi em Xin lỗi em Xin lỗi em Xin lỗi em Xin lỗi em Xin lỗi em Xin lỗi em Xin lỗi em Xin lỗi em Xin lỗi em Xin lỗi em Xin lỗi em Xin lỗi em Xin lỗi em Xin lỗi em Xin lỗi em Xin lỗi em Xin lỗi em Xin lỗi em Xin lỗi em Xin lỗi em Xin lỗi em Xin lỗi em Xin lỗi em Xin lỗi em '
+```
+
+### Kiểm tra một string có trong một string khác
+Chữ ``P`` có trong string ``s`` không? dò một cái là thấy có.
+``nh`` có trong string ``ss`` không? tìm mãi mới ra. Lại một công việc
+nhàm chán khác mà lập trình sẽ giúp ta giải quyết. Kết quả
+phép kiểm tra này (có tên tiếng anh là "test membership") là một giá trị
+Boolean, ``True`` nếu tìm thấy, ``False`` nếu không:
+
+```python
+>>> "nh" in ss
+True
+>>> "hkt" in ss
+False
+```
+
+Để kiểm tra xem có **KHÔNG** thấy một string trong string khác không,
+ta thêm ``not`` trước ``in``:
+
+```python
+>>> "p" not in "Python"
+True
+>>> "P" in "Python"
+True
+```
+Ta thấy Python phân biệt chữ hoa, chữ thường (case sensitive).
+
+### Kiểm tra string bắt đầu với một tiền tố
+Giống như kiểm tra xem có một string có chứa string khác không,
+Python có thể kiểm tra một string có **bắt đầu** với một string khác không:
+
+```python
+>>> "Python is an animal".startswith("Python ") # chú ý chữ ``s`` sau ``start``
+True
+```
+String ``"Python "`` là "tiền tố" (prefix) của string ``"Python is an animal"``.
+
+### Kiểm tra string có kết thúc với một hậu tố
+Rắt tiện lợi để kiểm tra đơn giản xem một file có phải là file ảnh định dạng PNG
+hay không dựa vào tên của file đó. Nếu nó kết thúc với hậu tố (suffix) phần
+mở rộng là ``".png"``, nó là (có vẻ) một file ảnh:
+
+```python
+>>> "filebimat.png".endswith(".png")
+True
+```
+
+Dùng từ "có vẻ" bởi người ta hoàn toàn có thể đặt cho file ảnh một phần mở rộng
+khác, ``.txt`` chẳng hạn - với một mục đích không trong sáng nào đó 😊
+
+### Biến đổi về chữ hoa
+```python
+>>> sup = ss.upper()
+>>> print(sup)
+TRÁI ĐẤT NÀY LÀ CỦA CHÚNG MÌNH.
+```
+
+### Biến đổi về chữ thường
+```python
+>>> sl = sup.lower()
+>>> print(sl)
+trái đất này là của chúng mình.
+```
+
+### Biến đổi để mỗi từ trong string đều là chữ hoa
+```python
+>>> sl.title()
+'Trái Đất Này Là Của Chúng Mình.'
+```
+
+### Biến đổi để chữ cái đầu tiên là chữ hoa
+```python
+>>> sl.capitalize()
+'Trái đất này là của chúng mình.'
+```
+
+### Bỏ các ký tự khoảng trắng
+
+#### Ký tự khoảng trắng - whitespace
+Là các ký tự ... mà nhìn vào chỉ thấy trắng. Nó bao gồm ký tự dấu cách (space),
+tab, xuống dòng (newline).
+
+```python
+>>> swhite = "  Còn tuổi    nào cho em       "
+>>> swhite.strip()
+'Còn tuổi    nào cho em'
+```
+
+Nếu chỉ muốn bỏ khoảng trắng bên phải, dùng ``rstrip`` (right strip), nếu chỉ muốn bỏ khoảng
+trắng bên trái, dùng ``lstrip`` (left strip).
+
+```python
+>>> swhite.lstrip()
+'Còn tuổi    nào cho em       '
+```
+
+### Kiểm tra 2 string có bằng nhau không:
+Dùng hai dấu bằng (``==``).
+
+```python
+>>> swhite.strip() == swhite.lstrip()
+False
+>>> "Python" == "python".capitalize()
+True
+```
+
+Còn tiếp...
+---
+pub_date: 2016-10-16
+---
+shortintro:
+
+Kiểu dữ liệu string
