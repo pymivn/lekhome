@@ -2,13 +2,19 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>{% block title %}Học Python chất lượng số 1 Việt Nam{% endblock %} — PyMI.vn</title>
+<title>{% block title %}Học Python chất lượng số 1 Việt Nam{% endblock %} — PyMi.vn</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="học lập trình Python chất lượng số 1 Việt Nam - đào tạo học viên từ không biết gì thành lập trình viên chuyên nghiệp" />
+<meta name="description" content="{% block description %}học lập trình Python chất lượng số 1 Việt Nam - đào tạo học viên từ không biết gì thành lập trình viên chuyên nghiệp{% endblock %} - PyMi.vn"/>
 <meta name="keywords" content="python, hoc python, hoc lap trinh python, hoc lap trinh, tai liey python, lap trinh python,
                                lap trinh, hoc lap trinh, học python, học lập trình python, tài liêu python, học lập trình,
                                hoc django, học django, tai lieu django, pyjobs, pyfml, python viet nam, python vietnam, pymi" />
 <meta name="author" content="http://pymi.vn" />
+<meta property="og:title" content="{% block ogtitle %}Học Python chất lượng số 1 Việt Nam{% endblock %}"/>
+<meta property="og:description" content="{% block ogdescription %}học lập trình Python chất lượng số 1 Việt Nam - đào tạo học viên từ không biết gì thành lập trình viên chuyên nghiệp{% endblock %} - PyMi.vn"/>
+<meta property="og:locale" content="vi_VN" />
+<meta property="og:type" content="article" />
+{% block custom_meta %}
+{% endblock %}
 <!-- css -->
 <link href="{{ '/static/css/bootstrap.min.css'|url }}" rel="stylesheet" />
 <link href="{{ '/static/css/flexslider.css'|url }}" rel="stylesheet" />

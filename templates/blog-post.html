@@ -1,6 +1,10 @@
 {% extends "layout.html" %}
 {% from "macros/blog.html" import render_blog_post %}
 {% block title %}{{ this.title }}{% endblock %}
+{% block ogtitle %}{{ this.title }}{% endblock %}
+{% block description %}{{ this.shortintro }}{% endblock %}
+{% block ogdescription %}{{ this.shortintro }}{% endblock %}
+
 {% block content %}
   {{ render_blog_post(this) }}
   <div class="comments">{{ render_disqus_comments() }}</div>
