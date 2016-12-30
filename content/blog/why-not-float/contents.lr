@@ -66,14 +66,14 @@ Dù đã biểu diễn bằng 17 con số (16 số sau dấu thập phân ``.``)
 giá trị chính xác mà ta cần biểu diễn, dù có thêm bao nhiêu số sau dấu phẩy đi nữa.
 
 Một lý do mà số hữy tỷ không được biểu diễn chính xác trên máy tính nữa là do:
-máy tính biểu diễn các giá trị phân số hệ 10 bằng các phân số hệ 2 (các phân số
+máy tính biểu diễn các giá trị phân số thập phân (hệ 10) bằng các phân số nhị phân (các phân số
 có tử là 1, mẫu là lũy thừa của 2 - binary fractions).
 
-Ví dụ: ``0.125`` là biểu diễn thập phân của giá trị ```1/10 + 2/100 + 5/1000`` sau khi rút gọn ta có phân số tối giản là ``1/8``.
-Máy tính biểu diễn giá trị này bằng phân số hệ 2: ``0.001`` - có giá trị là 0/2 + 0/4 + 1/8 = 1/8
-Vấn đề dẫn đến sai số khi dùng float biểu diễn các số hữu tỷ là bởi hầu hết các phân số hệ 10
-không có biểu diễn ở hệ 2. Điều này dẫn đến mỗi số float người dùng nhập vào sẽ được máy tính lưu
-trữ tương ứng một giá trị hệ 2 gần bằng với nó.
+Ví dụ: ``0.125`` là biểu diễn thập phân của giá trị ``1/10 + 2/100 + 5/1000`` sau khi rút gọn ta có phân số tối giản là ``1/8``.
+Máy tính biểu diễn giá trị này ở hệ nhị phân: ``0.001`` - có giá trị là ``0/2 + 0/4 + 1/8 = 1/8``.
+Vấn đề dẫn đến sai số khi dùng float biểu diễn các số hữu tỷ là bởi hầu hết các phân số hệ thập phân
+không có biểu diễn ở hệ nhị phân. Điều này dẫn đến mỗi số float người dùng nhập vào sẽ được máy tính lưu
+trữ tương ứng một giá trị nhị phân gần bằng với nó.
 Ví dụ với biểu diễn ``0.1`` hay giá trị ở hệ thập phân là 1/10. Khi đưa vào máy tính biểu diễn ở dạng
 phân số nhị phân, ta có phân số sau đây:
 
@@ -85,8 +85,8 @@ In [2]: format(3602879701896397 / 2 ** 55, '.17f')
 Out[2]: '0.10000000000000001'
 ```
 
-Giá trị máy tính thực sự lưu trữ kiểu float khi người dùng gõ ``1.1`` là giá trị sinh bởi phân số nói trên.
-Và nó không bằng ``0.1``.
+Giá trị máy tính thực sự lưu trữ kiểu float khi người dùng gõ ``0.1`` là giá
+trị sinh bởi phân số nói trên. Và nó không bằng ``0.1``.
 
 Khi ta cộng 3 giá trị 0.1 với nhau sẽ có:
 ```
