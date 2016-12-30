@@ -1,0 +1,152 @@
+title: Vì sao 0.1 + 0.1 + 0.1 không bằng 0.3?
+---
+author: HVN
+---
+body:
+
+Nếu có thể trả lời chính xác câu hỏi sau và giải thích tại sao, bạn có thể
+bỏ qua bài này:
+```
+0.1 + 0.1 + 0.1 == 0.3
+```
+
+Trong Python, biểu thức này trả về đúng (True) hay sai (False)? hay nói cách
+khác, khi gõ biểu diễn trên máy tính vế trái có bằng vế phải không?
+
+Có thể sử dụng bất kỳ ngôn ngữ lập trình nào khác: Python, C, Java, Golang, ...
+kết quả là không đổi.
+
+Câu trả lời ngắn gọn: Kết quả trả về là False, hay vế trái không bằng vế phải.
+
+## Float là gì?
+
+Kiểu dữ liệu ``float`` là viết tắt của "real floating-point number" - kiểu "số thực dấu chấm động".
+
+#### float là một cách BIỂU DIỄN XẤP XỈ  cho một số thực (real number) bằng cách đánh đổi độ chính xác (precision).
+
+Các quy tắc / chuẩn để biểu diễn float được mô tả trong tiêu chuẩn quốc tế
+[IEEE 754](http://grouper.ieee.org/groups/754/)
+
+### Số thực
+là tập số gồm:
+- các số hữu tỷ (số biểu diễn được ở dạng phân số: VD: 2, 1/3)
+- và các số vô tỷ (số không biểu diễn được ở dạng phân số: VD: căn bậc 2 của 2)
+
+#### Số vô tỷ
+Bản chất của các số vô tỷ là bạn không thể biểu diễn chính xác chúng ở dạng số
+(A.BCDEF) hay phân số.  Vậy nên khi biểu diễn các số vô tỷ bằng kiểu float, ta
+chỉ biểu diễn một giá trị gần đúng với giá trị thật, trong một phạm vi sai số
+ta chấp nhận.
+
+```
+In [14]: import math
+
+In [15]: math.sqrt(2)
+Out[15]: 1.4142135623730951
+```
+
+Ở các trường đại học có dạy môn giải tích số / phương pháp tính, đưa ra các cách tính để tính ra
+các số phần thập phân của căn bậc 2 của 2 trong phạm vi sai số cho phép.
+Có thể kể tới [phép lặp Newton](https://en.wikipedia.org/wiki/Newton%27s_method).
+
+#### Số hữu tỷ
+Đối với các số hữu tỷ, ta luôn có thể biểu diễn chúng ở dạng phân số thập phân (decimal fractions). Nhưng nếu
+không sử dụng ký hiệu phân số để biểu diễn, giá trị số thực thu được không bằng giá trị thật của phân số.
+Ví dụ với 1/3, khi biểu diễn trên máy tính bằng kiểu float, 1/3 sẽ chỉ được biểu diễn bằng giá trị xấp xỉ của nó:
+
+```
+In [1]: 1/3
+Out[1]: 0.3333333333333333
+
+In [2]: len(str(1/3))
+Out[2]: 18
+```
+
+Dù đã biểu diễn bằng 17 con số (16 số sau dấu thập phân ``.``) thì giá trị mà ta nhìn thấy vẫn không phải là
+giá trị chính xác mà ta cần biểu diễn, dù có thêm bao nhiêu số sau dấu phẩy đi nữa.
+
+Một lý do mà số hữy tỷ không được biểu diễn chính xác trên máy tính nữa là do:
+máy tính biểu diễn các giá trị phân số hệ 10 bằng các phân số hệ 2 (các phân số
+có tử là 1, mẫu là lũy thừa của 2 - binary fractions).
+
+Ví dụ: ``0.125`` là biểu diễn thập phân của giá trị ```1/10 + 2/100 + 5/1000`` sau khi rút gọn ta có phân số tối giản là ``1/8``.
+Máy tính biểu diễn giá trị này bằng phân số hệ 2: ``0.001`` - có giá trị là 0/2 + 0/4 + 1/8 = 1/8
+Vấn đề dẫn đến sai số khi dùng float biểu diễn các số hữu tỷ là bởi hầu hết các phân số hệ 10
+không có biểu diễn ở hệ 2. Điều này dẫn đến mỗi số float người dùng nhập vào sẽ được máy tính lưu
+trữ tương ứng một giá trị hệ 2 gần bằng với nó.
+Ví dụ với biểu diễn ``0.1`` hay giá trị ở hệ thập phân là 1/10. Khi đưa vào máy tính biểu diễn ở dạng
+phân số nhị phân, ta có phân số sau đây:
+
+```
+In [1]: 3602879701896397 / 2 ** 55
+Out[1]: 0.1
+
+In [2]: format(3602879701896397 / 2 ** 55, '.17f')
+Out[2]: '0.10000000000000001'
+```
+
+Giá trị máy tính thực sự lưu trữ kiểu float khi người dùng gõ ``1.1`` là giá trị sinh bởi phân số nói trên.
+Và nó không bằng ``0.1``.
+
+Khi ta cộng 3 giá trị 0.1 với nhau sẽ có:
+```
+In [1]: 0.1
+Out[1]: 0.1
+
+In [2]: 0.1 + .1 # .1 là kiểu viết tắt cho 0.1
+Out[2]: 0.2
+
+In [3]: 0.1 + .1 + .1
+Out[3]: 0.30000000000000004
+
+In [4]: 0.1 + .1 + .1 == 0.3
+Out[4]: False
+```
+
+Vậy nên, khi nhìn thấy số kiểu ``float``, thì khả năng lớn nó không phải là một giá trị chính xác, mà chỉ là
+giá trị xấp xỉ - mặc dù việc xấp xỉ (làm tròn) này không đáng kể - nhưng khi dồn lại nhiều sẽ dẫn đến một
+sai số lớn. Điều này khiến các ứng dụng liên quan đến tài chính không bao giờ dùng kiểu ``float``.
+Đặc biệt không so sánh các số kiểu float với nhau vì sẽ gặp những kết quả bất ngờ như ví dụ trên.
+
+Khi cần tính toán chính xác, hãy sử dụng các thư viện có sẵn của Python như ``decimal``, ``fraction`` để tính toán chính xác:
+
+```
+In [5]: from decimal import Decimal as D
+
+In [6]: D('0.1') + D('0.1') + D('0.1') == D('0.3')
+Out[6]: True
+```
+hoặc sử dụng thư viện chuyên dùng cho tính toán ``numpy`` để làm toán.
+
+### Cách tìm ra phân số nhị phân được dùng để xấp xỉ giá trị ``0.1``
+
+```
+In [7]: n = 0.1
+
+In [8]: n.as_integer_ratio()
+Out[8]: (3602879701896397, 36028797018963968)
+
+In [9]: 2 ** 55
+Out[9]: 36028797018963968
+
+In [12]: from fractions import Fraction as F
+In [13]: F.from_float(0.1)
+Out[13]: Fraction(3602879701896397, 36028797018963968)
+```
+
+## Tham khảo
+
+- https://docs.python.org/3/tutorial/floatingpoint.html#tut-fp-issues
+- https://docs.python.org/3/library/decimal.html
+- https://docs.python.org/3/whatsnew/2.4.html#pep-327-decimal-data-type
+- https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html#Real-Number-Types
+- http://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html
+---
+pub_date: 2016-12-29
+---
+shortintro:
+
+Tại sao không được so sánh 2 số kiểu float? float thì có gì sai?
+tính chính xác khi tính toán bằng kiểu float
+---
+_slug:
