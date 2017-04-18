@@ -4,7 +4,7 @@ author: HVN
 ---
 body:
 
-(Hay câu chuyện về encoding)
+(Hay câu chuyện về encoding).
 
 Ai từng làm lập trình cũng sẽ có không ít lần đau đầu vì chuyện "encode".
 
@@ -53,7 +53,7 @@ Và đó chính là cách người ta đã biểu diễn các văn bản tiếng
 
 ## Latin-1
 
-ASCII sống hạnh phúc được vài năm, cho tới khi người ta cần biểu diễn các văn bản tiếng Đức, tiếng Pháp lên máy tính. Sau nhiều cách biểu diễn khác nhau, các nước châu Âu đã thống nhất được cách biểu diễn bảng chữ cái của mình trên 8 bit, bao gồm 128 (0-127) ký tự trong bảng ASCII, cộng thêm với các ký tự của các nước châu Âu, như chữ "é" của Pháp, chữ "ü" của Đức. Bảng mã này gọi là "latin-1", được thống nhất ở tiêu chuẩn <a href="https://en.wikipedia.org/wiki/Latin-1_Supplement_(Unicode_block)">ISO-8859-1</a>
+ASCII sống hạnh phúc được vài năm, cho tới khi người ta cần biểu diễn các văn bản tiếng Đức, tiếng Pháp lên máy tính. Sau nhiều cách biểu diễn khác nhau, các nước châu Âu đã thống nhất được cách biểu diễn bảng chữ cái của mình trên 8 bit, bao gồm 128 (0-127) ký tự trong bảng ASCII, cộng thêm với các ký tự của các nước châu Âu, như chữ "é" của Pháp, chữ "ü" của Đức. Bảng mã này gọi là Latin-1, được thống nhất ở tiêu chuẩn <a href="https://en.wikipedia.org/wiki/Latin-1_Supplement_(Unicode_block)">ISO-8859-1</a>
 
 > Morgenwind umflügelt
 
@@ -91,7 +91,7 @@ In [43]: bin(128)
 Out[43]: '0b10000000'
 ```
 
-Thế nhưng như vậy là quá dài, nên người ta dùng hệ 16 (hex) để biểu diễn cho ngắn. Với hex, mọi ký tự trong bảng mã latin-1 đều có thể biểu diễn bằng 2 ký tự:
+Thế nhưng như vậy là quá dài, nên người ta dùng hệ 16 (hex) để biểu diễn cho ngắn. Với hex, mọi ký tự trong bảng mã Latin-1 đều có thể biểu diễn bằng 2 ký tự:
 
 ```
 In [47]: hex(128), hex(255), hex(29)
@@ -132,7 +132,7 @@ In [20]: ord('😂')
 Out[20]: 128514
 ```
 
-Bảng mã Unicode bắt đầu bằng các ký tự trong bảng mã ASCII, rồi các ký tự có thêm trong bảng mã "latin-1", sau đó là các bảng mã khác. Chữ "a" dù trong ASCII hay Unicode đều có thứ tự là
+Bảng mã Unicode bắt đầu bằng các ký tự trong bảng mã ASCII, rồi các ký tự có thêm trong bảng mã Latin-1, sau đó là các bảng mã khác. Chữ "a" dù trong ASCII hay Unicode đều có thứ tự là
 
 ```
 In [64]: ord('a')
@@ -163,7 +163,7 @@ Từ Python3, Python chỉ có 1 kiểu str và nó mặc định sử dụng UT
 
 ## Encode, decode
 
-Khi biểu diễn trên máy tính (thành các byte/bit), ta cần chọn cách để biểu diễn những ký tự ngoài khoảng 0-127 (ASCII). Mỗi cách biểu diễn này gọi là một "encoding". Encoding khác nhau như latin-1, utf-8, ...
+Khi biểu diễn trên máy tính (thành các byte/bit), ta cần chọn cách để biểu diễn những ký tự ngoài khoảng 0-127 (ASCII). Mỗi cách biểu diễn này gọi là một "encoding". Encoding khác nhau như Latin-1, UTF-8, ...
 
 Ta có ký tự, ta "chuyển thể" (encode) nó để biểu diễn thành byte/bits.
 Ta có byte/bits, ta "chuyển ngược lại" (decode) nó để thành các ký tự.
@@ -191,14 +191,13 @@ In [75]: '{0} {1}'.format(bin(ord(b'\xc3'))[2:], bin(ord(b'\xa1'))[2:])
 Out[75]: '11000011 10100001'
 ```
 
-latin-1 biểu diễn chữ 'á' bằng 1 byte, utf-8 biểu diễn chữ 'á' bằng 2 byte.
+Latin-1 biểu diễn chữ 'á' bằng 1 byte, UTF-8 biểu diễn chữ 'á' bằng 2 byte.
 
 Latin-1 chỉ biểu diễn được các ký tự trong khoảng 0-255 (00-ff), mỗi ký tự được biểu diễn bằng 1 byte.
 
-Luật encoding utf-8 dùng 1 byte để biểu diễn các ký tự trong khoảng 0-127, dùng 2 đến 4 bytes để biểu diễn ký tự có codepoint 128 trở lên (0x80), và các byte (trong 2-4 byte) đó luôn có giá trị >= 128 (0x80).
+Luật encoding UTF-8 dùng 1 byte để biểu diễn các ký tự trong khoảng 0-127, dùng 2 đến 4 bytes để biểu diễn ký tự có codepoint 128 trở lên (0x80), và các byte (trong 2-4 byte) đó luôn có giá trị >= 128 (0x80).
 
-Nếu 1 file sử dụng encode latin-1 để chứa chữ "é", tức đã lưu 1 nó thành 1 byte trên file.
- Khi đọc vào sử dụng encoding utf-8, ta gặp exception:
+Nếu 1 file sử dụng encode Latin-1 để chứa chữ "é", tức đã lưu nó thành 1 byte trên file. Khi đọc vào sử dụng encoding UTF-8, ta gặp exception:
 
 ```
 In [29]: with open('latin1.txt', 'w', encoding='latin1') as f:
@@ -250,7 +249,7 @@ In [43]: open('unicode.txt', 'rb').read()
 Out[43]: b'\xc3\xa9'
 ```
 
-Vì 'é' khi biểu diễn ở encoding "latin-1" là 1 byte, và nằm trong khoảng 0-255, dễ thấy nó có vẻ dùng encoding latin-1, bởi với utf-8, mọi giá trị ngoài khoảng 0-127 sẽ được biểu diễn bằng 2 byte trở lên, và mỗi byte trong 2 byte đó phải thoả mãn 128 <= x <= 255.
+Vì 'é' khi biểu diễn ở encoding Latin-1 là 1 byte, và nằm trong khoảng 0-255, dễ thấy nó có vẻ dùng encoding Latin-1, bởi với UTF-8, mọi giá trị ngoài khoảng 0-127 sẽ được biểu diễn bằng 2 byte trở lên, và mỗi byte trong 2 byte đó phải thoả mãn 128 <= x <= 255.
 
 Dùng method `decode` của kiểu `bytes` và `encode` của kiểu `str` để chuyển qua lại giữa 2 kiểu:
 
