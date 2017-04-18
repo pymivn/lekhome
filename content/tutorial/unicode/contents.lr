@@ -1,0 +1,287 @@
+title: Từ 'a' đến 'á' rồi sang 'ư'
+---
+author: HVN
+---
+body:
+
+(Hay câu chuyện về encoding)
+
+Ai từng làm lập trình cũng sẽ có không ít lần đau đầu vì chuyện "encode".
+
+Ai lập trình dùng Tiếng Việt, dù không hiểu cũng biết đến UTF-8/Unicode.
+
+Còn bây giờ là câu chuyện từ 'a' đến 'á' rồi sang 'ư'.
+
+## ASCII /ˈæski/
+
+Máy tính phát triển mạnh mẽ từ những quốc gia nói tiếng Anh, và khi cần biểu diễn toàn bộ bảng chữ cái / số / ký hiệu của họ lên máy tính, chỉ cần < 128 ký tự là đủ:
+
+```
+In [8]: import string
+
+In [9]: string.ascii_letters + string.digits + string.punctuation + string.whitespace
+Out[9]: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~\t\n\x0b\x0c\r '
+
+In [10]: len(string.ascii_letters + string.digits + string.punctuation + string.whitespace)
+Out[10]: 100
+```
+
+Mọi thứ trên máy tính, cuối cùng, đều được biểu diễn dưới dạng binary (bit 0 và 1). Mỗi bit có thể biểu diễn 2 giá trị (mang giá trị 0, hoặc 1) . Với 2 bit, ta có thể biểu diễn được 2*2 = 4 giá trị khác nhau. Và để biểu diễn tất cả các ký tự nói trên, ta cần
+
+```
+In [41]: for i in range(1,8):
+    ...:     print(i, 2**i)
+    ...:
+1 2
+2 4
+3 8
+4 16
+5 32
+6 64
+7 128
+```
+
+7 bit và vẫn còn thừa ra nhiều chỗ trống.
+
+Và đó chính là cách người ta đã biểu diễn các văn bản tiếng Anh lên máy tính. Nước Mỹ chuẩn hoá cách làm này thành một bảng mã có tên "ASCII" (American Standard Code for Information Interchange). Người Anh và người Mỹ thi nhau ghi các văn bản lên máy tính để lưu trữ. Như bài ["To Autumn" của John Keats](https://en.wikipedia.org/wiki/To_Autumn)
+
+>    Hedge-crickets sing; and now with treble soft
+
+>    The red-breast whistles from a garden-croft;
+
+>    And gathering swallows twitter in the skies.
+
+## Latin-1
+
+ASCII sống hạnh phúc được vài năm, cho tới khi người ta cần biểu diễn các văn bản tiếng Đức, tiếng Pháp lên máy tính. Sau nhiều cách biểu diễn khác nhau, các nước châu Âu đã thống nhất được cách biểu diễn bảng chữ cái của mình trên 8 bit, bao gồm 128 (0-127) ký tự trong bảng ASCII, cộng thêm với các ký tự của các nước châu Âu, như chữ "é" của Pháp, chữ "ü" của Đức. Bảng mã này gọi là "latin-1", được thống nhất ở tiêu chuẩn <a href="https://en.wikipedia.org/wiki/Latin-1_Supplement_(Unicode_block)">ISO-8859-1</a>
+
+> Morgenwind umflügelt
+
+> Die beschattete Bucht,
+
+> Und im See bespiegelt
+
+> Sich die reifende Frucht.
+
+[Trích "Auf dem See" - Johann Wolfgang von Goethe](https://de.wikisource.org/wiki/Auf_dem_See)
+
+> Demain, dès l'aube, à l'heure où blanchit la campagne,
+
+> Je partirai. Vois-tu, je sais que tu m'attends.
+
+> J'irai par la forêt, j'irai par la montagne.
+
+> Je ne puis demeurer loin de toi plus longtemps.
+
+[Trích Demain dès l'aube - Victor Hugo](https://en.wikipedia.org/wiki/Demain_d%C3%A8s_l'aube)
+
+Xem thứ tự của các ký tự trong bảng mã ASCII/Latin-1:
+
+```
+In [4]: ord('à'), ord('ù'), ord('ê'), ord('é'), ord('è'), ord('î'), ord('â'), ord('ç')
+Out[4]: (224, 249, 234, 233, 232, 238, 226, 231)
+```
+
+## Binary, bit, byte, hex
+
+Trong bộ môn khoa học máy tính, 8 bit = 1 byte. Cách biểu diễn 1 byte theo tiêu chuẩn là dùng dãy binary các bit (hệ nhị phân):
+
+```
+In [43]: bin(128)
+Out[43]: '0b10000000'
+```
+
+Thế nhưng như vậy là quá dài, nên người ta dùng hệ 16 (hex) để biểu diễn cho ngắn. Với hex, mọi ký tự trong bảng mã latin-1 đều có thể biểu diễn bằng 2 ký tự:
+
+```
+In [47]: hex(128), hex(255), hex(29)
+Out[47]: ('0x80', '0xff', '0x1d')
+```
+
+0x là ký hiệu để Python hiểu đó là hệ 16, khi cần phân biệt với hệ 10, hệ 8 (0o), hệ 2(0b). Còn khi biết đó là hệ 16 rồi, ta chỉ cần 2 ký tự như: fe (254) ff (255) ...
+
+```
+In [57]: int('0xfe', base=16), int('0xff', base=16)
+Out[57]: (254, 255)
+
+In [58]: int('fe', base=16), int('ff', base=16)
+Out[58]: (254, 255)
+
+In [1]: ord('ü'), hex(252)
+Out[1]: (252, '0xfc')
+
+In [8]: print(u'\xfc')
+ü
+```
+
+## Việt Nam và Unicode
+
+Ngày vẫn trôi qua êm đềm, cho tới một hôm, người ta nhận ra cần phải biểu diễn tiếng Việt lên máy tính để còn phát tán Truyện Kiều của Nguyễn Du, chép thơ "Tôi yêu em" bằng tiếng Nga của Puskin, "Tam quốc chí" của La Quán Trung tiếng Tàu, hay "Rừng Na Uy" tiếng Nhật... Nhu cầu sinh ra một bảng mã cho toàn thế giới bùng nổ. Các nhà khoa học máy tính đã ngồi lại và nghĩ ra một bảng mã cuối cùng cho vũ trụ: Unicode.
+Bảng mã này sinh ra với mục đích ghi lại tất cả các ký tự trong vũ trụ, ngày nay nó đã chứa cả những "biểu tượng cảm xúc", như 😂 (đây không phải 1 bức ảnh nhỏ, bạn có thể copy/paste nó thoải mái).
+
+Với những ký tự ngoài khoảng 0-255, tức không thể biểu diễn với 1 byte, người ta phải dùng nhiều byte để biểu diễn 1 ký tự.
+
+```
+In [63]: ord('ứ')
+Out[63]: 7913
+```
+Kí tự này có thứ tự / Codepoint 7913 trong bảng mã Unicode.
+
+```
+In [20]: ord('😂')
+Out[20]: 128514
+```
+
+Bảng mã Unicode bắt đầu bằng các ký tự trong bảng mã ASCII, rồi các ký tự có thêm trong bảng mã "latin-1", sau đó là các bảng mã khác. Chữ "a" dù trong ASCII hay Unicode đều có thứ tự là
+
+```
+In [64]: ord('a')
+Out[64]: 97
+```
+
+Bài thơ tiếng Nga nổi tiếng:
+
+> Я вас любил: любовь еще быть может
+
+> В душе моей угасла не совсем;
+
+> Но пусть она вас больше не тревожит;
+
+> Я не хочу печалить вас ничем.
+
+<a href="https://en.wikipedia.org/wiki/I_Loved_You_(poem)">Я вас любил - Puskin</a>
+
+```
+In [19]: for c in title:
+    ...:     print('%s:%s' % (c, ord(c)), end=' ')
+    ...:
+    ...:
+Я:1071  :32 в:1074 а:1072 с:1089  :32 л:1083 ю:1102 б:1073 и:1080 л:1083
+```
+
+Từ Python3, Python chỉ có 1 kiểu str và nó mặc định sử dụng UTF-8 (tương đương với kiểu Unicode trong Python2).
+
+## Encode, decode
+
+Khi biểu diễn trên máy tính (thành các byte/bit), ta cần chọn cách để biểu diễn những ký tự ngoài khoảng 0-127 (ASCII). Mỗi cách biểu diễn này gọi là một "encoding". Encoding khác nhau như latin-1, utf-8, ...
+
+Ta có ký tự, ta "chuyển thể" (encode) nó để biểu diễn thành byte/bits.
+Ta có byte/bits, ta "chuyển ngược lại" (decode) nó để thành các ký tự.
+
+Chữ 'á', có thứ tự 225 trong bảng mã Unicode, khi encode thành binary theo các "encoding" khác nhau sẽ thu được các byte khác nhau:
+
+```
+In [68]: ord('á')
+Out[68]: 225
+
+In [69]: 'á'.encode('latin-1')
+Out[69]: b'\xe1'
+
+In [70]: 'á'.encode('utf-8')
+Out[70]: b'\xc3\xa1'
+```
+
+Hay biểu diễn ở dạng binary:
+
+```
+In [72]: bin(ord(b'\xe1'))[2:]
+Out[72]: '11100001'
+
+In [75]: '{0} {1}'.format(bin(ord(b'\xc3'))[2:], bin(ord(b'\xa1'))[2:])
+Out[75]: '11000011 10100001'
+```
+
+latin-1 biểu diễn chữ 'á' bằng 1 byte, utf-8 biểu diễn chữ 'á' bằng 2 byte.
+
+Latin-1 chỉ biểu diễn được các ký tự trong khoảng 0-255 (00-ff), mỗi ký tự được biểu diễn bằng 1 byte.
+
+Luật encoding utf-8 dùng 1 byte để biểu diễn các ký tự trong khoảng 0-127, dùng 2 đến 4 bytes để biểu diễn ký tự có codepoint 128 trở lên (0x80), và các byte (trong 2-4 byte) đó luôn có giá trị >= 128 (0x80).
+
+Nếu 1 file sử dụng encode latin-1 để chứa chữ "é", tức đã lưu 1 nó thành 1 byte trên file.
+ Khi đọc vào sử dụng encoding utf-8, ta gặp exception:
+
+```
+In [29]: with open('latin1.txt', 'w', encoding='latin1') as f:
+    ...:     f.write('é')
+    ...:
+
+In [31]: f = open('latin1.txt')
+
+In [32]: f.read()
+----------------------------------------------------------------------------
+UnicodeDecodeError                        Traceback (most recent call last)
+<ipython-input-32-bacd0e0f09a3> in <module>()
+----> 1 f.read()
+
+/Users/hvn/python3/lib/python3.5/codecs.py in decode(self, input, final)
+    319         # decode input (taking the buffer into account)
+    320         data = self.buffer + input
+--> 321         (result, consumed) = self._buffer_decode(data, self.errors, final)
+    322         # keep undecoded input until the next call
+    323         self.buffer = data[consumed:]
+
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xe9 in position 0: unexpected end of data
+
+In [8]: 0xe9
+Out[8]: 233
+
+In [9]: chr(233)
+Out[9]: 'é'
+```
+
+Nếu ta đọc file đó vào python ở dạng binary, trên Python3 ta dùng kiểu dữ liệu `bytes` để lưu trư:
+
+```
+In [40]: open('latin1.txt', 'rb').read()
+Out[40]: b'\xe9'
+
+In [41]: type(b'\xe9')
+Out[41]: bytes
+```
+
+Thử ghi chữ `é` ra file sử dụng encoding UTF-8 (dạng Unicode phổ biến nhất, mặc định trong Python khi đọc ghi file):
+
+```
+In [34]: with open('unicode.txt', 'w', encoding='utf-8') as f: # không cần thiết ghi encoding='utf-8' - vì là mặc định rồi
+    ...:     f.write('é')
+    ...:
+
+In [43]: open('unicode.txt', 'rb').read()
+Out[43]: b'\xc3\xa9'
+```
+
+Vì 'é' khi biểu diễn ở encoding "latin-1" là 1 byte, và nằm trong khoảng 0-255, dễ thấy nó có vẻ dùng encoding latin-1, bởi với utf-8, mọi giá trị ngoài khoảng 0-127 sẽ được biểu diễn bằng 2 byte trở lên, và mỗi byte trong 2 byte đó phải thoả mãn 128 <= x <= 255.
+
+Dùng method `decode` của kiểu `bytes` và `encode` của kiểu `str` để chuyển qua lại giữa 2 kiểu:
+
+```
+In [44]: n = 'Anh Hưng'
+
+In [45]: n_bytes = n.encode()
+
+In [47]: n_bytes
+Out[47]: b'Anh H\xc6\xb0ng'
+
+In [48]: print(n_bytes.decode('utf-8')) # không cần ghi utf-8 vì là mặc định.
+Anh Hưng
+```
+
+## Tổng kết
+- Bảng mã ASCII dùng để lưu trữ các ký tự tiếng Anh/Mỹ, sử dụng 7 bits có khả năng lưu trữ 2**7 = 128 ký tự
+- Bảng mã Latin-1 mở rộng bảng mã ASCII, sử dụng 8 bits, có khả năng lưu trữ 2**8 = 256 ký tự.
+- Bảng mã Unicode với encoding UTF-8 được sử dụng rộng rãi, có khả năng lưu trữ mọi ký tự trong vũ trụ. Được thiết kế tương thích với Latin-1 và ASCII khi chỉ dùng 1 byte lưu trữ những ký tự trong hai bảng mã này.
+- Các function: ord, chr giúp hiển thị thứ tự của ký tự trong bảng mã Unicode / hình ảnh của nó.
+- Kiểu dữ liệu `bytes` trong Python3 có khả năng lưu trữ bytes ở dạng "thô".
+- Encode chuyển từ văn bản về dạng binary.
+- Decode để chuyển từ dạng binary thành dạng text.
+- Dùng mã Hex (hệ 16) dùng để hiển thị các byte ngắn gọn với 2 ký tự cho 1 byte.
+
+## Tham khảo
+- https://en.wikipedia.org/wiki/ASCII#Variants_and_derivations
+- https://docs.python.org/3/howto/unicode.html
+---
+pub_date: 2017-04-18
+---
+shortintro:
+
+Unicode, decode, encode string trong Python
