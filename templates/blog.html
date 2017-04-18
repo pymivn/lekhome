@@ -3,7 +3,7 @@
 {% from "macros/pagination.html" import render_pagination %}
 {% block title %}Python Tutorial Tiếng Việt{% endblock %}
 {% block content %}
-  {% for child in this.pagination.items %}
+  {% for child in this.pagination.items|reverse %}
     {{ render_blog_post(child, from_index=true) }}
   {% endfor %}
 
