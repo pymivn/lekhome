@@ -20,8 +20,7 @@ Bài này sẽ thực hiện các phép toán cơ bản ở phổ thông sử d�
 
 Nghe đọc phát âm tại từ điển [Cambridge](http://dictionary.cambridge.org/dictionary/english/)
 
-## Các phép toán trong Python
-Mở python lên - chú ý loạt bài viết này dùng Python3 nên nếu bạn sử dụng Python2, kết quả có thể khác.
+Mở Python lên
 
 ```python
 $ python3
@@ -30,6 +29,18 @@ Python 3.5.1 (default, Apr 21 2016, 17:24:52)
 Type "help", "copyright", "credits" or "license" for more information.
 >>>
 ```
+
+kiểm tra kiểu của các số
+
+```python
+>>> type(8)
+<class 'int'>  # kiểu integer
+>>> type(3.14)
+<class 'float'> # kiểu float
+```
+
+## Các phép toán trong Python
+Mở python lên - chú ý loạt bài viết này dùng Python3 nên nếu bạn sử dụng Python2, kết quả có thể khác.
 
 ###  Phép cộng
 Dùng dấu ``+``, trong tiếng Anh là "plus":
@@ -55,7 +66,7 @@ bài toán và thử với các số to hơn:
 Có thể thấy to cỡ nào thì Python cũng xử lý được cả.
 
 Số thực được biểu diễn với phần nguyên và phần thập phân được phân cách bởi dấu chấm (``.``).
-Làm phép toán giữa một số thực với một số nguyên sẽ trả về 1 số thực. (Vì tập số thực bao hàm cả tập số nguyên - theo toán học).
+Làm phép toán giữa một số thực (float) với một số nguyên (int) sẽ trả về 1 số thực (float). (Vì tập số thực bao hàm cả tập số nguyên - theo toán học).
 
 ```python
 >>> 1.5 + 2
@@ -104,6 +115,10 @@ Phép chia được biểu diễn bằng dấu ``/`` - trong tiếng Anh là "sl
 2.0
 >>> 3 / 2
 1.5
+>>> type(1.5)
+<class 'float'>
+>>> type(3/2)
+<class 'float'>
 ```
 
 Kết quả của phép chia luôn luôn là kiểu float. Đây là một cải tiến của Python3 so với Python2, bởi trong Python2,
