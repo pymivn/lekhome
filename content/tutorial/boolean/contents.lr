@@ -11,7 +11,7 @@ Nhưng sự thật chỉ có đúng hoặc sai, và Python thì có ``True`` ho�
 Trong Python, `True` (chú ý viết hoa chữ `T`) biểu diễn cho sự "đúng", và
 ``False`` (viết hoa chữ `F`) biểu diễn cho sự sai. Ví dụ so sánh số integer:
 
-```
+```python
 In [1]: 2 > 1
 Out[1]: True
 
