@@ -8,8 +8,22 @@ Thế giới không chỉ có trắng và đen, thế giới còn có tím mộn
 và xanh hoà bình nữa.
 Nhưng sự thật chỉ có đúng hoặc sai, và Python thì có ``True`` hoặc ``False``.
 
+Trong Python, `True` (chú ý viết hoa chữ `T`) biểu diễn cho sự "đúng", và
+``False`` (viết hoa chữ `F`) biểu diễn cho sự sai. Ví dụ so sánh số integer:
+
+```
+In [1]: 2 > 1
+Out[1]: True
+
+In [2]: 4 < 2
+Out[2]: False
+
+In [3]: type(True)
+Out[3]: bool # kiểu của True là bool
+```
+
 ## Boolean
-Boolean đọc là /ˈbuːlɪən/ - không phải là "bu lin" mà là "bu-li-ờn".
+`bool` hay đầy đủ là boolean đọc là /ˈbuːlɪən/ - không phải là "bu lin" mà là "bu-li-ờn".
 Kiểu boolean chỉ có 2 giá trị; ``True`` (đúng) hoặc ``False`` (sai), chú ý chữ T và chữ F viết hoa.
 
 ``True`` đọc là /truː/
