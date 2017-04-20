@@ -20,6 +20,9 @@ Out[2]: False
 
 In [3]: type(True)
 Out[3]: bool # kiểu của True là bool
+
+In [4]: 6 == 9 # kiểm tra hai vế có bằng nhau không - dùng 2 dấu =
+Out[4]: False
 ```
 
 ## Boolean
