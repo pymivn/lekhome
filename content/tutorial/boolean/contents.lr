@@ -117,6 +117,8 @@ True
 
 ### Câu hỏi bài tập: vậy tình yêu ở đâu?
 
+[Nâng cao, có thể bỏ qua trong lần đầu đọc.]
+
 ```python
 >>> import this
 >>> love = this
