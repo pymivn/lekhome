@@ -225,7 +225,7 @@ Với kiểu mutable, cần đặc biệt chú ý phép toán nào trả về ob
 
 **Pass by assignment** là khái niệm lấy từ [Python FAQ](https://docs.python.org/3/faq/programming.html#how-do-i-write-a-function-with-output-parameters-call-by-reference), khi mà người ta bắt buộc phải giải thích khái niệm này cho những người đã biết ngôn ngữ lập trình khác. Các name trong function sẽ bind tới các object mà argument đang bind tới.
 
-Trong tutorial Python, có viết ("các argument được pass sử dụng call by value, với các value luôn luôn là các **object reference** chứ không phải value của object.")[https://docs.python.org/3/tutorial/controlflow.html#id1], yup, I lied 😒
+Trong tutorial Python, có viết ["các argument được pass sử dụng **call by value**, với các value luôn luôn là các **object reference** chứ không phải value của object."](https://docs.python.org/3/tutorial/controlflow.html#id1) - yup, I lied 😒
 
 [Định nghĩa name trong Python](https://docs.python.org/3/reference/executionmodel.html#naming-and-binding):
 > Names refer to objects.
