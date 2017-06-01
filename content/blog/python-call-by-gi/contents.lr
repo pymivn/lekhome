@@ -231,12 +231,15 @@ Trong tutorial Python, có viết ["các argument được pass sử dụng **ca
 > Names refer to objects.
 
 Liệu bạn có thể bịa ra một thuật ngữ nữa là "call by name" ??!!!
-Bởi vậy để khỏi đau đầu về những điều này, chỉ cần nắm chắc các khái niệm `name`, `binding`, `mutable`, `immutable` là đủ biết chương trình chạy thế nào.
+
+## Chốt, thông
+Để khỏi đau đầu về những điều này, chỉ cần nắm chắc các khái niệm `name`,
+`binding`, `mutable`, `immutable` là đủ biết chương trình chạy thế nào.
+Bạn không cần biết gọi tên Python là call-by-gì? Nếu cần thể hiện thì hãy nói
+"call-by-object-reference" và gửi kèm link doc.
 
 Trên internet có nhiều nơi hỏi đáp, cố đưa ra một cái tên, nhưng những cái tên
-đó không có trong tài liệu chính thống của Python. Tài liệu ấy (Python
-        document) viết "call by object reference" những cũng chỉ là một chú ý
-nhỏ cuối phần tutorial.
+đó không có trong tài liệu chính thống của Python.
 
 ## Tham khảo
 - http://www.effbot.org/zone/call-by-object.htm
