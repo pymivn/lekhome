@@ -59,6 +59,9 @@ Chỉ là hai cách tập trung khác nhau vào một việc: call function vớ
 Nếu bắt phải đưa ra một từ khoá, thì đó là các argument sẽ được "pass by assignment".
 Để thực sự hiểu Python assignment làm gì, bạn cần hiểu về [khái niệm **name** và **binding** trong Python](http://pymi.vn/tutorial/naming/).
 
+
+### Cách hoạt động của name và binding <a name="binding"></a>
+
 ```Python
 x = 4
 y = x
@@ -119,28 +122,9 @@ True
 `id` sẽ trả về một số ID (đảm bảo là duy nhất) gắn liền với object mà cái name
 đó đang bind.
 
-Giờ hãy gọi function:
+### Cơ chế hoạt động của function <a name="function"></a>
 
-```Python
-def change(numb, ns):
-    numb = numb + 1
-    ns[0] = 0
-    return None
-
-N = 9
-L = [1,2,3]
-change(N, L)
-print(N, L)
-```
-
-Cơ chế gọi function của Python hoạt động như sau:
-- bind name `numb` vào argument thứ nhất, tức `numb = N`
-- bind name `ns` vào argument thứ hai, tức `ns = L`
-- bind `numb` vào object tạo ra bởi numb + 1, tức 10
-- thay đổi object mà name `ns` đang bind tới, tức list [1,2,3], thay đổi giá trị ứng với index 0, tức sẽ có [0,2,3]
-- nên nhớ rằng `ns` và `L` cùng bind đến 1 object. Vì vậy giờ L cũng đã bị thay đổi
-
-```
+```python
 >>> def change(numb, ns):
 ...     numb = numb + 1
 ...     ns[0] = 0
@@ -153,12 +137,19 @@ Cơ chế gọi function của Python hoạt động như sau:
 9 [0, 2, 3]
 ```
 
+Cơ chế gọi function của Python hoạt động như sau:
+- bind name `numb` vào argument thứ nhất, tức `numb = N`
+- bind name `ns` vào argument thứ hai, tức `ns = L`
+- bind `numb` vào object tạo ra bởi numb + 1, tức 10
+- thay đổi object mà name `ns` đang bind tới, tức list [1,2,3], thay đổi giá trị ứng với index 0, tức sẽ có [0,2,3]
+- nên nhớ rằng `ns` và `L` cùng bind đến 1 object. Vì vậy giờ L cũng đã bị thay đổi
+
 Vậy làm sao để không thay đổi list L và thu về một list mới sau khi gọi function?
 Hãy tạo một bản copy của list rồi dùng bản copy đó.
 
 ```Python
 >>> def change(L):
-...     L = L[:]
+...     L = L[:] # slicing là một cách đơn giản để tạo một bản shallow copy
 ...     L[0] = 0
 ...     return L
 ...
