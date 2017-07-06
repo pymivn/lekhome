@@ -1,0 +1,172 @@
+title:
+
+Đừng sudo, nếu không biết virtualenv
+---
+author: HVN
+---
+pub_date: 2017-07-06
+---
+shortintro: Nếu bạn gõ `sudo pip` để cài Python package, có thể bạn đã sai
+---
+body:
+
+- "Mình không cài bằng pip được..."
+- "chạy sudo pip ... nhé "
+
+Đó là những câu hỏi và trả lời thường xuất hiện, khi người ta nói về pip. Đây là vấn đề chung với những người dùng không hiểu về phân quyền trên UNIX và thường sẽ làm mọi thứ trở nên rắc rối thêm bằng cách chạy sudo.
+
+## sudo - câu lệnh thần thánh
+
+![Sudo XKCD](https://imgs.xkcd.com/comics/sandwich.png)
+
+Một mẩu truyện nhỏ cho thấy sức mạnh của `sudo`, khi ta nói mà đối phương không nghe, thêm `sudo` vào đầu là mọi thứ đều sẽ hoạt động.
+
+### sudo - SUperuser DO
+Trên các hệ điều hành *NIX có chia ra nhiều user để nhiều người  dùng chung một máy tính. Trong đó, mọi máy tính luôn có user `root` - user có quyền năng tối thượng, thường được gọi là quyền admin hay superuser, có thể thực hiện bất kỳ thay đổi gì trên máy tính. Do có quyền năng vô hạn như vậy, nên khi thực hiện việc gì cũng ẩn chứa nguy hiểm, một câu lệnh gõ nhầm cũng có thể phá huỷ hệ thống, và nếu như ai cũng là root thì hệ thống sẽ loạn, người dùng không hiểu biết có thể cài đặt các loại virus/malware lên máy tính (hi Windows).
+
+Để giải quyết vấn đền này, người ta sản xuất ra phần mềm tên "sudo", cho phép cấp quyền cho các user nhất định. Với sự tồn tại của sudo, người ta thay đổi cách dùng máy tính:
+- tất cả mọi người đều có tài khoản riêng của mình
+- cấp quyền `root` cho một số user cụ thể
+- user được cấp quyền có thể chạy câu lệnh như user root.
+
+### Khi nào cần quyền root
+Mỗi user trên *NIX được cấp một thư mục gọi là thư mục HOME. Có thể truy cập thư mục này bằng:
+
+```bash
+cd ~
+```
+
+hay
+```bash
+cd $HOME
+```
+
+Thư mục này thường có đường dẫn `/home/yourname/`.
+và mặc định thuộc toàn quyền sử dụng của user <yourname>, thích tạo/sửa/xoá file nào thì tuỳ ý.
+
+Hệ thống có thư mục đặc biệt `/tmp`, ai cũng đều có thể ghi vào (nhưng người này không thể can thiệp vào file/thư mục của người kia) - và các file trong này sẽ tự bị xoá mỗi khi máy tắt.
+
+Còn lại, các thư mục khác trên máy tính chỉ có `root` mới có thể thay đổi (/etc, /log, /var, /usr, /bin ...), khi sử dụng các phần mềm thực hiện thay đổi ảnh hưởng đến cả hệ thống, ví dụ dùng `apt-get` để cài package, lý do ta cần chạy sudo vì:
+- apt-get sẽ ghi file vào các thư mục nói trên. Ví dụ khi cài package `nginx`, các file sau sẽ được tạo ra:
+
+```sh
+$ dpkg -L nginx | grep nginx
+/var/cache/nginx
+/var/log/nginx
+/usr/lib/nginx
+/usr/lib/nginx/modules
+/usr/share/doc/nginx
+/usr/share/doc/nginx/CHANGES.ru.gz
+/usr/share/doc/nginx/changelog.Debian.gz
+/usr/share/doc/nginx/changelog.gz
+/usr/share/doc/nginx/copyright
+/usr/share/doc/nginx/README
+/usr/share/man/man8/nginx.8.gz
+/usr/share/lintian/overrides/nginx
+/usr/share/nginx
+/usr/share/nginx/html
+/usr/share/nginx/html/index.html
+/usr/share/nginx/html/50x.html
+/usr/sbin/nginx-debug
+/usr/sbin/nginx
+/etc/init.d/nginx-debug
+/etc/init.d/nginx
+/etc/logrotate.d/nginx
+/etc/nginx
+/etc/nginx/koi-win
+/etc/nginx/fastcgi_params
+/etc/nginx/uwsgi_params
+/etc/nginx/mime.types
+/etc/nginx/koi-utf
+/etc/nginx/nginx.conf
+/etc/nginx/conf.d
+/etc/nginx/conf.d/default.conf
+/etc/nginx/scgi_params
+/etc/nginx/win-utf
+/etc/default/nginx-debug
+/etc/default/nginx
+/etc/nginx/modules
+...
+```
+
+Chỉ user `root` mới có quyền ghi vào /etc/ /bin ... đó là lý do cần thêm `sudo` khi người dùng với user của họ chạy câu lệnh `apt-get`.
+
+Nếu ta cấu hình cho `apt-get` không ghi vào các thư mục trên, ta hoàn toàn có thể chạy `apt-get` để cài đặt package trên thư mục home của mình. Các chương trình được cài xong sẽ chỉ mình mình dùng được, do user khác không truy cập được vào các file này.
+
+### sudo pip
+
+Khi dùng pip cài ipython (không dùng virtualenv), đây là nơi ipython sẽ được cài:
+
+```
+root@hvn:~# pip show ipython
+Name: ipython
+Version: 6.1.0
+Summary: IPython: Productive Interactive Computing
+Home-page: https://ipython.org
+Author: The IPython Development Team
+Author-email: ipython-dev@python.org
+License: BSD
+Location: /usr/local/lib/python3.5/dist-packages
+Requires: prompt-toolkit, setuptools, pygments, simplegeneric, jedi, pexpect, traitlets, pickleshare, decorator
+```
+
+`/usr/local` là thư mục chỉ `root` mới được quyền ghi, vì vậy bạn không thể chạy `pip install PACKAGE`, bởi user thông thường không có quyền (permission denied) ghi vào /usr
+
+```sh
+$ pip install phg
+..,
+PermissionError: [Errno 13] Permission denied: '/usr/local/lib/python3.5/dist-packages/phg-1.1.0.dist-info'
+```
+
+Mô-tuýp truyền thống lại xảy ra:
+- "Mình không cài được ..."
+- "sudo pip ..."
+
+Cách làm này không sai, nhưng thiếu hiểu biết:
+- nó cài đặt package lên thư mục hệ thống /usr/local/lib, khi có nhu cầu sử dụng 2 phiên bản của cùng 1 phần mềm, ta không thể gỡ một bản đi và giữ lại bản kia (VD: django 1.7 và django 1.11)
+- không phải code nào cài từ pip cũng an toàn, khi chạy với user root cài một package chứa code phá hoại, nó có thể huỷ diệt cả hệ thống (vì user root có quyền làm mọi thứ).
+
+Giải pháp là virtualenv!
+
+## Virtualenv
+virtualenv là một phần mềm viết bằng Python, giúp tạo ra các "môi trường ảo" để tách biệt các môi trường của các project khác nhau.
+
+Mỗi "môi trường ảo" về bản chất chỉ là một thư mục, với một vài thay đổi khiến cho khi ta dùng pip để cài package, các package sẽ được cài vào thư mục này. Điều này giải quyết các vấn đề nói trên:
+- tách biệt các môi trường giữa các project, 2 project có thể dùng 2 phiên bản khác nhau của cùng 1 phần mềm.
+- người dùng có thể tạo môi trường ảo trong thư mục $HOME của mình, không cần chạy sudo - không ảnh hưởng đến hệ thống.
+
+virtualenv hoạt động được là nhờ vào cách mà Python thực hiện import. [Luật import của Python](https://docs.python.org/3/tutorial/modules.html#the-module-search-path), khi ta `import spam`:
+
+- Tìm các builtin module xem có cái nào tên là spam không. Danh sách các builtin module được chứa trong sys:
+
+```sh
+ python -c 'import sys; print(sys.builtin_module_names)'
+('__builtin__', '__main__', '_ast', '_bisect', '_codecs', '_collections', '_functools', '_heapq', '_io', '_locale', '_md5', '_random', '_sha', '_sha256', '_sha512', '_socket', '_sre', '_struct', '_symtable', '_warnings', '_weakref', 'array', 'binascii', 'cPickle', 'cStringIO', 'cmath', 'datetime', 'errno', 'exceptions', 'fcntl', 'gc', 'grp', 'imp', 'itertools', 'marshal', 'math', 'operator', 'posix', 'pwd', 'select', 'signal', 'spwd', 'strop', 'sys', 'syslog', 'thread', 'time', 'unicodedata', 'xxsubtype', 'zipimport', 'zlib')
+```
+
+- Nếu không thấy, tìm lần lượt trong các thư mục chứa trong list : `sys.path`, cho đến khi tìm thấy file spam.py.
+- Nếu vẫn không thấy, raise Exception `ImportError`.
+
+Khi ta bật (activate) một virtualenv lên (source), thực tế ta thay đổi sys.path, nhét đường dẫn đến "môi trường ảo" hiện tại lên đầu sys.path, vì vậy khi thực hiện import, Python sẽ tìm trong "môi trường ảo" trước.
+
+Đọc kỹ những dòng sau để thấy sự ảnh hưởng của virtualenv với Python sys.path
+
+```sh
+hvn@hvn:~$ virtualenv pymi -p python3
+Already using interpreter /usr/bin/python3
+Using base prefix '/usr'
+New python executable in /home/hvn/pymi/bin/python3
+Also creating executable in /home/hvn/pymi/bin/python
+Installing setuptools, pip, wheel...done.
+hvn@hvn:~$ source pymi/bin/activate
+(pymi) hvn@hvn:~$ python -c 'import sys; print(sys.path)'
+['', '/home/hvn/pymi/lib/python35.zip', '/home/hvn/pymi/lib/python3.5', '/home/hvn/pymi/lib/python3.5/plat-x86_64-linux-gnu', '/home/hvn/pymi/lib/python3.5/lib-dynload', '/usr/lib/python3.5', '/usr/lib/python3.5/plat-x86_64-linux-gnu', '/home/hvn/pymi/lib/python3.5/site-packages']
+(pymi) hvn@hvn:~$ deactivate
+hvn@hvn:~$ python -c 'import sys; print(sys.path)'
+['', '/usr/lib/python2.7', '/usr/lib/python2.7/plat-x86_64-linux-gnu', '/usr/lib/python2.7/lib-tk', '/usr/lib/python2.7/lib-old', '/usr/lib/python2.7/lib-dynload', '/usr/local/lib/python2.7/dist-packages', '/usr/lib/python2.7/dist-packages']
+```
+
+Với virtualenv, ta sẽ không bao giờ phải `sudo pip` nữa, mỗi project sẽ có một môi trường riêng biệt, không ai ảnh hưởng tới ai. Và chỉ gõ `sudo pip` khi cần thay đổi 1 package trên toàn hệ thống.
+
+## Kết luận
+`sudo` là sức mạnh, đừng chỉ vì quá mạnh mà thích làm gì cũng được 🙄
