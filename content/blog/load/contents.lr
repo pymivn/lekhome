@@ -1,0 +1,108 @@
+title: Giải mã bí ẩn "system load" trên Linux
+---
+author: HVN
+---
+body:
+
+Trên các hệ điều hành UNIX-like (như Ubuntu, Fedora, Kali, OSX, *BSD...) Một thông số phổ biến khi theo dõi trạng thái hệ thống qua các công cụ thường ngày như `top`, `w`, `uptime`  là load average hay đầy đủ là system load average.
+
+Load biểu diễn ở dạng 3 số thực:
+
+```bash
+$ w | grep load
+ 17:12:47 up 3 days,  6:45,  1 user,  load average: 0.08, 0.23, 0.35
+```
+
+```bash
+$ uptime
+ 17:13:42 up 3 days,  6:46,  1 user,  load average: 0.03, 0.19, 0.33
+```
+
+```bash
+$ top -bn1 | head -n1
+top - 17:17:41 up 3 days,  6:50,  1 user,  load average: 0.30, 0.17, 0.28
+```
+
+Tất cả đều có dạng: 
+```bash
+0.30, 0.17, 0.28
+```
+
+Theo `man 1 top` giải thích, 3 con số này là system load trung bình trong 1, 5 và 15 phút vừa qua :
+>  system load avg over the last 1, 5 and 15 minutes
+
+Nhưng system load, là cái gì?
+
+## system load là gì
+Khi nói về trạng thái của một máy tính, có quá nhiều thông số người ta có thể đưa ra: lượng RAM sử dụng, lượng ổ cứng còn, %CPU đang load, ... khiến cho việc ta ngồi đoán cũng khó mà trúng system load là gì.
+
+Theo [`man 1 uptime`](http://manpages.ubuntu.com/manpages/xenial/en/man1/uptime.1.html), system load avg là: trung bình của số lượng process/thread đang dùng hoặc chờ được dùng CPU (nằm trong [run queue](https://en.wikipedia.org/wiki/Run_queue) ), cùng với các process/thread đang đợi I/O (vd đọc, ghi ổ đĩa cứng). Con số trung bình này chưa được chia trung bình cho lượng CPU.
+
+Phần giải thích tiếp trong `man 1 uptime` khá "rắc rối", dịch tạm như sau:
+> khi load average = 1 trên máy chỉ có 1 CPU, nó có nghĩa là CPU luôn được sử dụng ( a single CPU system is loaded all the time) , nhưng trên máy có 4 CPU thì có nghĩa là 1 CPU sẽ chỉ được dùng 25% thời gian ( it was idle 75% of the time).
+
+Rõ ràng đoạn này viết về thời lượng dùng CPU chứ không phải **số lượng process** như phần ngay trước nó viết. Và theo tác giả bài viết này thì chỗ này của manpage bị `sai`.
+
+Để tìm khái niệm chính xác hơn, ta tìm về nguồn gốc mà cả 3 câu lệnh đều trả về 1 kết quả, trên Linux bản 4 trờ đi, các câu lệnh đó đều đọc thông tin từ 1 file: `/proc/loadavg`
+
+## proc - tin gì cũng có 
+`/proc` là nơi chứa các thông tin về các process, được Linux kernel ghi ra và cập nhập thường xuyên. 
+Mọi thông tin bạn có thể theo dõi 1 process: câu lệnh chạy process, thư mục hoạt động, lượng RAM sử dụng ... đều được Linux kernel ghi ra `/proc`, các công cụ chỉ việc mở file trong đó và đọc nội dung.
+
+Đây là nội dung của `/proc/loadavg` trên máy tác giả:
+```bash
+$ cat /proc/loadavg 
+0.56 0.63 0.64 2/607 3415
+$ uptime 
+ 14:56:19 up 4 days,  4:29,  1 user,  load average: 0.56, 0.63, 0.64
+```
+
+ngoài 3 con số load avg 1, 5, 15 đã nhắc tới ở trên, 2 trường còn lại :
+- `2/607`: 2 là số process/thread đang chạy hoặc đang đợi chạy, được kernel xếp lịch cho. 607 là số process/thread đang tồn tại trên hệ thống.
+- `3415`: PID của process mới nhất trên hệ thống.
+
+`man 5 proc` có giải thích 3 con số load giống như `man 1 uptime`:
+
+> The first three fields in this file  are  load  average  figures giving  the number of jobs in the run queue (state R) or waiting for disk I/O (state D) averaged over 1, 5, and 15 minutes.                                                                                                                           
+
+## system load được tính thế nào?
+
+Trong các manpage không giải thích cách tính công thức này, và đây rõ ràng là là một công thức thần bí. Ta sẽ chui vào sourcecode của Linux để xem cách tính loadavg, có thể xem file này tại [kernel/sched/loadavg.c](https://github.com/torvalds/linux/blob/v4.12/kernel/sched/loadavg.c)
+
+Trước khi đi chi tiết vào công thức kinh khủng này, hãy chú ý đến dòng comment ngay đầu file:
+```C
+* This file contains the magic bits required to compute the global loadavg
+* figure. Its a silly number but people think its important. We go through
+* great pains to make it work on big machines and tickless kernels.
+```
+
+Tác giả những dòng code tính loadavg cho rằng đây là một con số ngu ngốc, nhưng nhiều người lại coi nó là quan trọng.
+
+Nói nôm na, nó được tính bằng `1 - 1/e` ~ `63 %` số load của khoảng thời gian vừa qua (1, 5 hay 15 phút) + `1/3` ~ `37%` của load trung bình từ khi bật máy (trừ khoảng thời gian vừa qua) <a href="https://en.wikipedia.org/wiki/Load_(computing)#Unix-style_load_calculation">theo Wiki</a>.
+Chi tiết code tính lằng nhằng này có thể xem tại [linux source code](https://github.com/torvalds/linux/blob/v4.12/kernel/sched/loadavg.c) (good luck & have fun ;)).
+
+## system load có ý nghĩa gì
+Khi system load average tăng cao, nó có nghĩa trong khoảng thời gian vừa qua, có nhiều process/thread đang dùng hay chờ được dùng CPU, hoặc đợi thực hiện I/O (đọc ghi ổ cứng/mạng), nó không nhất thiết nghĩa là CPU bị dùng hết khả năng (tức không nhất thiết CPU phải luôn 100% nếu loadavg là 1.00 trên máy có 1 CPU).
+
+Xem một ví dụ [có loadavg > 50.00, trong khi CPU và ổ cứng đều ít được dùng, lý do là bởi nhiều process/thread xếp hàng được xử lý khi dùng mạng](https://serverfault.com/questions/365061/high-load-average-low-cpu-usage-why/).
+
+## Truy cập loadavg từ Python
+
+Có thể mở trực tiếp file `/proc/loadavg` - chỉ hoạt động trên Linux, không hoạt động trên OSX, BSD...
+hoặc dùng function có sẵn trong module `os`:
+
+```python
+In [7]: import os
+
+In [8]: os.getloadavg()
+Out[8]: (0.76, 0.87, 0.81)
+```
+
+Dù có 2 cách làm cho ra cùng kết quả, cách sử dụng thư viện có sẵn luôn được khuyên dùng với lập trình viên, vì nó xử lý được trên các hệ điều hành khác nhau, không quá quan tâm đến phía dưới là gì, khiến code trở nên "portable" hơn (có thể chạy ở trên nhiều nền tảng).
+
+---
+pub_date: 2017-08-07
+---
+shortintro:
+
+loadavg của hệ điều hành là gì, tính thế nào 
