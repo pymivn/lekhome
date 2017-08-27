@@ -1,0 +1,132 @@
+title: Thử làm một "lập trình viên Odoo"
+---
+author: HVN
+---
+body:
+
+## Odoo là gì
+
+Ố đù tự mô tả về mình trên [GitHub](https://github.com/odoo/odoo):
+
+> Odoo is a suite of web based open source business apps.
+> The main Odoo Apps include an Open Source CRM, Website Builder, eCommerce, Warehouse Management, Project Management, Billing & Accounting, Point of Sale, Human Resources, Marketing, Manufacturing, Purchase Management, ...
+> Odoo Apps can be used as stand-alone applications, but they also integrate seamlessly so you get a full-featured Open Source ERP when you install several Apps.
+
+Nó là một bộ các web app phục vụ các công việc trong kinh doanh như quản lý quan hệ khách hàng, quản lý project, tính tiền/ kế tóan, tuyển dụng ... đầy đủ đến mức nó là một giải pháp "ERP" cho doanh nghiệp.
+Odoo là tên mới từ bản 8.0 (giờ đang là 10.0) của phần mềm OpenERP.
+
+Đó là nhìn từ phía người dùng. Còn về phía lập trình viên, Odoo là gì?
+
+- Odoo không phải đơn thuần là 1 webapp, nó không dùng bất cứ web framework nào như Django, Flask, Tornado...
+- Odoo LÀ một web framework, trong code của Odoo có đủ các thành phần cần thiết của 1 web framework:
++ Router: https://github.com/odoo/odoo/blob/10.0/odoo/http.py#L419
++ ORM (Django có sẵn Django ORM, Flask thì phải cài thêm như SQLAlchemy), Odoo tự viết luôn 1 ORM ở đây: https://github.com/odoo/odoo/blob/10.0/odoo/models.py (gần 6000 dòng code) chỉ hỗ trợ PostgreSQL.
++ Template render: Qweb (http://www.odoo.com/documentation/10.0/reference/qweb.html) - của nhà tự trồng, code tại https://github.com/odoo/odoo/blob/10.0/odoo/addons/base/ir/ir_qweb/qweb.py#L228.
++ WSGI: werkzeug (như Flask)
+
+## Kiến trúc
+Odoo sử dụng kiến trúc server - client.
+- Code server viết bằng Python, chạy phía server.
+- Code client viết bằng Javascript, chạy trên trình duyệt web, nó tương tác với server bằng [JSON-RPC](http://www.jsonrpc.org/specification) trên nền HTTP request: https://github.com/odoo/odoo/blob/10.0/odoo/http.py#L91
+
+Mỗi chương trình (webapp), được đóng thành 1 python module (thư mục với file `__init__.py`),
+và nằm trong thư mục addons https://github.com/odoo/odoo/tree/10.0/addons
+
+## Vài phút làm lập trình viên Odoo
+Lấy code về
+
+```sh
+$ git clone https://github.com/odoo/odoo.git
+Cloning into 'odoo'...
+remote: Counting objects: 1999445, done.
+remote: Compressing objects: 100% (546/546), done.
+Receiving objects:  84% (1679534/1999445), 1.47 GiB | 1.33 MiB/s
+Receiving objects:  84% (1691261/1999445), 1.47 GiB | 1.27 MiB/s
+remote: Total 1999445 (delta 208), reused 258 (delta 105), pack-reused 1998777
+Receiving objects: 100% (1999445/1999445), 1.67 GiB | 2.29 MiB/s, done.
+Resolving deltas: 100% (1660073/1660073), done.
+Checking connectivity... done.
+Checking out files: 100% (21097/21097), done.
+```
+
+Yeah, 1.67 GB
+
+Nếu tải sourcecode bằng file zip (không có git)
+
+```sh
+$ du -h 10.0.zip
+121M    10.0.zip
+```
+
+Tạo virtualenv Python2 (Odoo hỗ trợ Python 2.7+, ko hỗ trợ 3), cài các requirements:
+
+```sh
+$ pip install -r requirements.txt
+...
+
+Successfully installed Babel-2.3.4 Jinja2-2.8 Mako-1.0.4 MarkupSafe-0.23 Pillow-3.4.1 PyYAML-3.12 Python-Chart-1.39 Werkzeug-0.11.11 XlsxWriter-0.9.3 beautifulsoup4-4.6.0 decorator-4.0.10 docutils-0.12 ebaysdk-2.1.4 feedparser-5.2.1 funcsigs-1.0.2 gevent-1.1.2 greenlet-0.4.10 jcconv-0.2.3 lxml-3.5.0 mock-2.0.0 ofxparse-0.16 passlib-1.6.5 pbr-3.1.1 psutil-4.3.1 psycogreen-1.0 psycopg2-2.7.1 pyPdf-1.13 pydot-1.2.3 pyparsing-2.1.10 pyserial-3.1.1 python-dateutil-2.5.3 python-ldap-2.4.27 python-openid-2.2.5 python-stdnum-1.6 pytz-2016.7 pyusb-1.0.0 qrcode-5.3 reportlab-3.3.0 requests-2.11.1 six-1.10.0 suds-jurko-0.6 vatnumber-1.2 vobject-0.9.3 xlrd-1.0.0 xlwt-1.1.2
+```
+
+Mặc dù dùng qweb template engine, Odoo vẫn có vài chỗ dùng jinja2 hay Mako template engine:
+> [2] although it uses a few others, either for historical reasons or because they remain better fits for the use case. Odoo 9.0 still depends on Jinja and Mako.
+
+Code Odoo không tuân theo chuẩn PEP8 nhưng khá sạch sẽ và dễ đọc.
+Tài liệu cho developer đầy đủ, dễ xem.
+http://www.odoo.com/documentation/10.0/index.html
+
+Đứng ở góc độ của lập trình viên, việc phát triển một "module/addon"  cho Odoo không có gì quá khác biệt hay cao siêu so với viết một web app bằng bất cứ framework nào (Django, Flask...), ngoài chuyện clone 1.6GB git repo.
+
+## Cài đặt và chạy thử
+Code Python cài từ source có một số thư viện yêu cầu lập trình viên phải cài thêm các thư viện C (bằng apt trên Ubuntu):
+
+- Yêu cầu chung: `python-dev`
+- lxml: `libxml2-dev libxslt1-dev`
+- python-ldap: `libsasl2-dev libldap2-dev libssl-dev`
+- psycopg2: `libpq-dev`
+
+Phải cài `npm` để cài `less`, xem chi tiết tại https://www.odoo.com/documentation/10.0/setup/install.html#setup-install-source
+
+Sau khi cài
+![Odoo](odoo.png)
+
+Giao diện quản lý project
+![Odoo project management](odoo2.png)
+
+Cảm nhận chung là Odoo vẫn chậm như thời OpenERP, khá ngốn RAM, 180MB cho process Python chạy Odoo, chưa làm gì cả + một đống process chạy postgres.
+
+```sh
+# ps xau | grep odo[o]
+root     26287  0.0  0.0  54104  3640 pts/1    S    11:27   0:00 su odoo
+odoo     26288  0.0  0.0  24468  5524 pts/1    S    11:27   0:00 bash
+odoo     26766  2.3  2.2 2387728 180068 pts/1  Sl+  11:32   2:16 python ./odoo-bin
+postgres 26779  0.0  0.1 303684 12532 ?        Ss   11:33   0:00 postgres: odoo postgres [local] idle
+postgres 26796  0.2  0.6 316460 56828 ?        Ss   11:33   0:15 postgres: odoo db1 [local] idle
+postgres 26813  0.0  0.5 306484 41576 ?        Ss   11:34   0:00 postgres: odoo db1 [local] idle
+postgres 26823  0.0  0.5 307428 45272 ?        Ss   11:34   0:00 postgres: odoo db1 [local] idle
+postgres 26836  0.6  0.9 323972 73628 ?        Ss   11:34   0:37 postgres: odoo db1 [local] idle
+postgres 26841  0.0  0.5 306992 42800 ?        Ss   11:34   0:00 postgres: odoo db1 [local] idle
+postgres 26847  0.0  0.5 307052 41240 ?        Ss   11:34   0:00 postgres: odoo db1 [local] idle
+postgres 26848  0.0  0.5 306232 41784 ?        Ss   11:34   0:00 postgres: odoo db1 [local] idle
+postgres 26849  0.0  0.5 306536 41104 ?        Ss   11:34   0:00 postgres: odoo db1 [local] idle
+postgres 26850  0.0  0.5 306976 43236 ?        Ss   11:34   0:00 postgres: odoo db1 [local] idle
+postgres 26851  0.0  0.5 306528 44344 ?        Ss   11:34   0:00 postgres: odoo db1 [local] idle
+postgres 26852  0.0  0.5 306272 41192 ?        Ss   11:34   0:00 postgres: odoo db1 [local] idle
+postgres 26853  0.0  0.4 306608 39024 ?        Ss   11:34   0:00 postgres: odoo db1 [local] idle
+root     29378  0.0  0.0  16044   984 pts/0    S+   13:11   0:00 grep --color=auto odoo
+
+```
+
+## Làm lập trình viên Odoo
+
+Khi vận hành trang [tổng hợp việc Python của PyMi](http://jobs.pymi.vn/), những tin tuyển lập trình viên Odoo hiện lên hàng ngày, lặp đi lặp lại, với mức lương phổ biến trong khoảng 6-10 triệu.
+
+Các nhà tuyển dụng thì lại bắt buộc lập trình viên phải có sẵn kinh nghiệm với Odoo... NOOOOOO!
+
+Chẳng có lập trình viên web Python nào đầu tư vào 1 framework không có chỗ dùng ngoài chính nó, người ta học Django, Flask.
+Một lập trình viên Django hay Flask có thể viết Odoo webapp chỉ sau vài tiếng chuyển đổi những kiến thức tương tự sang những thư viện của Odoo framework.
+
+Tại sao anh đòi hỏi thứ không ai có, mà lại trả lương thấp?
+---
+pub_date: 2017-08-27
+---
+shortintro: Nhật ký mấy tiếng thử làm lập trình viên Odoo - một trong những công việc Python được tuyển dụng nhiều (nhưng bèo) ở Việt Nam
