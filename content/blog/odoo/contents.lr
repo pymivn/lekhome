@@ -122,7 +122,7 @@ Khi vận hành trang [tổng hợp việc Python của PyMi](http://jobs.pymi.v
 
 Các nhà tuyển dụng thì lại bắt buộc lập trình viên phải có sẵn kinh nghiệm với Odoo... NOOOOOO!
 
-Chẳng có lập trình viên web Python nào đầu tư vào 1 framework không có chỗ dùng ngoài chính nó, người ta học Django, Flask.
+Chẳng có lập trình viên web Python nào đầu tư vào 1 framework không dùng ở đâu ngoài để phát triển chính Odoo module/addon, họ học Django, Flask.
 Một lập trình viên Django hay Flask có thể viết Odoo webapp chỉ sau vài tiếng chuyển đổi những kiến thức tương tự sang những thư viện của Odoo framework.
 
 Tại sao anh đòi hỏi thứ không ai có, mà lại trả lương thấp?
