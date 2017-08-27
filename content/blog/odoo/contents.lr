@@ -12,17 +12,17 @@ body:
 > The main Odoo Apps include an Open Source CRM, Website Builder, eCommerce, Warehouse Management, Project Management, Billing & Accounting, Point of Sale, Human Resources, Marketing, Manufacturing, Purchase Management, ...
 > Odoo Apps can be used as stand-alone applications, but they also integrate seamlessly so you get a full-featured Open Source ERP when you install several Apps.
 
-Nó là một bộ các web app phục vụ các công việc trong kinh doanh như quản lý quan hệ khách hàng, quản lý project, tính tiền/ kế tóan, tuyển dụng ... đầy đủ đến mức nó là một giải pháp "ERP" cho doanh nghiệp.
+Nó là một bộ các web app phục vụ các công việc trong kinh doanh như quản lý quan hệ khách hàng, quản lý dự án, tính tiền/kế toán, tuyển dụng... đầy đủ đến mức nó là một giải pháp "ERP" cho doanh nghiệp.
 Odoo là tên mới từ bản 8.0 (giờ đang là 10.0) của phần mềm OpenERP.
 
 Đó là nhìn từ phía người dùng. Còn về phía lập trình viên, Odoo là gì?
 
 - Odoo không phải đơn thuần là 1 webapp, nó không dùng bất cứ web framework nào như Django, Flask, Tornado...
 - Odoo LÀ một web framework, trong code của Odoo có đủ các thành phần cần thiết của 1 web framework:
-+ Router: https://github.com/odoo/odoo/blob/10.0/odoo/http.py#L419
-+ ORM (Django có sẵn Django ORM, Flask thì phải cài thêm như SQLAlchemy), Odoo tự viết luôn 1 ORM ở đây: https://github.com/odoo/odoo/blob/10.0/odoo/models.py (gần 6000 dòng code) chỉ hỗ trợ PostgreSQL.
-+ Template render: Qweb (http://www.odoo.com/documentation/10.0/reference/qweb.html) - của nhà tự trồng, code tại https://github.com/odoo/odoo/blob/10.0/odoo/addons/base/ir/ir_qweb/qweb.py#L228.
-+ WSGI: werkzeug (như Flask)
+  + Router: https://github.com/odoo/odoo/blob/10.0/odoo/http.py#L419
+  + ORM (Django có sẵn Django ORM, Flask thì phải cài thêm như SQLAlchemy), Odoo tự viết luôn 1 ORM ở đây: https://github.com/odoo/odoo/blob/10.0/odoo/models.py (gần 6000 dòng code) chỉ hỗ trợ PostgreSQL.
+  + Template render: Qweb (http://www.odoo.com/documentation/10.0/reference/qweb.html) - của nhà tự trồng, code tại https://github.com/odoo/odoo/blob/10.0/odoo/addons/base/ir/ir_qweb/qweb.py#L228.
+  + WSGI: werkzeug (như Flask)
 
 ## Kiến trúc
 Odoo sử dụng kiến trúc server - client.
@@ -89,7 +89,7 @@ Phải cài `npm` để cài `less`, xem chi tiết tại https://www.odoo.com/d
 Sau khi cài
 ![Odoo](odoo.png)
 
-Giao diện quản lý project
+Giao diện quản lý dự án
 ![Odoo project management](odoo2.png)
 
 Cảm nhận chung là Odoo vẫn chậm như thời OpenERP, khá ngốn RAM, 180MB cho process Python chạy Odoo, chưa làm gì cả + một đống process chạy postgres.
