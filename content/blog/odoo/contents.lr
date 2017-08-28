@@ -51,24 +51,13 @@ Checking out files: 100% (21097/21097), done.
 
 Yeah, 1.67 GB
 
-Nếu tải sourcecode bằng file zip (không có git)
+Nếu tải sourcecode bằng [file zip](https://github.com/odoo/odoo/archive/10.0.zip) (không có git)
 
 ```sh
 $ du -h 10.0.zip
 121M    10.0.zip
 ```
-
-Tạo virtualenv Python2 (Odoo hỗ trợ Python 2.7+, ko hỗ trợ 3), cài các requirements:
-
-```sh
-$ pip install -r requirements.txt
-...
-
-Successfully installed Babel-2.3.4 Jinja2-2.8 Mako-1.0.4 MarkupSafe-0.23 Pillow-3.4.1 PyYAML-3.12 Python-Chart-1.39 Werkzeug-0.11.11 XlsxWriter-0.9.3 beautifulsoup4-4.6.0 decorator-4.0.10 docutils-0.12 ebaysdk-2.1.4 feedparser-5.2.1 funcsigs-1.0.2 gevent-1.1.2 greenlet-0.4.10 jcconv-0.2.3 lxml-3.5.0 mock-2.0.0 ofxparse-0.16 passlib-1.6.5 pbr-3.1.1 psutil-4.3.1 psycogreen-1.0 psycopg2-2.7.1 pyPdf-1.13 pydot-1.2.3 pyparsing-2.1.10 pyserial-3.1.1 python-dateutil-2.5.3 python-ldap-2.4.27 python-openid-2.2.5 python-stdnum-1.6 pytz-2016.7 pyusb-1.0.0 qrcode-5.3 reportlab-3.3.0 requests-2.11.1 six-1.10.0 suds-jurko-0.6 vatnumber-1.2 vobject-0.9.3 xlrd-1.0.0 xlwt-1.1.2
-```
-
-Mặc dù dùng qweb template engine, Odoo vẫn có vài chỗ dùng jinja2 hay Mako template engine:
-> [2] although it uses a few others, either for historical reasons or because they remain better fits for the use case. Odoo 9.0 still depends on Jinja and Mako.
+Giải nén file zip rồi cài.
 
 Code Odoo không tuân theo chuẩn PEP8 nhưng khá sạch sẽ và dễ đọc.
 Tài liệu cho developer đầy đủ, dễ xem.
@@ -85,6 +74,18 @@ Code Python cài từ source có một số thư viện yêu cầu lập trình 
 - psycopg2: `libpq-dev`
 
 Phải cài `npm` để cài `less`, xem chi tiết tại https://www.odoo.com/documentation/10.0/setup/install.html#setup-install-source
+
+Tạo virtualenv Python2 (Odoo hỗ trợ Python 2.7+, ko hỗ trợ 3), cài các requirements:
+
+```sh
+$ pip install -r requirements.txt
+...
+
+Successfully installed Babel-2.3.4 Jinja2-2.8 Mako-1.0.4 MarkupSafe-0.23 Pillow-3.4.1 PyYAML-3.12 Python-Chart-1.39 Werkzeug-0.11.11 XlsxWriter-0.9.3 beautifulsoup4-4.6.0 decorator-4.0.10 docutils-0.12 ebaysdk-2.1.4 feedparser-5.2.1 funcsigs-1.0.2 gevent-1.1.2 greenlet-0.4.10 jcconv-0.2.3 lxml-3.5.0 mock-2.0.0 ofxparse-0.16 passlib-1.6.5 pbr-3.1.1 psutil-4.3.1 psycogreen-1.0 psycopg2-2.7.1 pyPdf-1.13 pydot-1.2.3 pyparsing-2.1.10 pyserial-3.1.1 python-dateutil-2.5.3 python-ldap-2.4.27 python-openid-2.2.5 python-stdnum-1.6 pytz-2016.7 pyusb-1.0.0 qrcode-5.3 reportlab-3.3.0 requests-2.11.1 six-1.10.0 suds-jurko-0.6 vatnumber-1.2 vobject-0.9.3 xlrd-1.0.0 xlwt-1.1.2
+```
+
+Mặc dù dùng qweb template engine, Odoo vẫn có vài chỗ dùng jinja2 hay Mako template engine:
+> [2] although it uses a few others, either for historical reasons or because they remain better fits for the use case. Odoo 9.0 still depends on Jinja and Mako.
 
 Sau khi cài
 ![Odoo](odoo.png)
