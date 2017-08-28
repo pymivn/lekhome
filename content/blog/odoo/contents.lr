@@ -112,7 +112,6 @@ postgres 26850  0.0  0.5 306976 43236 ?        Ss   11:34   0:00 postgres: odoo 
 postgres 26851  0.0  0.5 306528 44344 ?        Ss   11:34   0:00 postgres: odoo db1 [local] idle
 postgres 26852  0.0  0.5 306272 41192 ?        Ss   11:34   0:00 postgres: odoo db1 [local] idle
 postgres 26853  0.0  0.4 306608 39024 ?        Ss   11:34   0:00 postgres: odoo db1 [local] idle
-root     29378  0.0  0.0  16044   984 pts/0    S+   13:11   0:00 grep --color=auto odoo
 
 ```
 
