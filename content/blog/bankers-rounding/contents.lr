@@ -1,0 +1,113 @@
+title: Làm tròn hay làm méo?
+---
+author: HVN
+---
+pub_date: 2017-09-21
+---
+shortintro: Tại sao dùng hàm làm tròn (round) với 2.5 thì được 2, mà làm tròn 3.5 lại được 4?
+---
+body:
+
+Làm việc với kiểu dữ liệu float (số thực) luôn mang lại những bất ngờ đầy thú vị (thú vị không có hàm ý là tốt hay xấu).
+Nếu như kiểu integer (số nguyên) luôn tròn trịa, đẹp đẽ, thì float lại xù xì, thô ráp, thiếu chính xác (float là biểu diễn gần đúng),
+thực dụng, và đầy dãy bất ngờ.
+
+![YinYang](yinyang.jpg)
+
+Số nguyên như một bức tranh về những tưởng tượng của con người.
+Còn số thực thì rất thực, như cuộc sống này vậy.
+
+Python có sẵn function ``round`` dùng để làm tròn một số float về kiểu int, rất dễ hiểu, gần gữi như lúc ta học
+
+```python
+In [2]: round(4.2)
+Out[2]: 4
+
+In [3]: round(6.9)
+Out[3]: 7
+
+In [4]: round(6.0)
+Out[4]: 6
+
+In [5]: round(7.0)
+Out[5]: 7
+
+```
+
+Mọi thứ đều đơn giản, cho đến khi có vấn đề xảy ra. Liệu kết quả sẽ thu được là mấy nếu làm tròn ``9.5``? Là ``9`` hay là ``10``?
+Nếu tuân theo logic thông thường, ta sẽ làm tròn về số nguyên nào mà ở gần ``9.5`` hơn.
+Với ``9.5``, khoảng cách tới ``9`` hay ``10`` đều là ``0.5``. Vậy em chọn lối nào?
+
+Đưa ra lựa chọn là một điều không hề đơn giản, đưa ra lựa chọn đúng thì phải mãi về sau có kết quả rồi ta mới biết.
+
+Giả sử với bộ dữ liệu có
+```python
+L = [5.5, 6.5, 7.5, 8.5]
+```
+
+Bộ dữ liệu này có giá trị trung bình là
+```python
+In [1]: L = [5.5, 6.5, 7.5, 8.5]
+
+In [2]: sum(L)/len(L)
+Out[2]: 7.0
+```
+
+Khi mang đi làm tròn, ta chỉ muốn thu được các giá trị "tròn" hơn, nhưng vẫn mong muốn giữ nguyên ý nghĩa của bộ dữ liệu - giá trị trung bình (mean) ở đây là một đại diện có thể xem xét.
+
+Nếu làm tròn lên số nguyên lớn hơn, ta có:
+
+```python
+In [3]: import math
+
+In [4]: [math.ceil(n) for n in L]
+Out[4]: [6, 7, 8, 9]
+
+In [5]: up = [math.ceil(n) for n in L]
+
+In [6]: sum(up)/len(up)
+Out[6]: 7.5
+```
+
+Bộ dữ liệu của ta giờ đã có vẻ tiến lên so với ban đầu.
+
+Nếu làm tròn xuống số nguyên gần nhất, ta có:
+```python
+In [7]: [math.floor(n) for n in L]
+Out[7]: [5, 6, 7, 8]
+
+In [8]: down = [math.floor(n) for n in L]
+
+In [9]: sum(down)/len(down)
+Out[9]: 6.5
+```
+
+Bộ dữ liệu có vẻ đã "dịch xuống" một chút.
+
+Giải pháp nào để làm tròn mà giảm thiểu sự lệch của bộ dữ liệu?
+Vấn đề này có thể không xuất hiện ở Việt Nam, với đơn vị tiền tệ biểu diễn bằng kiểu integer, với đơn vị tối thiểu là trăm (đồng), nhưng
+hẳn đã khiến người Mỹ đau đầu khi đơn vị dola ($) thường xuất hiện ở dạng 1.5 $, 2.4 $...
+
+Và nói đến tiền, những người hiểu về tiền nhất, có lẽ là các nhà ngân hàng (banker).
+Ngành banker có một phương pháp làm tròn mà Microsoft, ... các ngôn ngữ lập trình đều học theo, đó là làm tròn tới số chẵn gần nhất.
+```python
+In [2]: [round(n) for n in L]
+Out[2]: [6, 6, 8, 8]
+
+In [3]: bankers = [round(n) for n in L]
+
+In [4]: sum(bankers)/len(bankers)
+Out[4]: 7.0
+```
+
+Bởi trong một bộ số liệu bất kỳ, tỷ lệ giữa số chẵn và số lẻ là như nhau, khi làm tròn ``5.5`` lên ``6`` (số chẵn gần nhất), ta tăng nó lên ``0.5``, còn với ``6.5``, làm tròn sẽ giảm đi ``0.5``. Kết quả là số lẻ tiến lên, số chẵn lùi lại, ta giữ được thế cân bằng.
+Cách làm tròn này vốn tồn tại với cái tên "bankers' rounding", sau này được chuẩn hóa vào tiêu chuẩn xử lý số thực (float) [IEEE-754](https://en.wikipedia.org/wiki/IEEE_754#Roundings_to_nearest) mà hầu hết các ngôn ngữ lập trình tuân theo.
+
+Cái gì quá cũng không tốt, to quá, nhỏ quá, mạnh quá, yếu quá, ít quá, nhiều quá đều không ổn. Vạn vật chỉ phát triển khi  đạt tới một thế cân bằng, âm dương hòa hợp, đất trời nảy hoa, cỏ cây xanh lá.
+
+## Tham khảo
+- https://en.wikipedia.org/wiki/Rounding
+- https://mathematica.stackexchange.com/questions/2116/why-round-to-even-integers
+- https://en.wikipedia.org/wiki/IEEE_754#Roundings_to_nearest
+
+Xem thêm bài viết về một "sự thật" cần biết về số thực tại [đây](http://pymi.vn/blog/why-not-float/).
