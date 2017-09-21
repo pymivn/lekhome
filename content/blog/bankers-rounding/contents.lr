@@ -100,7 +100,7 @@ In [4]: sum(bankers)/len(bankers)
 Out[4]: 7.0
 ```
 
-Bởi trong một bộ số liệu bất kỳ, tỷ lệ giữa số chẵn và số lẻ là như nhau, khi làm tròn ``5.5`` lên ``6`` (số chẵn gần nhất), ta tăng nó lên ``0.5``, còn với ``6.5``, làm tròn sẽ giảm đi ``0.5``. Kết quả là số lẻ tiến lên, số chẵn lùi lại, ta giữ được thế cân bằng.
+Trong một bộ số liệu bất kỳ, khi tỷ lệ giữa số chẵn và số lẻ là như nhau, nếu làm tròn ``5.5`` lên ``6`` (số chẵn gần nhất), ta tăng nó lên ``0.5``, còn với ``6.5``, làm tròn sẽ giảm đi ``0.5`` thì kết quả là các số lẻ tiến lên, các số chẵn lùi lại, ta giữ được thế cân bằng.
 Cách làm tròn này vốn tồn tại với cái tên "bankers' rounding", sau này được chuẩn hóa vào tiêu chuẩn xử lý số thực (float) [IEEE-754](https://en.wikipedia.org/wiki/IEEE_754#Roundings_to_nearest) mà hầu hết các ngôn ngữ lập trình tuân theo.
 
 Cái gì quá cũng không tốt, to quá, nhỏ quá, mạnh quá, yếu quá, ít quá, nhiều quá đều không ổn. Vạn vật chỉ phát triển khi  đạt tới một thế cân bằng, âm dương hòa hợp, đất trời nảy hoa, cỏ cây xanh lá.
