@@ -19,6 +19,8 @@ Còn số thực thì rất thực, như cuộc sống này vậy.
 
 Python có sẵn function ``round`` dùng để làm tròn một số float về kiểu int, rất dễ hiểu, gần gữi như lúc ta học
 
+**P.S: code trong bài sử dụng Python 3.5**
+
 ```python
 In [2]: round(4.2)
 Out[2]: 4
