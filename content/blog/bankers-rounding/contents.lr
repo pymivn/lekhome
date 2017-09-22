@@ -107,6 +107,9 @@ Cách làm tròn này vốn tồn tại với cái tên "bankers' rounding", sau
 
 Cái gì quá cũng không tốt, to quá, nhỏ quá, mạnh quá, yếu quá, ít quá, nhiều quá đều không ổn. Vạn vật chỉ phát triển khi  đạt tới một thế cân bằng, âm dương hòa hợp, đất trời nảy hoa, cỏ cây xanh lá.
 
+P.P.S: cách làm tròn này là một thay đổi của Python 3 so với Python 2, có ghi
+trong [changelog của python 3.0](https://docs.python.org/3/whatsnew/3.0.html#builtins)
+
 ## Tham khảo
 - https://en.wikipedia.org/wiki/Rounding
 - https://mathematica.stackexchange.com/questions/2116/why-round-to-even-integers
