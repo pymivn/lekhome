@@ -64,7 +64,7 @@ Sử dụng phép chia lấy dư, ta có thể kiểm tra một số có là b�
 Do số dư luôn luôn nhỏ hơn số chia (7 là số bị chia, 2 là số chia, 1 là số dư), phép chia dư được sử dụng
 khi bài toán có quy luật tuần hoàn. Cho đề bài:
 
-> Biết từ nhà Mít sang nhà Chuối có 9 bậc (đánh số từ 1-9),
+> Biết giữa nhà Mít sang nhà Chuối có 9 bậc (đánh số từ 1-9),
 coi nhà Mít là bậc 0 và nhà Chuối là bậc 10. Biết mỗi 1 bước đi 1 bậc, hỏi nếu
 Mít bắt đầu từ nhà mình, đi theo đường ấy, đến nhà Chuối thì lại quay về,
 thì sau 1235789 bước, Mít đang ở bậc số mấy?
@@ -88,6 +88,9 @@ Sau 1235789, Mít ở bậc
 >>> 1235789 % 20
 9
 ```
+
+Hay một bài toán đơn giản khác cũng dùng phép ``%`` để giải: nếu hôm nay là thứ
+6 thì 96 ngày nữa là thứ mấy?
 
 Phép modulo còn có ứng dụng quan trọng trong ngành mật mã học (cryptography), hệ thống bảo mật RSA
 có sử dụng phép modulo, xem thêm tại [wikipedia][1].
