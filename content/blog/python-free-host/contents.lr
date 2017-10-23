@@ -1,0 +1,161 @@
+title: Chạy Python web app
+---
+author: HVN
+---
+body:
+
+Làm một trang web bằng Python là việc cực kỳ đơn giản, 5-7 dòng code với [Flask framework](http://flask.pocoo.org/), bạn đã sẵn sàng để khoe website "hello world" với cả trái đất này.
+
+```python
+from flask import Flask
+app = Flask(__name__)
+
+@app.route("/")
+def hello():
+    return "Hello PyMi.vn!"
+```
+
+
+Nhưng sẵn sàng khoe không có nghĩa là đã khoe được.
+Bạn cần phải tiếp tục vật lộn để mang tuyệt tác ấy đến cho cả thế giới này được biết.
+
+Làm thế nào để cho cả "cộng đồng" cùng xem được website của bạn? Nên nhớ, để website chạy được, phải có một cái máy nào đó luôn chạy code Python mà bạn đã viết. Tự nguyện xung phong bật máy tính của mình 24/7 là một lựa chọn dũng cảm, nhưng nhiều khó khăn và rắc rối và tốn tiền.
+Vì vậy, tìm một "cái máy khác" hay các dịch vụ hosting/VPS/server để chạy thì khỏe người hơn.
+
+Những người dùng đến từ thế giới PHP sẽ đi tìm ngay `Python free hosting`, nhưng kết
+quả sẽ không có gì dùng được, đây không phải PHP. Nên từ khóa "free hosting" sẽ không giúp gì cho bạn cả, trong Python cũng chẳng ai nhắc tới khái niệm này.
+
+Tài liệu của Flask - phần hướng dẫn "triển khai" (deployment) có [liệt kê vài lựa chọn phổ biến](http://flask.pocoo.org/docs/0.12/deploying/#deployment). Trong đó, đáng kể - tiện lợi - và đơn giản nhất là chạy miễn phí với tài khỏan Heroku - có thể chạy 1 website miễn phí, không yêu cầu thẻ tín dụng hay thanh toán - đủ để bạn chạy 1 trang web Python nhỏ.
+
+Dù [Heroku đã có hướng dẫn rất chi tiết với một Django app](https://devcenter.heroku.com/articles/getting-started-with-python), bài này sẽ thực hiện deploy một website Flask đơn giản lên Heroku.
+
+### Tạo tài khoản Heroku miễn phí
+Vào trang heroku.com rồi chọn "Sign Up", điền thông tin, Heroku sẽ gửi mail, mở email và xác nhận.
+
+![SignUp](herokusignup.png)
+
+### Cài đặt câu lệnh "heroku", git
+Tải chương trình "heroku" theo hướng dẫn ở https://devcenter.heroku.com/articles/getting-started-with-python#set-up , mỗi hệ điều hành sẽ có cách cài riêng.
+
+Git là chương trình để quản lý code của bạn (và chia sẻ với người khác). Thay vì phải nén các file code vào zip, copy qua lại, dùng FTP như thời năm 2000, thì ngày nay người ta sử dụng git để "copy" code về hay "đưa" code đi. Cài đặt git nằm ngoài phạm vi bài viết này, xem thêm tại [vinagit](https://pymivn.github.io/vinagit/).
+
+### Tạo một "heroku app"
+Gõ lệnh sau tại thư mục chứa code
+
+```sh
+$ heroku create
+Creating app... done, ⬢ glacial-lowlands-37256
+https://glacial-lowlands-37256.herokuapp.com/ | https://git.heroku.com/glacial-lowlands-37256.git
+```
+
+Heroku sẽ yêu cầu bạn nhập tài khỏan, rồi tạo một "app" cho bạn, đồng thời thiết lập git để sẵn sàng "đẩy code lên Heroku"
+
+Các file cần có:
+
+- requirements.txt - chứa danh sách các thư viện cần cho chương trình. Trong ví dụ này có 2 dòng, flask là web framework ta dùng ở đây, và gunicorn - là chương trình server sẽ chạy code Python.
+```
+flask==0.12.2
+gunicorn
+```
+
+- Procfile - chứa câu lệnh mà heroku sẽ chạy. Trong ví dụ này, heroku sẽ chạy app Flask bằng lệnh gunicorn
+```
+# Procfile
+web: gunicorn app:app --log-file -
+```
+
+- Code Flask webapp nằm trong file `app.py` in ra màn hình khi người dùng vào trang chủ
+
+```python
+from flask import Flask
+app = Flask(__name__)
+
+@app.route("/")
+def hello():
+    return "Hello PyMi.vn!"
+```
+
+Xem đầy đủ code tại [pymivn/flask_heroku](https://github.com/pymivn/flask_heroku)
+
+### Đưa code lên heroku
+
+Sau khi đã add hết các file cần thiết vào git, gõ lệnh để đưa code (push) lên  Heroku,
+
+```sh
+$ git push heroku master
+Counting objects: 8, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (8/8), 701 bytes | 0 bytes/s, done.
+Total 8 (delta 1), reused 0 (delta 0)
+remote: Compressing source files... done.
+remote: Building source:
+remote:
+remote: -----> Python app detected
+remote: -----> Installing python-3.6.2
+remote: -----> Installing pip
+remote: -----> Installing requirements with pip
+remote:        Collecting flask==0.12.2 (from -r /tmp/build_332af31aead5e8121044856aecc9b1ca/requirements.txt (line 1))
+remote:          Downloading Flask-0.12.2-py2.py3-none-any.whl (83kB)
+remote:        Collecting gunicorn (from -r /tmp/build_332af31aead5e8121044856aecc9b1ca/requirements.txt (line 2))
+remote:          Downloading gunicorn-19.7.1-py2.py3-none-any.whl (111kB)
+remote:        Collecting itsdangerous>=0.21 (from flask==0.12.2->-r /tmp/build_332af31aead5e8121044856aecc9b1ca/requirements.txt (line 1))
+remote:          Downloading itsdangerous-0.24.tar.gz (46kB)
+remote:        Collecting Werkzeug>=0.7 (from flask==0.12.2->-r /tmp/build_332af31aead5e8121044856aecc9b1ca/requirements.txt (line 1))
+remote:          Downloading Werkzeug-0.12.2-py2.py3-none-any.whl (312kB)
+remote:        Collecting Jinja2>=2.4 (from flask==0.12.2->-r /tmp/build_332af31aead5e8121044856aecc9b1ca/requirements.txt (line 1))
+remote:          Downloading Jinja2-2.9.6-py2.py3-none-any.whl (340kB)
+remote:        Collecting click>=2.0 (from flask==0.12.2->-r /tmp/build_332af31aead5e8121044856aecc9b1ca/requirements.txt (line 1))
+remote:          Downloading click-6.7-py2.py3-none-any.whl (71kB)
+remote:        Collecting MarkupSafe>=0.23 (from Jinja2>=2.4->flask==0.12.2->-r /tmp/build_332af31aead5e8121044856aecc9b1ca/requirements.txt (line 1))
+remote:          Downloading MarkupSafe-1.0.tar.gz
+remote:        Installing collected packages: itsdangerous, Werkzeug, MarkupSafe, Jinja2, click, flask, gunicorn
+remote:          Running setup.py install for itsdangerous: started
+remote:            Running setup.py install for itsdangerous: finished with status 'done'
+remote:          Running setup.py install for MarkupSafe: started
+remote:            Running setup.py install for MarkupSafe: finished with status 'done'
+remote:        Successfully installed Jinja2-2.9.6 MarkupSafe-1.0 Werkzeug-0.12.2 click-6.7 flask-0.12.2 gunicorn-19.7.1 itsdangerous-0.24
+remote:
+remote: -----> Discovering process types
+remote:        Procfile declares types -> web
+remote:
+remote: -----> Compressing...
+remote:        Done: 42.8M
+remote: -----> Launching...
+remote:        Released v3
+remote:        https://glacial-lowlands-37256.herokuapp.com/ deployed to Heroku
+remote:
+remote: Verifying deploy... done.
+To https://git.heroku.com/glacial-lowlands-37256.git
+ * [new branch]      master -> master
+
+```
+
+Heroku sẽ tự động cài đặt và chạy code, nó sẽ in ra đường dẫn đến trang web lên màn hình
+https://glacial-lowlands-37256.herokuapp.com/
+
+hoặc nếu không thấy thì gõ:
+
+```sh
+heroku open
+```
+
+Câu lệnh sẽ tự mở trang web tại địa chỉ https://glacial-lowlands-37256.herokuapp.com/
+
+### Xem kết quả
+
+![result](herokuview.png)
+
+## Tổng kết
+Bài này hướng dẫn chạy một Flask web app đơn giản trên Heroku, cho cả thế giới thấy sản phẩm của bạn.
+- Tài khỏan miễn phí của heroku cho phép bạn chạy 1 website nhỏ 550 tiếng "Dynos" mỗi tháng - nói nôm na thì nếu không có nhiều người vào, thời lượng này sẽ đủ chạy cả tháng - và miễn phí. Bao giờ đòi thu tiền Heroku sẽ báo, đến lúc ấy hãy phải lo.
+- Mỗi tài khoản sẽ chỉ được giới hạn miễn phí 550 giờ một tháng (~ 22 ngày CPU chạy liên tục), nên nói chung thì sẽ chỉ chạy được 1 website / tài khoản.
+- Heroku hỗ trợ 1 free database PostgreSQL - database opensource xịn nhất thế giới, xem thêm tại [bài hướng dẫn của Heroku](https://devcenter.heroku.com/articles/getting-started-with-python#provision-a-database).
+- Khi "chạy thật", hầu hết các Python web app sẽ được chạy trên các "máy ảo"/"server"/"cloud" riêng, người dùng
+sẽ tự lo cài đặt database, [tạo virtualenv, cài requirements](http://pymi.vn/blog/virtualenv/) và chạy code.
+Heroku là dịch vụ rất tiện, nhưng rất đắt khi website bắt đầu lớn lên.
+
+---
+pub_date: 2017-10-23
+---
+shortintro: Đăng ký tài khoản và chạy Python web app miễn phí
