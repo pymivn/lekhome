@@ -30,7 +30,7 @@ Tài liệu của Flask - phần hướng dẫn "triển khai" (deployment) có 
 Dù [Heroku đã có hướng dẫn rất chi tiết với một Django app](https://devcenter.heroku.com/articles/getting-started-with-python), bài này sẽ thực hiện deploy một website Flask đơn giản lên Heroku.
 
 ### Tạo tài khoản Heroku miễn phí
-Vào trang heroku.com rồi chọn "Sign Up", điền thông tin, Heroku sẽ gửi mail, mở email và xác nhận.
+Vào trang [heroku.com](https://www.heroku.com/) rồi chọn "Sign Up", điền thông tin, Heroku sẽ gửi mail, mở email và xác nhận.
 
 ![SignUp](herokusignup.png)
 
@@ -64,7 +64,7 @@ gunicorn
 web: gunicorn app:app --log-file -
 ```
 
-- Code Flask webapp nằm trong file `app.py` in ra màn hình khi người dùng vào trang chủ
+- Code Flask webapp nằm trong file `app.py` hiển thị dòng chữ "Hello PyMi.vn!" khi người dùng vào trang chủ
 
 ```python
 from flask import Flask
@@ -75,7 +75,7 @@ def hello():
     return "Hello PyMi.vn!"
 ```
 
-Xem đầy đủ code tại [pymivn/flask_heroku](https://github.com/pymivn/flask_heroku)
+Xem đầy đủ code tại [pymivn/flask_heroku](https://github.com/pymivn/flask_heroku).
 
 ### Đưa code lên heroku
 
