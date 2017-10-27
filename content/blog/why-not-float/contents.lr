@@ -107,6 +107,20 @@ Vậy nên, khi nhìn thấy số kiểu ``float``, thì khả năng lớn nó k
 giá trị xấp xỉ - mặc dù việc xấp xỉ (làm tròn) này không đáng kể - nhưng khi dồn lại nhiều sẽ dẫn đến một
 sai số lớn. Điều này khiến các ứng dụng liên quan đến tài chính không bao giờ dùng kiểu ``float``.
 Đặc biệt không so sánh các số kiểu float với nhau vì sẽ gặp những kết quả bất ngờ như ví dụ trên.
+Để so sánh float, dùng function `math.isclose`
+
+```
+In [1]: import math
+
+In [2]: math.isclose(10**60, 1e60)
+Out[2]: True
+
+In [3]: 10**60 == 1e60
+Out[3]: False
+
+In [4]: type(1e60)
+Out[4]: float
+```
 
 Khi cần tính toán chính xác, hãy sử dụng các thư viện có sẵn của Python như ``decimal``, ``fraction`` để tính toán chính xác:
 
@@ -116,7 +130,6 @@ In [5]: from decimal import Decimal as D
 In [6]: D('0.1') + D('0.1') + D('0.1') == D('0.3')
 Out[6]: True
 ```
-hoặc sử dụng thư viện chuyên dùng cho tính toán ``numpy`` để làm toán.
 
 ### Cách tìm ra phân số nhị phân được dùng để xấp xỉ giá trị ``0.1``
 
