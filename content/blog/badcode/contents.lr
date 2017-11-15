@@ -1,0 +1,148 @@
+title: Ai cũng có thể viết code ... tồi
+---
+author: HVN
+---
+body:
+
+Viết code không khó.
+
+Một đoạn code Python với logic tầm thường ai cũng có thể viết, nhưng việc viết sao cho tốt thì hãy thử xem...
+
+Function get_groups(name) nhận vào 1 string, tìm kết quả ở 1 nguồn dữ liệu, và trả về kết quả cần thiết. Đây là
+một phiên bản ai cũng viết được:
+
+```python
+def get_groups(name):
+    
+    all_groups = get_data_from_source()
+
+    groups = []
+    if name:
+        for group in all_groups():
+            if name.lower() in group['name'].lower():
+                groups.append({group['name']: group['id']})
+    else:
+        # if user provide empty string, return list customers as default
+        for group in all_groups():
+            if 'customer' in group['name'].lower():
+                groups.append(group['name'])
+
+    if len(groups) > 0:
+        return groups
+    else:
+        return "Group {} not found in groups".format(name)
+```
+
+Đoạn code nhìn qua tốt, chuẩn pep8, pythonic (`for group in all_group()` chứ không dùng `range`), 
+tên đặt cũng dễ hiểu. Nhưng hãy xem thật kỹ code,  nghĩ xem có gì không tốt trước khi đọc tiếp.
+
+...
+...
+...
+
+Function này trông có vẻ ổn, cho đến khi ta gọi function này và xử lý kết quả của nó:
+- nó có thể trả về 1 string, khi không tìm thấy 
+- nó có thể trả về list của các dictionary, nếu người dùng đưa vào name khác rỗng
+- nó có thể trả về list của các string, nếu người dùng đưa vào string rỗng
+
+Ai cũng có thể viết function, nhưng function trả về 3 kiểu dữ liệu khác nhau như vậy 
+thì chỉ làm cho người dùng nó thêm khổ. Người gọi function này sẽ phải xử lý cả 3 trường hợp,
+hãy thử xem function sau là 
+function DUY NHẤT gọi `get_groups`:
+
+```python
+def handle_group_search(name):
+    result = get_groups(name)
+
+    if isinstance(result, str):
+        print(str)
+    else:
+        groups = []
+        if isinstance(result[0], dict):
+            groups = [list(d.items())[0][0] for d in result]
+        else:
+            groups = result
+
+    for n in result:
+         print(n.lower())
+```
+
+Trước tiên, code này cũng phải rẽ 3 nhánh để xử lý 3 loại đầu ra khác nhau của get_groups. Người dùng
+function này không có cách nào khác ngoài đọc code để hiểu function sẽ làm gì.
+
+Lập trình viên sẽ viết code rất khổ, nếu có những function như `get_groups()` có trên hệ thống. Giải pháp?
+Viết lại function này đảm bảo một tiêu chuẩn: 
+
+**Mỗi function chỉ trả về 1 kiểu dữ liệu.**
+
+Nếu `get_groups` trả về `[]` hoặc 1 list chứa danh sách các tên của group, code gọi nó chỉ còn lại :
+
+```python
+def handle_group_search(name):
+    result = get_groups(name)
+
+    if not result:
+        print('Not found name {} in groups'.format(name))
+    else: 
+    	for n in result:
+         	print(n.lower())
+```
+
+
+Một lý do khác mà `get_groups` là một function rất tệ, nó dùng kiểu dict để nhóm dữ liệu (group:id)
+rồi nhét vào list. Khi dữ liệu lưu vào dict mà không để tìm kiếm hay không có key cố định, nó
+chỉ là một nỗi đau. Để lọc ra name của groups, code sử dụng đã phải viết:
+```python
+    groups = [list(d.items())[0][0] for d in result] 
+```
+code trên biến dict 1 phần tử thành 1 list và truy cập lấy tên của key:
+
+```python
+In [1]: d = {'Pymi': 17}
+
+In [2]: list(d.items())
+Out[2]: [('Pymi', 17)]
+
+In [3]: list(d.items())[0]
+Out[3]: ('Pymi', 17)
+
+In [4]: list(d.items())[0][0]
+Out[4]: 'Pymi'
+```
+
+Bạn thậm chí có thể viết dài hơn thế:
+
+```python
+    groups = []
+    for d in result:
+        name = []
+        for k, v in d.items():
+            name.append(k)
+        groups.extend(name)
+
+```
+
+Nếu `get_groups` trả về list của các tuple, code chỉ cần:
+
+```python
+groups = [group[0] for group in result]
+```
+Thậm chí có thể tốt hơn nếu dùng namedtuple. (i.e: group.name)
+
+Nếu nó trả về list cả các dict có key cố định, code chỉ cần:
+
+```python
+groups = [d['name'] for d in result]
+```
+
+Lựa chọn kiểu dữ liệu phù hợp với mục đích sử dụng, chính là điều khiến code của bạn trở nên 
+đẹp hơn, dễ hiểu hơn, dễ xử lý hơn.
+
+Code không chỉ là kỹ thuật, code còn là một nghệ thuật.
+Và người tạo ra bug chính là nghệ sỹ.
+---
+pub_date: 2017-11-15
+---
+shortintro:
+
+Viết function thế nào? dùng kiểu dữ liệu gì? 
