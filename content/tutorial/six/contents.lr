@@ -47,7 +47,9 @@ Out[6]: 2.5
 Python3 mặc định mọi phép chia số nguyên sẽ trả về kiểu float, vì vậy, không có bug nào nữa.
 
 > Simple is better than complex.
+
 Python3 win!
+
 Python3 `1` - Python2 `0`
 
 ### Phép so sánh
