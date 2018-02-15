@@ -1,0 +1,152 @@
+title: Viết function trả về string là một ý tưởng tồi!
+---
+author: HVN
+---
+body:
+
+### Function là gì?
+Function là một phần tất yếu của mọi phần mềm.  Một chương trình (Python) không
+bắt buộc phải có function, nhưng nó là cách làm cơ bản, phổ biến nhất, tương tự
+như những ngôn ngữ lập trình khác.  Về bản chất, function là một khái niệm / cơ
+chế để dùng lại code. Thay vì viết một đoạn code nhiều lần mà mỗi lần chỉ thay
+đổi chút chút, ta viết một function, nhận vào các tham số khác nhau.
+
+### Đầu vào và đầu ra
+Chuyện một function nhận đầu vào, xử lý và trả về đầu ra thì ai cũng biết. Phần
+đầu vào luôn phải được định nghĩa rõ ràng đầy đủ (trừ `*args` và `**kwargs` -
+thì có chúa mới biết function nhận những cái gì!), nhưng phần đầu ra thì không
+có quy tắc cụ thể nào. Vậy nên mới xảy ra
+chuyện, ai thích làm gì thì làm, và thường thì người ta sẽ làm khá tệ khi không
+có quy tắc nào.
+
+Đây là một trường hợp phổ biến, hãy tưởng tượng 1 đoạn code làm nhiệm vụ
+CÓ_KHẢ_THI.  Đầu vào dễ dàng định nghĩa những thứ ta cần cho vào, tên người
+dùng chẳng hạn:
+
+```python
+def CÓ_KHẢ_THI(username):
+    pass
+```
+
+Đầu ra là gì? chuyện này không dễ dàng thống nhất.  Xét về mặt nhiệm vụ,
+function này chỉ có thể có 2 khả năng: thành công, hoặc thất bại. Bạn có thể
+tạo user, hoặc không tạo được, chấm hết. Trong nhóm chỉ có 2 kết quả trái nhau
+như vậy, rõ ràng boolean là ứng cử viên sáng giá, thành công: return `True`,
+thất bại return `False`. Nhưng nếu thất bại, bạn muốn biết lý do (user đã tồn
+tại, vượt quá giới hạn số lượng user, ...) thì làm thế nào?
+
+Vậy là giải pháp return string ra đời.
+
+### Return string?
+Nếu thành công, return `"Success"`, nếu thất bại vì username đã tồn tại, return
+`"Failed user exists"`, nếu thất bại vì quá giới hạn, return `"Failed limit
+exceeded"`, ... tiếp tục như vậy với những lý do thất bại khác.
+
+Function này làm tốt nhiệm vụ của nó, nhưng đầu ra giờ là một trời khả năng.
+Thay vì 2, giờ ta có N khả năng xảy ra. Thì sao?
+
+Không sao cả, cho đến khi có ai đó gọi function này.
+
+```python
+username = "laptrinhvien"
+result = CÓ_KHẢ_THI(username)
+if result == "Success":
+     print("Added user {}".format(username))
+elif result == "Failed limit exceeded":
+...
+elif result == "Failed user exists":
+...
+...
+```
+
+Người gọi function `CÓ_KHẢ_THI` phải biết tất cả các khả năng mà function này
+trả về, và cách duy nhất để làm điều đó là ngồi đọc toàn bộ code của function
+`CÓ_KHẢ_THI`. Function này có thể vài dòng, nhưng cũng có thể là vài chục dòng,
+vài chục câu if else... nếu việc sử dụng 1 function yêu cầu bạn phải đọc code
+của function đó, thì đó là một function tồi.
+
+Ta không cần biết `math.sqrt` tính căn 2 như thế nào, ta chỉ cần đưa đầu vào,
+và sẽ thu được kết quả ở dạng số float. Ta chỉ cần đưa đường dẫn vào
+`requests.get` và nhận kết quả của HTTP GET requests đó, không cần biết nó làm
+thế nào.
+
+### Xử lý lỗi
+Khi lỗi xảy ra thì sao?
+
+Mỗi ngôn ngữ lập trình có cách xử lý lỗi khác nhau - khái niệm này gói chung
+vào từ khóa "error handling".
+
+Chuyện gì xảy ra khi lấy căn bậc 2 của `-2`? Python sẽ "raise" (tung ra) một
+Exception object:
+
+```python
+In [2]: math.sqrt(-2)
+----------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+<ipython-input-2-750cdbc9cc40> in <module>()
+----> 1 math.sqrt(-2)
+
+ValueError: math domain error
+```
+Ta dùng try/except để xử lý khi có exception xảy ra.
+
+Golang sử dụng cơ chế khác: một function thường trả về lỗi, và kết quả. Nếu
+không có lỗi, giá trị lỗi là `nil` (tương đương `None` của Python).
+Việc gọi 1 function trong Golang thường trông như sau:
+
+```go
+ok, value = call_function(arg1, arg2)
+if ok != nil {
+   Xử lý lỗi xảy ra dựa trên giá trị cụ thể của ok
+} else {
+   Tiếp tục xử lý value thu được.
+}
+```
+
+Mỗi cách làm sẽ có ưu nhược điểm khác nhau. Trong Python, ta có thể làm tương
+tự như Golang, với ví dụ function CÓ_KHẢ_THI, return 1 tuple chứa boolean chỉ
+định việc thành công hay thất bại, và string chứa thông điệp muốn gửi tới
+người dùng là một cách làm tốt hơn chỉ trả về string.
+Người dùng có thể không quan tâm đến lỗi gì, vậy khi đó chỉ cần xử lý dựa trên
+giá trị boolean. Nếu quan tâm đến lỗi, lúc đó lại phải dựa vào giá trị string.
+Mà dựa vào string lại khiến vấn đề quay lại từ đầu. Liệu nội dung lỗi là
+string chữ thường hay chữ hoa? liệu sau này nội dung string đó có bị thay đổi
+không, nếu có làm sao ta biết? (đọc lại function?!?!!!).
+
+Tạo các exception và raise khi có lỗi là cách làm đơn giản hơn cả. Exception có
+kiểu, là các class có kế thừa, dễ dàng phân loại các lớp lỗi khác nhau mà không
+dựa vào string.
+
+```
+class MyException(Exception): pass
+class MyFirstException(MyException): pass
+class MySecondException(MyException): pass
+
+def do_something(username):
+    result = do_job()
+    if error1 in result:
+        raise MyFirstException(error1)
+    elif error2 in result:
+        raise MySecondException(error2)
+    ...
+    else:
+        raise MyException("Unknown error: %s" % error_msg)
+
+try:
+    do_something('pymi')
+except MyFirstException as e:
+    print('Failed with error1', e)
+except MySecondException as e:
+    print('Failed with error2', e)
+except MyException as e:
+    print('Failed with error not 1 and 2', e)
+else:
+    print('Success')
+```
+
+Dù dùng cách nào đi nữa, đừng chỉ trả về string - trừ khi function được tạo ra
+để xử lý string.
+---
+pub_date: 2017-12-09
+---
+shortintro: trừ khi function đó để xử lý string
