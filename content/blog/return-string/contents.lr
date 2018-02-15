@@ -20,11 +20,11 @@ chuyện, ai thích làm gì thì làm, và thường thì người ta sẽ làm
 có quy tắc nào.
 
 Đây là một trường hợp phổ biến, hãy tưởng tượng 1 đoạn code làm nhiệm vụ
-CÓ_KHẢ_THI.  Đầu vào dễ dàng định nghĩa những thứ ta cần cho vào, tên người
+CO_KHA_THI.  Đầu vào dễ dàng định nghĩa những thứ ta cần cho vào, tên người
 dùng chẳng hạn:
 
 ```python
-def CÓ_KHẢ_THI(username):
+def CO_KHA_THI(username):
     pass
 ```
 
@@ -49,7 +49,7 @@ Không sao cả, cho đến khi có ai đó gọi function này.
 
 ```python
 username = "laptrinhvien"
-result = CÓ_KHẢ_THI(username)
+result = CO_KHA_THI(username)
 if result == "Success":
      print("Added user {}".format(username))
 elif result == "Failed limit exceeded":
@@ -59,9 +59,9 @@ elif result == "Failed user exists":
 ...
 ```
 
-Người gọi function `CÓ_KHẢ_THI` phải biết tất cả các khả năng mà function này
+Người gọi function `CO_KHA_THI` phải biết tất cả các khả năng mà function này
 trả về, và cách duy nhất để làm điều đó là ngồi đọc toàn bộ code của function
-`CÓ_KHẢ_THI`. Function này có thể vài dòng, nhưng cũng có thể là vài chục dòng,
+`CO_KHA_THI`. Function này có thể vài dòng, nhưng cũng có thể là vài chục dòng,
 vài chục câu if else... nếu việc sử dụng 1 function yêu cầu bạn phải đọc code
 của function đó, thì đó là một function tồi.
 
@@ -104,7 +104,7 @@ if ok != nil {
 ```
 
 Mỗi cách làm sẽ có ưu nhược điểm khác nhau. Trong Python, ta có thể làm tương
-tự như Golang, với ví dụ function CÓ_KHẢ_THI, return 1 tuple chứa boolean chỉ
+tự như Golang, với ví dụ function CO_KHA_THI, return 1 tuple chứa boolean chỉ
 định việc thành công hay thất bại, và string chứa thông điệp muốn gửi tới
 người dùng là một cách làm tốt hơn chỉ trả về string.
 Người dùng có thể không quan tâm đến lỗi gì, vậy khi đó chỉ cần xử lý dựa trên
@@ -117,7 +117,7 @@ Tạo các exception và raise khi có lỗi là cách làm đơn giản hơn c�
 kiểu, là các class có kế thừa, dễ dàng phân loại các lớp lỗi khác nhau mà không
 dựa vào string.
 
-```
+```python
 class MyException(Exception): pass
 class MyFirstException(MyException): pass
 class MySecondException(MyException): pass
