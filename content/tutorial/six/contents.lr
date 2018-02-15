@@ -1,0 +1,126 @@
+title: Những điều nhỏ nhoi
+---
+author: HVN
+---
+pub_date: 2017-12-09
+---
+shortintro: mà Python3 ngon hơn Python2
+---
+body:
+
+Ngày bị bỏ rơi của Python2 không còn xa, khi chính các tác giả đã quyết định chỉ tiếp tục phát triển Python3.X, không thêm tính năng nào mới cho Python2, và chỉ fix bug cho đến [năm 2020](https://www.python.org/dev/peps/pep-0373/#update).
+
+Python3 không có nhiều điểm khác Python2 về mặt cú pháp, nhưng với
+những "cải tiến" nhỏ bé sau đây
+sẽ giúp người dùng tránh được hàng loạt bug.
+
+### Phép chia
+Hãy thử trả lời xem phép tính sau trả về kết quả bao nhiêu?
+
+```
+40 + 5/2
+```
+
+Với một người có kiến thức toán học phổ thông, kết quả mong đợi là `40 + 2.5 = 42.5`.
+Và đó chính xác là điều mà Python3 làm. Không có gì bất ngờ, và lập trình viên không có gì phải nhớ, phải nghĩ cả. Khi mọi thứ hoạt động quá tốt, người ta sẽ xem đó là điều hiển nhiên, và chả ai nhớ đến công của người làm ra nó.
+Hãy xem Python2 giải bài toán này:
+
+```
+In [1]: 40 + 5/2
+Out[1]: 42
+
+In [2]: type(40 + 5/2)
+Out[2]: <type 'int'>
+```
+
+Kết quả là `42`, ngạc nhiên chưa? và ngạc nhiên sẽ dẫn đến bug bug bug.
+Phép chia trên Python2 trả về kiểu integer, lấy phần nguyên của kết quả.
+Để chia lấy kết quả là kiểu float, ta phải biến 1 trong 2 toán tử của phép chia thành kiểu float:
+
+```
+In [5]: float(5)/2
+Out[5]: 2.5
+
+In [6]: 5/float(2)
+Out[6]: 2.5
+```
+
+Trong Python3, mọi phép chia số nguyên (trừ chia 0) trả về kiểu float.
+
+> Simple is better than complex.
+
+Python3 wins!
+
+Python3 `1` - Python2 `0`
+
+### Phép so sánh
+Ta luôn so sánh bằng con số, tài khoản anh này bao nhiêu tỷ, chị kia có số đo
+3 vòng là bao nhiêu, Bitcoin lên mấy chục nghìn đô rồi...
+Nhưng có bao giờ ta muốn so sánh chữ và số?
+Điều này nghe có vẻ vô lý, nhưng Python2 cho phép làm vậy, nghĩa là giả sử bạn có làm sai đâu đó, thì kết quả ta thu được là mỗi lỗi về logic - code vẫn chạy bình thường, chỉ là đưa ra kết quả sai.
+
+```
+In [8]: 3 < 'Pymi'
+Out[8]: True
+
+In [9]: 3 < 'ahihi'
+Out[9]: True
+
+In [10]: 3 < '3'
+Out[10]: True
+```
+
+Như dòng  `3 < '3'` là một ví dụ không hiếm gặp khi ta quên convert string về integer trước khi so sánh.
+Mọi kiểu trong Python2 đều có thể mang ra so sánh, tạo ra một sự hỗn loạn điên cuồng
+
+```
+In [12]: [] < 'aaa'
+Out[12]: True
+
+In [13]: [1,2,3] < (1,2,3)
+Out[13]: True
+```
+
+Nếu có "chuyên gia" nào giải thích rằng cái này ưu tiên hơn cái kia và hơn cái kia nữa, anh ta có một bộ nhớ tuyệt vời, cho 1 thứ không đáng nhớ.
+
+Python3 sửa lại chuyện này, ta sẽ có ngay exception khi so sánh những object khác kiểu, giúp lập trình viên phát hiện ra lỗi ngay trước khi nó đi quá xa.
+
+```
+In [1]: [1,2,3] < (1,2,3)
+---------------------------------------------------------------------------
+TypeError                                Traceback (most recent call last)
+<ipython-input-1-5bf8a68150f0> in <module>()
+----> 1 [1,2,3] < (1,2,3)
+
+TypeError: unorderable types: list() < tuple()
+
+In [2]: 3 > '4'
+---------------------------------------------------------------------------
+TypeError                                Traceback (most recent call last)
+<ipython-input-2-ebca31a61b39> in <module>()
+----> 1 3 > '4'
+
+TypeError: unorderable types: int() > str()
+```
+
+Python3 lại giành chiến thắng!
+
+Python3 `2` - Python2 `0`
+
+
+### Unicode
+Đây là chiến thắng lớn nhất của Python3 so với Python2. Những vấn đề nảy sinh
+khi làm việc với Unicode trong Python2 quá rắc rối, thậm chí tài liệu chính
+phải viết hẳn một bài [giải thích về kiểu Unicode](https://docs.python.org/2.7/howto/unicode.html) - mà chắc chắn là không nhiều
+người đọc. Python3 nhập 2 kiểu `str` và `unicode` vào làm một (`str`), 96.69%
+rắc rối biến mất!
+
+Viết tài liệu để giải thích một vấn đề không tốt bằng sửa hoàn toàn và làm vấn
+đề đó biến mất. Khả năng xử lý Unicode đơn giản của Python3 là động lực không
+nhỏ để các lập trình viên chuyển từ Python2 sang Python3.
+
+Python3 `10` - Python2 `0`
+
+![Cúc họa mi - ảnh trên mạng](h.jpg)
+
+Với từng cải tiến nhỏ nhỏ như vậy, Python3 trở  nên xịn hơn, viết code ít bug hơn, là tương lai của Python, niềm hy vọng của các Pythonista, những người không chìm đắm trong quá khứ của phiên bản 2.X.
