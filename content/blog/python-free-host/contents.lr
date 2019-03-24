@@ -146,11 +146,18 @@ Câu lệnh sẽ tự mở trang web tại địa chỉ https://glacial-lowlands
 
 ![result](herokuview.png)
 
+### Chú ý
+- SQlite sẽ không dùng được trên Heroku do Heroku sử dụng công nghệ container
+  (như Docker), mỗi lần deploy lại code, các file được sinh ra sẽ bị xóa hết.
+  File SQLite database sẽ bị xóa sau mỗi lần như vậy.
+- Thay vì dùng SQLite, hãy dùng PostgreSQL. Heroku hỗ trợ 1 free database
+  PostgreSQL - database opensource xịn nhất thế giới, xem thêm tại [bài hướng dẫn
+  của Heroku](https://devcenter.heroku.com/articles/getting-started-with-python#provision-a-database).
+
 ## Tổng kết
 Bài này hướng dẫn chạy một Flask web app đơn giản trên Heroku, cho cả thế giới thấy sản phẩm của bạn.
 - Tài khỏan miễn phí của heroku cho phép bạn chạy 1 website nhỏ 550 tiếng "Dynos" mỗi tháng - nói nôm na thì nếu không có nhiều người vào, thời lượng này sẽ đủ chạy cả tháng - và miễn phí. Bao giờ đòi thu tiền Heroku sẽ báo, đến lúc ấy hãy phải lo.
 - Mỗi tài khoản sẽ chỉ được giới hạn miễn phí 550 giờ một tháng (~ 22 ngày CPU chạy liên tục), nên nói chung thì sẽ chỉ chạy được 1 website / tài khoản.
-- Heroku hỗ trợ 1 free database PostgreSQL - database opensource xịn nhất thế giới, xem thêm tại [bài hướng dẫn của Heroku](https://devcenter.heroku.com/articles/getting-started-with-python#provision-a-database).
 - Khi "chạy thật", hầu hết các Python web app sẽ được chạy trên các "máy ảo"/"server"/"cloud" riêng, người dùng
 sẽ tự lo cài đặt database, [tạo virtualenv, cài requirements](http://pymi.vn/blog/virtualenv/) và chạy code.
 Heroku là dịch vụ rất tiện, nhưng rất đắt khi website bắt đầu lớn lên.
