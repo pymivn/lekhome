@@ -135,6 +135,8 @@ Theo  http://manpages.ubuntu.com/manpages/xenial/en/man1/locale.1posix.html
 
 ## Set/get locale trên Python
 
+Chú ý: bài viết thực hiện trên Ubuntu, trên Windows 10 dùng `vi` thay vì `vi_VN`
+
 ```python
 In [1]: import locale
 
