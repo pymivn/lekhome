@@ -66,8 +66,7 @@ Dù đã biểu diễn bằng 17 con số (16 số sau dấu thập phân ``.``)
 giá trị chính xác mà ta cần biểu diễn, dù có thêm bao nhiêu số sau dấu phẩy đi nữa.
 
 Một lý do mà số hữy tỷ không được biểu diễn chính xác trên máy tính nữa là do:
-máy tính biểu diễn các giá trị phân số thập phân (hệ 10) bằng các phân số nhị phân (các phân số
-có tử là 1, mẫu là lũy thừa của 2 - binary fractions).
+máy tính biểu diễn các giá trị phân số thập phân (hệ 10) bằng các phân số nhị phân (các phân số có mẫu là lũy thừa của 2 - binary fractions).
 
 Ví dụ: ``0.125`` là biểu diễn thập phân của giá trị ``1/10 + 2/100 + 5/1000`` sau khi rút gọn ta có phân số tối giản là ``1/8``.
 Máy tính biểu diễn giá trị này ở hệ nhị phân: ``0.001`` - có giá trị là ``0/2 + 0/4 + 1/8 = 1/8``.
