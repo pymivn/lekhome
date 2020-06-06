@@ -149,24 +149,56 @@ virtualenv hoạt động được là nhờ vào cách mà Python thực hiện
 
 Khi ta bật (activate) một virtualenv lên (source), thực tế ta thay đổi sys.path, nhét đường dẫn đến "môi trường ảo" hiện tại lên đầu sys.path, vì vậy khi thực hiện import, Python sẽ tìm trong "môi trường ảo" trước.
 
-Đọc kỹ những dòng sau để thấy sự ảnh hưởng của virtualenv với Python sys.path
+Đọc kỹ những dòng sau để thấy sự ảnh hưởng của virtualenv với Python sys.path,
+khi bật virtualenv, đường dẫn tới virtualenv sẽ xuất hiện trong sys.path,
+tức module / code nào nằm trong thư mục
+`/home/hvn/myvenv/lib/python3.6/site-packages`
+đều có thể được import.
 
 ```sh
-hvn@hvn:~$ virtualenv pymi -p python3
-Already using interpreter /usr/bin/python3
-Using base prefix '/usr'
-New python executable in /home/hvn/pymi/bin/python3
-Also creating executable in /home/hvn/pymi/bin/python
-Installing setuptools, pip, wheel...done.
-hvn@hvn:~$ source pymi/bin/activate
-(pymi) hvn@hvn:~$ python -c 'import sys; print(sys.path)'
-['', '/home/hvn/pymi/lib/python35.zip', '/home/hvn/pymi/lib/python3.5', '/home/hvn/pymi/lib/python3.5/plat-x86_64-linux-gnu', '/home/hvn/pymi/lib/python3.5/lib-dynload', '/usr/lib/python3.5', '/usr/lib/python3.5/plat-x86_64-linux-gnu', '/home/hvn/pymi/lib/python3.5/site-packages']
-(pymi) hvn@hvn:~$ deactivate
-hvn@hvn:~$ python -c 'import sys; print(sys.path)'
-['', '/usr/lib/python2.7', '/usr/lib/python2.7/plat-x86_64-linux-gnu', '/usr/lib/python2.7/lib-tk', '/usr/lib/python2.7/lib-old', '/usr/lib/python2.7/lib-dynload', '/usr/local/lib/python2.7/dist-packages', '/usr/lib/python2.7/dist-packages']
+$ python3 -m venv myvenv
+$ source myvenv/bin/activate
+(myvenv) $ python3 -c 'import sys; print(sys.path)'
+['', '/usr/lib/python36.zip', '/usr/lib/python3.6', '/usr/lib/python3.6/lib-dynload', '/home/hvn/myvenv/lib/python3.6/site-packages']
+(myvenv) $ deactivate
+$ python3 -c 'import sys; print(sys.path)'
+['', '/usr/lib/python36.zip', '/usr/lib/python3.6', '/usr/lib/python3.6/lib-dynload', '/usr/local/lib/python3.6/dist-packages', '/usr/lib/python3/dist-packages']
 ```
 
 Với virtualenv, ta sẽ không bao giờ phải `sudo pip` nữa, mỗi project sẽ có một môi trường riêng biệt, không ai ảnh hưởng tới ai. Và chỉ gõ `sudo pip` khi cần thay đổi 1 package trên toàn hệ thống.
+
+### Sử dụng pip trong venv
+
+Cho python3.6 trở lên, ví dụ trên Ubuntu 18.04, xem [tài
+liệu](https://docs.python.org/3/tutorial/venv.html)
+cho lệnh dùng trên Windows.
+
+```sh
+$ python3 -m venv myvenv
+$ source myvenv/bin/activate
+(myvenv) $ python3 -m pip install django
+Collecting django
+  Cache entry deserialization failed, entry ignored
+  Downloading https://files.pythonhosted.org/packages/5c/63/6d7efecbf3f06db8c6577950a24a191e55cadf7cda4d7fe6976206c886dd/Django-3.0.7-py3-none-any.whl (7.5MB)
+    100% |████████████████████████████████| 7.5MB 206kB/s
+Collecting pytz (from django)
+  Using cached https://files.pythonhosted.org/packages/4f/a4/879454d49688e2fad93e59d7d4efda580b783c745fd2ec2a3adf87b0808d/pytz-2020.1-py2.py3-none-any.whl
+Collecting sqlparse>=0.2.2 (from django)
+  Using cached https://files.pythonhosted.org/packages/85/ee/6e821932f413a5c4b76be9c5936e313e4fc626b33f16e027866e1d60f588/sqlparse-0.3.1-py2.py3-none-any.whl
+Collecting asgiref~=3.2 (from django)
+  Cache entry deserialization failed, entry ignored
+  Downloading https://files.pythonhosted.org/packages/68/00/25013f7310a56d17e1ab6fd885d5c1f216b7123b550d295c93f8e29d372a/asgiref-3.2.7-py2.py3-none-any.whl
+Installing collected packages: pytz, sqlparse, asgiref, django
+Successfully installed asgiref-3.2.7 django-3.0.7 pytz-2020.1 sqlparse-0.3.1
+(myvenv) $ python
+Python 3.6.9 (default, Apr 18 2020, 01:56:04)
+[GCC 8.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import django
+>>> django.__version__
+'3.0.7'
+>>>
+```
 
 ## Kết luận
 `sudo` là sức mạnh, đừng chỉ vì quá mạnh mà thích làm gì cũng được 🙄
