@@ -8,28 +8,40 @@ author: HVN
 ---
 body:
 
-Ngày mới học lập trình, tôi thường lười và ngại xử lý các "chuỗi" (string) -
+Ngày mới học lập trình, tôi thường lười và ngại xử lý các string ("chuỗi") -
 tức các dòng chữ, đoạn văn.
 Tôi thích mang lập trình ra để tính toán, tìm số nguyên tố, tìm bội nhỏ nhất, ước lớn nhất,
 đường đi loằng ngoằng nhất...
 Vậy nhưng đến khi đi làm, mới nhận ra, 68,59 % số code viết ra đều chỉ để xử lý string.
 Bởi thế mới nói, xử lý string quan trọng như nước trong cơ thể vậy 😳.
 
-Có bao nhiêu người lập trình để tính toán khoa học?
+- Có bao nhiêu người lập trình để tính toán khoa học?
+- Không nhiều lắm
 
-Có bao nhiêu người xử lý đồ hoạ (tức viết ra phần mềm Photoshop, Camera360 chứ KHÔNG PHẢI
+- Có bao nhiêu người xử lý đồ hoạ (tức viết ra phần mềm Photoshop, Camera360 chứ KHÔNG PHẢI
 dùng phần mềm Photoshop), thực hiện các phép toán trên bit và bytes?
+- Không nhiều lắm
 
-Và còn lại, bao nhiêu người xử lý các HTTP request? lưu và xử lý thông tin người
-dùng, vốn là dạng text? Số này là rất rất nhiều.
+Và còn lại, bao nhiêu người làm website, xử lý các HTTP request? lưu và xử lý
+thông tin người dùng, vốn là dạng text? Số này là rất rất nhiều.
 
 Python hỗ trợ text, hỗ trợ đến tận răng, mà cần gì thì chỉ việc mang ra dùng, không
 cần nghĩ suy. Không tin thì làm thử coi.
+
+Kiểu dữ liệu này trên Python gọi là string.
 
 ### Tạo string
 đặt cho chúng là ``s`` và ``ss``:
 ```python
 >>> s = "Python"
+>>> type(s)
+<class 'str'>
+>>> s2 = ""
+>>> type(s2)
+<class 'str'>
+>>> s3 = "a"
+>>> type(s3)
+<class 'str'>
 >>> ss = "Trái đất này là của chúng mình."
 >>> print(s)
 Python
@@ -56,7 +68,11 @@ và việc đếm thì chỉ các cháu lớp một mới thấy vui. Ta dùng f
 6
 >>> len(ss)
 31
+>>> len(s2)
+0
 ```
+
+String có độ dài bằng không còn có tên gọi "empty string".
 
 ### Nối string
 Các string được nối với nhau bằng phép cộng:
@@ -125,6 +141,9 @@ True
 ```
 Ta thấy Python phân biệt chữ hoa, chữ thường (case sensitive).
 
+### Gọi method
+Cú pháp `string.mt(gì đó)` gọi là "gọi method mt".
+
 ### Kiểm tra string bắt đầu với một tiền tố
 Giống như kiểm tra xem có một string có chứa string khác không,
 Python có thể kiểm tra một string có **bắt đầu** với một string khác không:
@@ -174,6 +193,20 @@ trái đất này là của chúng mình.
 'Trái đất này là của chúng mình.'
 ```
 
+### Cắt string/nối list các string
+```python
+>>> "con chim non trên cành cao".split()
+['con', 'chim', 'non', 'trên', 'cành', 'cao']
+>>> ws = "con chim non trên cành cao".split()
+>>> ws
+['con', 'chim', 'non', 'trên', 'cành', 'cao']
+>>> ws2 = "con.chim.non".split(".")
+>>> ws2
+['con', 'chim', 'non']
+>>> " ".join(ws2)
+'con chim non'
+```
+
 ### Bỏ các ký tự khoảng trắng
 
 #### Ký tự khoảng trắng - whitespace
@@ -204,7 +237,8 @@ False
 True
 ```
 
-Còn tiếp...
+Xem đầy đủ các string method khác tại [đây](https://docs.python.org/3/library/stdtypes.html#string-methods).
+
 ---
 pub_date: 2016-10-16
 ---
