@@ -193,20 +193,6 @@ trái đất này là của chúng mình.
 'Trái đất này là của chúng mình.'
 ```
 
-### Cắt string/nối list các string
-```python
->>> "con chim non trên cành cao".split()
-['con', 'chim', 'non', 'trên', 'cành', 'cao']
->>> ws = "con chim non trên cành cao".split()
->>> ws
-['con', 'chim', 'non', 'trên', 'cành', 'cao']
->>> ws2 = "con.chim.non".split(".")
->>> ws2
-['con', 'chim', 'non']
->>> " ".join(ws2)
-'con chim non'
-```
-
 ### Bỏ các ký tự khoảng trắng
 
 #### Ký tự khoảng trắng - whitespace
@@ -226,6 +212,23 @@ trắng bên trái, dùng ``lstrip`` (left strip).
 >>> swhite.lstrip()
 'Còn tuổi    nào cho em       '
 ```
+
+### Cắt string/nối list các string
+```python
+>>> ws = "con chim non     trên cành\tcao".split()
+>>> ws
+['con', 'chim', 'non', 'trên', 'cành', 'cao']
+>>> # cắt tại các ký tự khoảng trắng và bỏ các empty string đi - kết quả khác với dòng tiếp ws1
+>>> ws1 = "con chim non     trên cành\tcao".split(" ")
+>>> ws1
+['con', 'chim', 'non', '', '', '', '', 'trên', 'cành\tcao']
+>>> ws2 = "con.chim.non".split(".")
+>>> ws2
+['con', 'chim', 'non']
+>>> " ".join(ws2)
+'con chim non'
+```
+
 
 ### Kiểm tra 2 string có bằng nhau không:
 Dùng hai dấu bằng (``==``).
