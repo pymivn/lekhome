@@ -240,7 +240,11 @@ False
 True
 ```
 
-Xem đầy đủ các string method khác tại [đây](https://docs.python.org/3/library/stdtypes.html#string-methods).
+Xem đầy đủ các string method khác tại:
+
+- https://docs.python.org/3/library/stdtypes.html#string-methods
+- http://automatetheboringstuff.com/2e/chapter6/
+- https://realpython.com/python-strings/#built-in-string-methods
 
 ---
 pub_date: 2016-10-16
