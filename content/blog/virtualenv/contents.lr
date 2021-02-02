@@ -167,7 +167,7 @@ $ python3 -c 'import sys; print(sys.path)'
 
 Với virtualenv, ta sẽ không bao giờ phải `sudo pip` nữa, mỗi project sẽ có một môi trường riêng biệt, không ai ảnh hưởng tới ai. Và chỉ gõ `sudo pip` khi cần thay đổi 1 package trên toàn hệ thống.
 
-### Sử dụng pip trong venv
+### Sử dụng pip trong venv <a name="venv"></a>
 
 Cho python3.6 trở lên, ví dụ trên Ubuntu 18.04, xem [tài
 liệu](https://docs.python.org/3/tutorial/venv.html)
