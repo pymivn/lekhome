@@ -1,0 +1,22 @@
+title: Kết quả khảo sát Python developer 2020
+---
+author: HVN
+---
+body:
+
+Kết quả khảo sát developer 2020 Flask trên đỉnh, FastAPI đang leo
+
+![python](https://www.python.org/static/img/python-logo.png)
+
+Python Software Foundation và JetBrains đã công bố kết quả khảo sát hơn 28000 lập trình viên Python trên toàn cầu.
+
+Những kết quả thú vị như việc `Flask` đứng trên `Django` về độ phổ biến, [FastAPI](https://fastapi.tiangolo.com/) dù lần đầu xuất hiện cũng đã leo lên vị trí thứ 3.
+
+`requests` vẫn là thư viện phổ biến nhất của Python.
+
+Xem đầy đủ tại link gốc: [https://www.jetbrains.com/lp/python-developers-survey-2020/](https://www.jetbrains.com/lp/python-developers-survey-2020/)
+
+---
+pub_date: 2021-02-26
+---
+shortintro: Flask trên đỉnh, FastAPI đang leo, Django no.2
